@@ -1,4 +1,4 @@
-namespace CinemaAPI.Data;
+namespace CinemaAPI.Models;
 
 public class Ticket
 {
@@ -7,6 +7,7 @@ public class Ticket
     public string Film { get; set; }
     public bool IsPaid { get; set; }
     public int Room { get; set; }
-    public int Seat { get; set; }
+    public string Seat { get; set; }
     public DateTime Time { get; set; }
+    public virtual Room room { get; set; }
 }

@@ -1,0 +1,82 @@
+﻿using CinemaAPI.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace CinemaAPI.Controllers
+{
+    [ApiController]
+    [Route("api[controller]")]
+    public class LocationController : Controller
+    {
+        private readonly CinemaDbContext _cinemaDbContext;
+        public LocationController(CinemaDbContext cinemaDbContext) 
+        {
+            _cinemaDbContext = cinemaDbContext;        
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> addLocation([FromBody] Location locationRequest) 
+        {
+            locationRequest.id_location = Guid.NewGuid();
+
+            await _cinemaDbContext.Locations.AddAsync(locationRequest);  
+
+            await _cinemaDbContext.SaveChangesAsync();
+
+            return(Ok());
+        }
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> removeLocation([FromRoute] Guid id) 
+        {
+            var location = await _cinemaDbContext.Locations.FindAsync(id);
+
+            if(location == null) 
+            {
+                return NotFound();
+            }
+
+            _cinemaDbContext.Locations.Remove(location);
+
+            await _cinemaDbContext.SaveChangesAsync();
+
+            return(Ok(location));
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> getLocation([FromRoute] Guid id)
+        {
+            var location = _cinemaDbContext.Locations.FindAsync(id);
+
+            return Ok(location);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> getAllLocations() 
+        {
+            var locations = _cinemaDbContext.Locations.ToListAsync();
+
+            return Ok(locations);
+
+        }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> modifyLocation([FromRoute] Guid id, Location locationRequest) 
+        {
+            var modifyLocation = await _cinemaDbContext.Locations.FindAsync(id);
+
+            if(modifyLocation == null)
+            { return NotFound(); }
+
+            modifyLocation.city = locationRequest.city;
+            modifyLocation.id_location = locationRequest.id_location;
+
+            await _cinemaDbContext.SaveChangesAsync();
+
+            return(Ok(modifyLocation));
+
+        }
+    }
+}

@@ -1,4 +1,4 @@
-using CinemaAPI.Data;
+using CinemaAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinemaAPI.Controllers;
@@ -11,4 +11,8 @@ public class CinemaDbContext : DbContext
     }
 
     public DbSet<Ticket> Tickets { get; set; } //table
+    public DbSet<Film> Films { get; set; }
+    public DbSet<Screening> Screenings { get; set; }
+    public DbSet<Location> Locations { get; set; }
+    public DbSet<Room> Rooms { get; set; }
 }
