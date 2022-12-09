@@ -1,7 +1,10 @@
-﻿namespace CinemaAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CinemaAPI.Models
 {
     public class Film
     {
+        [Key]
         public Guid Id_Film { get; set; }
         public bool Is3D { get; set; }
         public int Age { get; set; }

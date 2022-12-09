@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace CinemaAPI.Models;
 
 public class Ticket
 {
+    [Key]
     public Guid Id { get; set; }
     public bool IsChecked { get; set; }
     public string Film { get; set; }

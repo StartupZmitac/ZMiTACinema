@@ -1,7 +1,10 @@
-﻿namespace CinemaAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CinemaAPI.Models
 {
     public class Screening
     {
+        [Key]
         public Guid Screening_ID { get; set; }
         public int Room { get; set; }
         public string Film { get; set; }
