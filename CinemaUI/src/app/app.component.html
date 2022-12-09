@@ -1,0 +1,29 @@
+<head>
+  <title>ZMiTACinema</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<!--
+Change router link to normal link
+-->
+<div class="container">
+  <div class="jumbotron text-center">
+    <h1>ZMiTACinema</h1>
+    <p>Please choose your cinema's location</p>
+    <div class="list-group">
+      <a routerLink="main-page" class="list-group-item list-group-item-action">Katowice</a>
+      <a href="#" class="list-group-item list-group-item-action">Knyszyn</a>
+      <a href="#" class="list-group-item list-group-item-action">Wilkowyje</a>
+      <a href="#" class="list-group-item list-group-item-action">Wadowice</a>
+      <a href="#" class="list-group-item list-group-item-action">Miechów</a>
+    <div>
+      <button type="button" class="btn btn-primary text-left">Log in</button>
+      <button type="button" class="btn btn-primary text-right">Cancel ticket</button>
+    </div>
+  </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
