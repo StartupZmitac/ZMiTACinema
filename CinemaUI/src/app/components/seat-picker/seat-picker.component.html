@@ -1,1 +1,16 @@
-<p>seat-selector works!</p>
+<html>
+<head>
+  <title>Selecting seat</title>
+</head>
+<body>
+<div class="seat-picker">
+  <div *ngFor="let row of seats" class="seat-row">
+    <div *ngFor="let seat of row" class="seat"
+         [class.selected]="seat.selected"
+         (click)="selectSeat(seat)">
+      {{ seat.number }}
+    </div>
+  </div>
+</div>
+</body>
+</html>
