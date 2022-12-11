@@ -9,21 +9,67 @@
 <!--
 Change router link to normal link
 -->
+<body>
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">ZMiTACinema</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<div *ngIf="router.url === '/'">
 <div class="container">
   <div class="jumbotron text-center">
     <h1>ZMiTACinema</h1>
     <p>Please choose your cinema's location</p>
     <div class="list-group">
-      <a routerLink="main-page" class="list-group-item list-group-item-action">zmitac Katowice</a>
-      <a href="#" class="list-group-item list-group-item-action">Knyszyn</a>
-      <a href="#" class="list-group-item list-group-item-action">Wilkowyje</a>
-      <a href="#" class="list-group-item list-group-item-action">Wadowice</a>
-      <a href="#" class="list-group-item list-group-item-action">Miechów</a>
+      <a class="list-group-item list-group-item-action">
+        <button id="first-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Katowice">Katowice</button>
+      </a>
+      <a class="list-group-item list-group-item-action">
+        <button id="second-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Knyszyn">Knyszyn</button>
+        </a>
+      <a class="list-group-item list-group-item-action">
+        <button id="third-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Wilkowyje">Wilkowyje</button>
+      </a>
+      <a class="list-group-item list-group-item-action">
+        <button id="fourth-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Miechów">Miechów</button>
+      </a>
+      <a class="list-group-item list-group-item-action">
+        <button id="fifth-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Knyszyn">Knyszyn</button>
+      </a>
     <div>
       <button type="button" class="btn btn-primary text-left">Log in</button>
       <button type="button" class="btn btn-primary text-right">Cancel ticket</button>
+      <button id="seat-picker-button" class="btn btn-primary text-right"
+      (click)="onButtonClick($event)">Select seat</button>
     </div>
   </div>
   </div>
 </div>
+</div>
+
 <router-outlet></router-outlet>
+</body>
+
