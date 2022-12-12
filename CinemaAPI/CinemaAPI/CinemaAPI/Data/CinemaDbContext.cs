@@ -15,4 +15,6 @@ public class CinemaDbContext : DbContext
     public DbSet<Screening> Screenings { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<Room> Rooms { get; set; }
+    public DbSet<Admin> Admins { get; set; }
+    public DbSet<Cashier> Cashiers { get; set; }
 }

@@ -9,13 +9,13 @@ namespace CinemaAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> addCashier() { return Ok(); }
         [HttpDelete]
-        public async Task<IActionResult> removeCachier() { return Ok(); }
+        public async Task<IActionResult> removeCashier() { return Ok(); }
         [HttpPut]
-        public async Task<IActionResult> modifyCachier() { return Ok(); }
+        public async Task<IActionResult> modifyCashier() { return Ok(); }
         [HttpGet]
-        public async Task<IActionResult> getAllCachier() { return Ok(); }
+        public async Task<IActionResult> getAllCashier() { return Ok(); }
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> getCachier([FromRoute] Guid id) { return Ok(); }
+        public async Task<IActionResult> getCashier([FromRoute] Guid id) { return Ok(); }
     }
 }
