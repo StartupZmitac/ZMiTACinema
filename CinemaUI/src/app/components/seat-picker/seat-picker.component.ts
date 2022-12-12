@@ -17,7 +17,7 @@ export class SeatPickerComponent {
       { number: 'M1', selected: false },
       { number: 'M2', selected: false },
       { number: 'M3', selected: false },
-      { number: 'M4', selected: false },
+      { number: 'M4', selected: true },
       { number: 'M5', selected: false },
       { number: 'M6', selected: false },
       { number: 'M7', selected: false },

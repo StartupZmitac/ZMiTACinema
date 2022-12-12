@@ -25,6 +25,8 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
+
+  //TODO: Correct visuals
   localizationName: string | null | undefined;
   films: { title: string, hours: string[] }[] = [
     {

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
 
+  //TODO: Select amount of tickets from different types. Do not assign type to seat - assign type to ticket.
   constructor() { }
 
   ngOnInit(): void {
