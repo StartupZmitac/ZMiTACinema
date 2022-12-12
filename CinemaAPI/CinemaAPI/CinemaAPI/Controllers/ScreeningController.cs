@@ -33,6 +33,8 @@ namespace CinemaAPI.Controllers
             toModify.Film = screeningRequest.Film;
             toModify.Room = screeningRequest.Room;
             toModify.Time= screeningRequest.Time;
+            toModify.id_room = screeningRequest.id_room;
+            toModify.Id_Film = screeningRequest.Id_Film;
             await cinemaDbContext.SaveChangesAsync();
             return Ok(screeningRequest);
         }

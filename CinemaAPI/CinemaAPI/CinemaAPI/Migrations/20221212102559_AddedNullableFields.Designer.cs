@@ -4,6 +4,7 @@ using CinemaAPI.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CinemaAPI.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    partial class CinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221212102559_AddedNullableFields")]
+    partial class AddedNullableFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,11 +87,11 @@ namespace CinemaAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("_locationid_location")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("column")
                         .HasColumnType("int");
-
-                    b.Property<Guid?>("id_location")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("row")
                         .HasColumnType("int");
@@ -103,7 +106,7 @@ namespace CinemaAPI.Migrations
 
                     b.HasKey("id_room");
 
-                    b.HasIndex("id_location");
+                    b.HasIndex("_locationid_location");
 
                     b.ToTable("Rooms");
                 });
@@ -117,8 +120,11 @@ namespace CinemaAPI.Migrations
                     b.Property<string>("Film")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("Id_Film")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Id_Film")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_Room")
+                        .HasColumnType("int");
 
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
@@ -129,14 +135,17 @@ namespace CinemaAPI.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("id_room")
+                    b.Property<Guid?>("_filmId_Film")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("_roomid_room")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Screening_ID");
 
-                    b.HasIndex("Id_Film");
+                    b.HasIndex("_filmId_Film");
 
-                    b.HasIndex("id_room");
+                    b.HasIndex("_roomid_room");
 
                     b.ToTable("Screenings");
                 });
@@ -165,12 +174,12 @@ namespace CinemaAPI.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("id_room")
+                    b.Property<Guid?>("_roomid_room")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("id_room");
+                    b.HasIndex("_roomid_room");
 
                     b.ToTable("Tickets");
                 });
@@ -179,7 +188,7 @@ namespace CinemaAPI.Migrations
                 {
                     b.HasOne("CinemaAPI.Models.Location", "_location")
                         .WithMany("rooms")
-                        .HasForeignKey("id_location");
+                        .HasForeignKey("_locationid_location");
 
                     b.Navigation("_location");
                 });
@@ -188,11 +197,11 @@ namespace CinemaAPI.Migrations
                 {
                     b.HasOne("CinemaAPI.Models.Film", "_film")
                         .WithMany("Screenings")
-                        .HasForeignKey("Id_Film");
+                        .HasForeignKey("_filmId_Film");
 
                     b.HasOne("CinemaAPI.Models.Room", "_room")
                         .WithMany("Screenings")
-                        .HasForeignKey("id_room");
+                        .HasForeignKey("_roomid_room");
 
                     b.Navigation("_film");
 
@@ -203,7 +212,7 @@ namespace CinemaAPI.Migrations
                 {
                     b.HasOne("CinemaAPI.Models.Room", "_room")
                         .WithMany("Tickets")
-                        .HasForeignKey("id_room");
+                        .HasForeignKey("_roomid_room");
 
                     b.Navigation("_room");
                 });

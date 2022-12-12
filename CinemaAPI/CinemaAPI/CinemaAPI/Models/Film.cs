@@ -1,9 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CinemaAPI.Models
 {
     public class Film
     {
+        public Film()
+        {
+            this.Screenings = new HashSet<Screening>();
+        }
         [Key]
         public Guid Id_Film { get; set; }
         public bool Is3D { get; set; }
@@ -16,6 +21,7 @@ namespace CinemaAPI.Models
         public string Name { get; set; }
         public bool Sub { get; set; }
         public int Time { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Screening> Screenings { get; set; }
     }
 }

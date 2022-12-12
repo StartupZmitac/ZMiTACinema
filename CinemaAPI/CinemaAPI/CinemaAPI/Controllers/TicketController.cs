@@ -47,7 +47,7 @@ namespace CinemaAPI.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> getTicket([FromRoute] Guid id)
         {
-            var ticket = _cinemaDbContext.Tickets.FindAsync(id);
+            var ticket = await _cinemaDbContext.Tickets.FindAsync(id);
 
             return Ok(ticket);
         }
@@ -55,7 +55,7 @@ namespace CinemaAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> getAllTickets()
         {
-            var tickets = _cinemaDbContext.Tickets.ToListAsync();
+            var tickets = await _cinemaDbContext.Tickets.ToListAsync();
 
             return Ok(tickets);
 
@@ -72,11 +72,11 @@ namespace CinemaAPI.Controllers
 
             modifyTicket.Time = ticketRequest.Time;
             modifyTicket.Seat = ticketRequest.Seat;
-            modifyTicket.Id = ticketRequest.Id;
             modifyTicket.Room = ticketRequest.Room;
             modifyTicket.IsPaid= ticketRequest.IsPaid;
             modifyTicket.IsChecked= ticketRequest.IsChecked;
             modifyTicket.Film = ticketRequest.Film;
+            modifyTicket.id_room = ticketRequest.id_room;
 
             await _cinemaDbContext.SaveChangesAsync();
 
