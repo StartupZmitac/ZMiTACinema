@@ -18,6 +18,7 @@ namespace CinemaAPI.Models
         public int row { get; set; }
         public string taken_seats { get; set; }
         public string unavailable_seats { get; set; }
+        public int number { get; set; }
         public Guid? id_location { get; set; }
         [JsonIgnore]
         [ForeignKey("id_location")]
