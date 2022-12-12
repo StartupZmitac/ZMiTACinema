@@ -8,80 +8,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="jumbotron text-center">
-  <div class="row">
-    <div class="col-xs-6"><h1>ZMiTACinema</h1></div>
-    <div class="col-xs-6"><h2>{{localizationName}}</h2></div>
-  </div>
-</div>
-<br>
 <div class="jumbotron">
   <ul class="list-group">
-    <li class="list-group-item">
+    <li class="list-group-item" *ngFor="let film of films">
       <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">365 dni warunku</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">12:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-      </ul>
-    </li>
-    <li class="list-group-item">
-      <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">Nieznajomy z wydziału</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">12:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-      </ul>
-    </li>
-    <li class="list-group-item">
-      <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">Świat według ZMiTAC</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">12:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-      </ul>
-    </li>
-    <li class="list-group-item">
-      <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">Skazani na EiM</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">12:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-      </ul>
-    </li>
-    <li class="list-group-item">
-      <ul class="list-group list-group-horizontal-sm">
-      <li class="list-group-item">Poprawkaa</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">12:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-    </ul>
-    </li>
-    <li class="list-group-item">
-      <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">Poprawka 2: Zaskoczenie</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">12:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-      </ul>
-    </li>
-    <li class="list-group-item">
-      <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">Poprawka 3: Urlop dziekański</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">12:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">15:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">16:00</a></li>
-      </ul>
-    </li>
-    <li class="list-group-item">
-      <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">Poprawka 4: Ostateczne starcie</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">17:00</a></li>
-      </ul>
-    </li>
-    <li class="list-group-item">
-      <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">Test Film</li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">12:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">14:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">15:00</a></li>
-        <li class="list-group-item"><a class="btn btn-primary" href="#" role="button">16:00</a></li>
+        <li class="list-group-item">{{ film.title }}</li>
+        <li class="list-group-item" *ngFor="let hour of film.hours">
+          <a class="btn btn-primary" (click)="onHourClick($event)" role="button">{{ hour }}</a>
+        </li>
       </ul>
     </li>
   </ul>

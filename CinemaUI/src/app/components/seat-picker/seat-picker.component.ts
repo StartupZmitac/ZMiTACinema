@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import { Seat } from 'src/app/models/seat.model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'seat-picker',
@@ -7,6 +8,8 @@ import { Seat } from 'src/app/models/seat.model';
   styleUrls: ['./seat-picker.component.css']
 })
 export class SeatPickerComponent {
+  constructor(private router:Router) {
+  }
   seats: Seat[][] = [
     // An array of rows, each containing an array of seats
     // Test array values.
@@ -83,6 +86,9 @@ export class SeatPickerComponent {
 
   selectSeat(seat: Seat) {
     seat.selected = !seat.selected;
+  }
+  onButtonClick(event: Event){
+    this.router.navigate(['/checkout']);
   }
 }
 
