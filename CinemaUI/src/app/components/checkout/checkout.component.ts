@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
@@ -8,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class CheckoutComponent implements OnInit {
 
   //TODO: Select amount of tickets from different types. Do not assign type to seat - assign type to ticket.
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
+  selectedSeats: any[] = [];
 
   ngOnInit(): void {
+    //this.selectedSeats = this.route.snapshot.paramMap.get('localizationName');
   }
 
 }
