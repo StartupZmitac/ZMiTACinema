@@ -74,6 +74,7 @@ namespace CinemaAPI.Controllers
             modifyRoom.row = roomRequest.row;
             modifyRoom.taken_seats= roomRequest.taken_seats;
             modifyRoom.unavailable_seats= roomRequest.unavailable_seats;
+            modifyRoom.number = roomRequest.number;
             modifyRoom.id_location= roomRequest.id_location;
 
             await _cinemaDbContext.SaveChangesAsync();
