@@ -14,6 +14,7 @@ public class Ticket
     public int Room { get; set; }
     public string? Seat { get; set; }
     public DateTime Time { get; set; }
+    public string Type { get; set; }
     public Guid? id_room { get; set; }
     [JsonIgnore]
     [ForeignKey("id_room")]

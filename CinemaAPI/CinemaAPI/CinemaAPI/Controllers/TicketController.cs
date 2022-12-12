@@ -76,6 +76,7 @@ namespace CinemaAPI.Controllers
             modifyTicket.IsPaid= ticketRequest.IsPaid;
             modifyTicket.IsChecked= ticketRequest.IsChecked;
             modifyTicket.Film = ticketRequest.Film;
+            modifyTicket.Type = ticketRequest.Type;
             modifyTicket.id_room = ticketRequest.id_room;
 
             await _cinemaDbContext.SaveChangesAsync();
