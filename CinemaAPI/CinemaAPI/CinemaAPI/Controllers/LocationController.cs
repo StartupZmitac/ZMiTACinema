@@ -47,7 +47,7 @@ namespace CinemaAPI.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> getLocation([FromRoute] Guid id)
         {
-            var location = _cinemaDbContext.Locations.FindAsync(id);
+            var location = await _cinemaDbContext.Locations.FindAsync(id);
 
             return Ok(location);
         }
@@ -55,7 +55,7 @@ namespace CinemaAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> getAllLocations() 
         {
-            var locations = _cinemaDbContext.Locations.ToListAsync();
+            var locations = await _cinemaDbContext.Locations.ToListAsync();
 
             return Ok(locations);
 
@@ -71,7 +71,6 @@ namespace CinemaAPI.Controllers
             { return NotFound(); }
 
             modifyLocation.city = locationRequest.city;
-            modifyLocation.id_location = locationRequest.id_location;
 
             await _cinemaDbContext.SaveChangesAsync();
 

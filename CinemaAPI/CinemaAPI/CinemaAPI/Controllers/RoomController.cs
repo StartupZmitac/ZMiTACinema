@@ -47,7 +47,7 @@ namespace CinemaAPI.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> getRoom([FromRoute] Guid id) 
         {
-            var room = _cinemaDbContext.Rooms.FindAsync(id);
+            var room = await _cinemaDbContext.Rooms.FindAsync(id);
 
             return Ok(room);
         }
@@ -55,7 +55,7 @@ namespace CinemaAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> getAllRooms()
         {
-            var rooms = _cinemaDbContext.Rooms.ToListAsync();
+            var rooms = await _cinemaDbContext.Rooms.ToListAsync();
 
             return Ok(rooms);
 
@@ -71,10 +71,10 @@ namespace CinemaAPI.Controllers
             { return NotFound(); }
 
             modifyRoom.column = roomRequest.column;
-            modifyRoom.id_room = roomRequest.id_room;
             modifyRoom.row = roomRequest.row;
             modifyRoom.taken_seats= roomRequest.taken_seats;
             modifyRoom.unavailable_seats= roomRequest.unavailable_seats;
+            modifyRoom.id_location= roomRequest.id_location;
 
             await _cinemaDbContext.SaveChangesAsync();
 
