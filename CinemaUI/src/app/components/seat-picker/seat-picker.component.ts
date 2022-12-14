@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class SeatPickerComponent {
   constructor(private router:Router) {
   }
+  selectedSeats: (string | undefined)[] = [];
   seats: Seat[][] = [
     // An array of rows, each containing an array of seats
     // Test array values.
@@ -17,7 +18,7 @@ export class SeatPickerComponent {
       { number: 'M1', selected: false },
       { number: 'M2', selected: false },
       { number: 'M3', selected: false },
-      { number: 'M4', selected: false },
+      { number: 'M4', selected: true },
       { number: 'M5', selected: false },
       { number: 'M6', selected: false },
       { number: 'M7', selected: false },
@@ -87,8 +88,13 @@ export class SeatPickerComponent {
   selectSeat(seat: Seat) {
     seat.selected = !seat.selected;
   }
+  //TODO: If no seat is selected, make button unavailable.
   onButtonClick(event: Event){
-    this.router.navigate(['/checkout']);
+    this.selectedSeats = this.seats
+      .flat()
+      .filter(seat=>seat.selected)
+      .map(seat => seat.number);
+    this.router.navigate(['/checkout',this.selectedSeats]);
   }
 }
 
