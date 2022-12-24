@@ -1,1 +1,6 @@
-<p>dropdown works!</p>
+<button type="button" name="button" (click)='getLocations()'>click</button>
+<ul>
+    <li *ngFor=" let location of locations">
+        {{location}}
+    </li>
+</ul>
