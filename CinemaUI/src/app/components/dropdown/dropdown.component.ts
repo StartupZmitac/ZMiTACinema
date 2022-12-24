@@ -22,7 +22,7 @@ export class DropdownComponent implements OnInit {
     this.lservice.getLocations()
     .subscribe({
       next: (locations) => {
-        console.log(locations);
+        this.locations = locations;
       },
       error: (response) => {
         console.log(response);
