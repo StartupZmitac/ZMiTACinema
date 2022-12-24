@@ -18,6 +18,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
     DropdownComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule, // Import the AppRoutingModule here
     RouterModule.forRoot([]) // Remove the routes from the root module
