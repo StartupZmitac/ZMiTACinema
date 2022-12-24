@@ -6,13 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import {MainPageComponent} from "./components/main-page/main-page.component";
 import {SeatPickerComponent} from "./components/seat-picker/seat-picker.component";
 import {CheckoutComponent} from "./components/checkout/checkout.component";
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     SeatPickerComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,

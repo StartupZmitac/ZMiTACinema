@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'main-page/:localizationName', component: MainPageComponent },
   { path: 'seat-picker', component: SeatPickerComponent },
-  {path: 'checkout', component: CheckoutComponent}
+  { path: 'checkout', component: CheckoutComponent}
 ];
 
 @NgModule({
