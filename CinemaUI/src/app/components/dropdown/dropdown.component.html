@@ -1,6 +1,8 @@
-<button type="button" name="button" (click)='getLocations()'>click</button>
-<ul>
-    <li *ngFor=" let location of locations">
-        {{location.city}}
-    </li>
-</ul>
+<div>
+    <select #local>
+        <option value="default">---</option>
+        <option *ngFor=" let location of locations" [value]="location">
+            {{location.city}}
+        </option>
+    </select>
+</div>
