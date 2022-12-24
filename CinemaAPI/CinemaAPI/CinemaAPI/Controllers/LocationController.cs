@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace CinemaAPI.Controllers
 {
     [ApiController]
-    [Route("api[controller]")]
+    [Route("api/[controller]")]
     public class LocationController : Controller
     {
         private readonly CinemaDbContext _cinemaDbContext;
