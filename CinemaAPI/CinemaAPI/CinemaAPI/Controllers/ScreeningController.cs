@@ -54,7 +54,7 @@ namespace CinemaAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> getAllScreenings(string location, DateTime date)
         {
-            var screenings = await cinemaDbContext.Screenings.Where(x => x.Time == date && x.Location== location).ToListAsync();
+            var screenings = await cinemaDbContext.Screenings.Where(x => x.Time.Date == date.Date && x.Location == location).ToListAsync();
             return Ok(screenings);
         }
         [HttpGet]
