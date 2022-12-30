@@ -14,15 +14,17 @@ export class ScreeningService {
 
   constructor(private http: HttpClient) { }
 
-  getAllScreenings(): Observable<Screening[]>{
-    return this.http.get<Screening[]>(this.baseApiUrl+'/api/Screening')
-  }
+  // getAllScreenings(): Observable<Screening[]>{
+  //   return this.http.get<Screening[]>(this.baseApiUrl+'/api/Screening')
+  // }
 
-  getScreenings(date: Date, location: Location): Observable<Screening[]>{
+  getScreenings(date: string, location: string): Observable<Screening[]>{
 
-    let url = this.baseApiUrl+'/api/Screening';
-    let params= new HttpParams();
-    params.append(location.city,date.toString());
-    return this.http.get<Screening[]>(url,{params})
+    let url = this.baseApiUrl+'/api/Screening?location=string&date=2022-12-30';
+    let data = {
+      date: date,
+      string: location
+    }
+    return this.http.get<Screening[]>(url,{params:data});
   }
 }
