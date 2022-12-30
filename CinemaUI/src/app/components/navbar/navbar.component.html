@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><img [src]="'/assets/logo.png'" style="max-height: 50px"></a>
+  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggle-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" style="margin-top: 20px" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Repertoire</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{localizationName}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" (click)="setLocalizationName('Katowice')">Katowice</a>
+          <a class="dropdown-item" (click)="setLocalizationName('Wadowice')">Wadowice</a>
+          <a class="dropdown-item" (click)="setLocalizationName('Wilkowyje')">Wilkowyje</a>
+          <a class="dropdown-item" (click)="setLocalizationName('Miechów')">Miechów</a>
+          <a class="dropdown-item" (click)="setLocalizationName('Knyszyn')">Knyszyn</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <app-dropdown>Your old</app-dropdown>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
