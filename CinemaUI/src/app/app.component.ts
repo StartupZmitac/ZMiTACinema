@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   title = 'CinemaUI';
-  localizationName = 'Katowice';
+
   constructor(public router: Router) {}
   onButtonClick(event: Event){
     const buttonId = (event.target as HTMLButtonElement).id;
@@ -19,8 +19,5 @@ export class AppComponent {
         this.router.navigate(['/main-page',buttonValue]);
 
   }
-  setLocalizationName(value: string){
-    this.localizationName = value;
-    this.router.navigate(['/main-page',this.localizationName]);
-  }
+
 }
