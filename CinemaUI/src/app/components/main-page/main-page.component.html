@@ -10,12 +10,10 @@
 <body>
 <div class="jumbotron">
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let film of films">
+    <li class="list-group-item" *ngFor="let film of screenings">
       <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">{{ film.title }}</li>
-        <li class="list-group-item" *ngFor="let hour of film.hours">
-          <a class="btn btn-primary" (click)="onHourClick($event)" role="button">{{ hour }}</a>
-        </li>
+        <li class="list-group-item">{{ film.film}}</li>
+        
       </ul>
     </li>
   </ul>
