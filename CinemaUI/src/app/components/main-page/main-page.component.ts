@@ -18,6 +18,8 @@ export class MainPageComponent implements OnInit {
 }*/
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import { Screening } from 'src/app/models/screening.model';
+import { ScreeningService } from 'src/app/services/screening.service';
 
 @Component({
   selector: 'app-main-page',
@@ -26,51 +28,29 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class MainPageComponent implements OnInit {
 
-  //TODO: Correct visuals
+  time: Date = new Date();
   localizationName: string | null | undefined;
-  films: { title: string, hours: string[] }[] = [
-    {
-      title: 'Świat według ZMiTAC',
-      hours: ['12:30','14:30']
-    },
-    {
-      title: '365 dni warunku',
-      hours: ['12:00', '14:00']
-    },
-    {
-      title: 'Nieznajomy z wydziału',
-      hours: ['12:00', '14:00']
-    },
-    {
-      title: 'Skazani na EiM',
-      hours: ['12:00', '14:00']
-    },
-    {
-      title: 'Poprawka',
-      hours: ['12:00', '14:00']
-    },
-    {
-      title: 'Poprawka 2: Zaskoczenie',
-      hours: ['12:00', '14:00']
-    },
-    {
-      title: 'Poprawka 3: Urlop dziekański',
-      hours: ['12:00', '14:00']
-    },
-    {
-      title: 'Poprawka 4: Ostateczne starcie',
-      hours: ['12:00', '14:00']
-    },
+  screenings: Screening[] = [];
 
-  ];
-
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private service: ScreeningService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.localizationName = this.route.snapshot.paramMap.get('localizationName');
   }
   onHourClick(event: Event){
     this.router.navigate(['/seat-picker']);
+  }
+  getScreenings(){
+    this.service.getAllScreenings()
+    .subscribe({
+      next: (screenings) =>{
+        this.screenings = screenings;
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    }
+    )
   }
 }
 
