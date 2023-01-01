@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import {MainPageComponent} from "./components/main-page/main-page.component";
 import {SeatPickerComponent} from "./components/seat-picker/seat-picker.component";
 import {CheckoutComponent} from "./components/checkout/checkout.component";
-import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MainPageComponent,
     SeatPickerComponent,
     CheckoutComponent,
-    DropdownComponent,
     NavbarComponent
   ],
   imports: [

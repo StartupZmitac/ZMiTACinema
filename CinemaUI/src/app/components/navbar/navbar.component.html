@@ -16,16 +16,7 @@
           {{localizationName}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" (click)="setLocalizationName('Katowice')">Katowice</a>
-          <a class="dropdown-item" (click)="setLocalizationName('Wadowice')">Wadowice</a>
-          <a class="dropdown-item" (click)="setLocalizationName('Wilkowyje')">Wilkowyje</a>
-          <a class="dropdown-item" (click)="setLocalizationName('Miechów')">Miechów</a>
-          <a class="dropdown-item" (click)="setLocalizationName('Knyszyn')">Knyszyn</a>
-        </div>
-      </li>
-      <li>
-        <div>
-          <app-dropdown>Your old</app-dropdown>
+          <a class="dropdown-item" *ngFor="let location of locations" (click)="setLocalizationName(location.city)">{{location.city}}</a>
         </div>
       </li>
     </ul>
