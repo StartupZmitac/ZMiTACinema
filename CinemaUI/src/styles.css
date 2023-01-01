@@ -2,3 +2,28 @@
 .navbar{
   height: 50px;
 }
+.navbar-light{
+  background-color: #212622 !important;
+}
+body {
+  background-color: #353d36;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: #fff10b !important;
+}
+.dropdown-menu{
+  background-color: #353d36 !important;
+}
+.dropdown-item{
+  color: #fff10b !important;
+}
+.dropdown-item:hover{
+  background-color: #212622 !important;
+}
+.jumbotron{
+  background-color: #212622 !important;
+  color: #fff10b !important;
+}
+.main-page-container{
+  background-color: #353d36;
+}

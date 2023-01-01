@@ -3,6 +3,9 @@
   bottom: 15px;
   right: 16px;
 }
+.bg-primary{
+  color: #212622;
+}
 #navbarNavDropdown{
   position: relative;
   bottom: 10px;
