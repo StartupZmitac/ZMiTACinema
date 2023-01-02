@@ -17,9 +17,9 @@ export class RoomService {
     return this.http.get<Room[]>(this.baseApiUrl+'/api/Room')
   }
   getRoomByNum(number: number, location: string): Observable<Room>{
-    let url = this.baseApiUrl+"/room-num"
+    let url = this.baseApiUrl+"/api/Room/room-num"
     let data = {
-      number: number,
+      id: number,
       location: location
     }
     return this.http.get<Room>(url,{params:data})

@@ -11,8 +11,6 @@ import { RoomService } from 'src/app/services/room.service';
   styleUrls: ['./seat-picker.component.css'],
   providers: [RoomService]
 })
-
-
 export class SeatPickerComponent implements OnInit {
   constructor(private router:Router, private rservice: RoomService) {
   }

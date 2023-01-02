@@ -70,6 +70,7 @@ export class MainPageComponent implements OnInit {
     this.localizationName = this.route.snapshot.paramMap.get('localizationName');
   }
   onHourClick(event: Event){
+    //forward roomnum and location of screening
     this.router.navigate(['/seat-picker']);
   }
 }
