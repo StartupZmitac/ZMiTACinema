@@ -51,12 +51,15 @@ namespace CinemaAPI.Controllers
             await cinemaDbContext.SaveChangesAsync();
             return Ok(toDelete);
         }
+
         [HttpGet]
         public async Task<IActionResult> getAllScreenings(string location, DateTime date)
         {
-            var screenings = await cinemaDbContext.Screenings.Where(x => x.Time.Date == date.Date && x.Location == location).ToListAsync();
+            var screenings = await cinemaDbContext.Screenings
+                .Where(x => x.Time.Date == date.Date && x.Location == location).ToListAsync();
             return Ok(screenings);
         }
+
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> getScreening([FromRoute] Guid id)
