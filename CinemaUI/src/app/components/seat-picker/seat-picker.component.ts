@@ -3,27 +3,32 @@ import { Seat } from 'src/app/models/seat.model';
 import {Router} from "@angular/router";
 import { Room } from 'src/app/models/room.model';
 import { Guid } from 'guid-typescript';
-import { DomSanitizer } from '@angular/platform-browser';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
   selector: 'seat-picker',
   templateUrl: './seat-picker.component.html',
-  styleUrls: ['./seat-picker.component.css']
+  styleUrls: ['./seat-picker.component.css'],
+  providers: [RoomService]
 })
 
 
 export class SeatPickerComponent implements OnInit {
-  constructor(private router:Router) {
+  constructor(private router:Router, private rservice: RoomService) {
   }
   ngOnInit(): void
   {
+    this.getRoom();
     this.createRoom();
+
   }
+  //TODO: get these from route
+  locationName: string = "Miechów";
+  roomNum: number = 0;
+
   selectedSeats: (string | undefined)[] = [];
   seats: Seat[][] = [
     // An array of rows, each containing an array of seats
-    // Test array values.
-    // ...
   ];
 
   selectSeat(seat: Seat) {
@@ -38,8 +43,6 @@ export class SeatPickerComponent implements OnInit {
     this.router.navigate(['/checkout',this.selectedSeats]);
   }
   
-  
-
   rooms: Room = 
   {
     id: Guid.create(),
@@ -53,7 +56,18 @@ export class SeatPickerComponent implements OnInit {
     tickets: [],
     screenings: []  
   }
-
+  getRoom(){
+    this.rservice.getRoomByNum(this.roomNum,this.locationName)
+    .subscribe({
+      next: (room) => {
+        this.rooms = room
+      },
+      error:(response) =>{
+        console.log(response)
+      }
+    }
+    )
+  }
   createRoom()
   {
     let temps: Seat[] = [];
