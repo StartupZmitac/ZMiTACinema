@@ -15,7 +15,7 @@
       <ul class="list-group list-group-horizontal-sm">
         <li class="list-group-item">{{ film.title }}</li>
         <li class="list-group-item" *ngFor="let hour of film.hours">
-          <a class="btn btn-primary" (click)="onHourClick($event)" role="button">{{ hour }}</a>
+          <a class="btn btn-dark" (click)="onHourClick($event)" role="button">{{ hour }}</a>
         </li>
       </ul>
     </li>

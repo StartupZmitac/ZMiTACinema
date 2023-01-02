@@ -27,3 +27,26 @@ body {
 .main-page-container{
   background-color: #353d36;
 }
+.list-group-item{
+  background-color: #353d36 !important;
+  color: #fff10b;
+  border: none;
+}
+.btn-primary{
+  background-color: #353d36;
+  color: #fff10b;
+  border: none;
+}
+.btn-primary:hover{
+  background-color: #fff10b;
+  color: #353d36;
+}
+.btn-dark{
+  background-color: #212622;
+  color: #fff10b;
+  border: none;
+}
+.btn-dark:hover{
+  background-color: #fff10b;
+  color: #212622;
+}
