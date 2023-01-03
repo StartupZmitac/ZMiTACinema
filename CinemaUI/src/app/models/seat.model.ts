@@ -1,6 +1,6 @@
 export class Seat {
   number: string | undefined;
-  selected: boolean | undefined;
-  available: boolean | undefined;
+  isTaken: boolean = false;
+  unavailable: boolean = false;
   
 }
