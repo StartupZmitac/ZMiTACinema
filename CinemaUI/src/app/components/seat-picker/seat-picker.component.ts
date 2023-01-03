@@ -16,7 +16,8 @@ export class SeatPickerComponent implements OnInit {
   }
   ngOnInit(): void
   {
-    this.getRoom();
+   // this.getRoom();
+      this.createRoom();
   }
   //TODO: get these from route
   locationName: string = "Miechów";
@@ -28,29 +29,29 @@ export class SeatPickerComponent implements OnInit {
   ];
 
   selectSeat(seat: Seat) {
-    seat.selected = !seat.selected;
+    seat.isTaken = !seat.isTaken;
   }
   //TODO: If no seat is selected, make button unavailable.
   onButtonClick(event: Event){
     this.selectedSeats = this.seats
       .flat()
-      .filter(seat=>seat.selected)
+      .filter(seat=>seat.isTaken)
       .map(seat => seat.number);
     this.router.navigate(['/checkout',this.selectedSeats]);
   }
-  
-  rooms: Room = 
+
+  rooms: Room =
   {
     id: Guid.create(),
-    column: 2,
-    row: 3,
-    taken_seats: "1C2R,2C3R",
-    unavailable_seats: "1C1R",
+    column: 5,
+    row: 5,
+    taken_seats: "0C0R,1C1R,",
+    unavailable_seats: "2C1R,",
     room_number: 5,
     id_location: Guid.create(),
     _location: [],
     tickets: [],
-    screenings: []  
+    screenings: []
   }
   getRoom(){
     this.rservice.getRoomByNum(this.roomNum,this.locationName)
@@ -59,7 +60,6 @@ export class SeatPickerComponent implements OnInit {
         this.rooms = room;
         console.log(room.room_number)
         console.log(this.rooms.room_number)
-        this.createRoom()
       },
       error:(response) =>{
         console.log(response)
@@ -76,43 +76,50 @@ export class SeatPickerComponent implements OnInit {
     {
       for(var j = 0;j < this.rooms.row; j++)
       {
-        temps.push({number: 'M' + j, selected: false, available: true});
+        temps.push({number: 'M' + j, isTaken: false, unavailable: true});
       }
       this.seats.push(temps);
       temps = [];
       //this.seats[i][j] = {number: 'M' + i, selected: false, available: true};
     }
-    
-    this.takenSeatsDecode();
+
+    this.seatsDecode(this.rooms.taken_seats, true);
+    this.seatsDecode(this.rooms.unavailable_seats, false)
 
   }
 
-  takenSeatsDecode()
+
+  seatsDecode(toDecode: string, taken: boolean)
   {
     //gada z api i bierze dane o roomie po id (skad id?)
     //this.seats;
     var temp = "";
     var roww = 0;
     var coll = 0;
-    for(var i =0; i<this.rooms.taken_seats.length; i++)
+    for(var i =0; i<toDecode.length ; i++)
     {
-      if(!isNaN(Number(this.rooms.taken_seats[i]))){ //nie dziala
-        temp += this.rooms.taken_seats[i];
+      if(!isNaN(Number(toDecode[i]))){ //nie dziala
+        temp += toDecode[i];
       }
-      else if(this.rooms.taken_seats[i] == "C") 
+      else if(toDecode[i] == "C")
       {
         coll = Number(temp);
         temp = "";
 
       }
-      else if(this.rooms.taken_seats[i] == "R")
+      else if(toDecode[i] == "R")
       {
         roww = Number(temp);
         temp = "";
       }
-      else if(this.rooms.taken_seats[i] == ",")
+      else if(toDecode[i] == ",")
       {
-        this.seats[coll][roww].selected = true;
+        if(taken){
+          this.seats[coll][roww].isTaken = true;
+        }
+        else{
+          this.seats[coll][roww].unavailable = true;
+        }
         console.log(coll);
         console.log(roww);
       }
@@ -121,12 +128,11 @@ export class SeatPickerComponent implements OnInit {
         var temp = "";
         var roww = 0;
         var coll = 0;
-      } 
-        
+      }
+
     }
 
   }
-
 
 }
 
