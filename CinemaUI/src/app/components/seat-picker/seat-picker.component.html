@@ -7,6 +7,7 @@
   <div *ngFor="let row of seats" class="seat-row">
     <div *ngFor="let seat of row" class="seat"
          [class.selected]="seat.selected"
+         [class.unavailable]="!seat.available"
          (click)="selectSeat(seat)">
       {{ seat.number }}
     </div>

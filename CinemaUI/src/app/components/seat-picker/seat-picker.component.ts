@@ -15,85 +15,93 @@ export class SeatPickerComponent {
     // An array of rows, each containing an array of seats
     // Test array values.
     [
-      { number: 'M1', selected: false },
-      { number: 'M2', selected: false },
-      { number: 'M3', selected: false },
-      { number: 'M4', selected: true },
-      { number: 'M5', selected: false },
-      { number: 'M6', selected: false },
-      { number: 'M7', selected: false },
-      { number: 'M8', selected: false },
-      { number: 'M9', selected: false },
+      { number: 'M1', selected: false, available: true },
+      { number: 'M2', selected: false, available: true },
+      { number: 'M3', selected: false, available: true },
+      { number: 'M4', selected: true , available: false },
+      { number: 'M5', selected: false, available: true  },
+      { number: 'M6', selected: false, available: true  },
+      { number: 'M7', selected: false, available: true  },
+      { number: 'M8', selected: false, available: true  },
+      { number: 'M9', selected: false, available: true  },
       // ...
     ],
     [
-      { number: 'M1', selected: false },
-      { number: 'M2', selected: false },
-      { number: 'M3', selected: false },
-      { number: 'M4', selected: false },
-      { number: 'M5', selected: false },
-      { number: 'M6', selected: false },
-      { number: 'M7', selected: false },
-      { number: 'M8', selected: false },
-      { number: 'M9', selected: false },
+      { number: 'M1', selected: false, available: true },
+      { number: 'M2', selected: false, available: true },
+      { number: 'M3', selected: false, available: true },
+      { number: 'M4', selected: false, available: true },
+      { number: 'M5', selected: false, available: true },
+      { number: 'M6', selected: false, available: true },
+      { number: 'M7', selected: false, available: true },
+      { number: 'M8', selected: false, available: true },
+      { number: 'M9', selected: false, available: true },
       // ...
     ],
     [
-      { number: 'M1', selected: false },
-      { number: 'M2', selected: false },
-      { number: 'M3', selected: false },
-      { number: 'M4', selected: false },
-      { number: 'M5', selected: false },
-      { number: 'M6', selected: false },
-      { number: 'M7', selected: false },
-      { number: 'M8', selected: false },
-      { number: 'M9', selected: false },
+      { number: 'M1', selected: false, available: true },
+      { number: 'M2', selected: false, available: true },
+      { number: 'M3', selected: false, available: true },
+      { number: 'M4', selected: false, available: true },
+      { number: 'M5', selected: false, available: true },
+      { number: 'M6', selected: false, available: true },
+      { number: 'M7', selected: false, available: true },
+      { number: 'M8', selected: false, available: true },
+      { number: 'M9', selected: false, available: true },
+      // ...
     ],
     [
-      { number: 'M1', selected: false },
-      { number: 'M2', selected: false },
-      { number: 'M3', selected: false },
-      { number: 'M4', selected: false },
-      { number: 'M5', selected: false },
-      { number: 'M6', selected: false },
-      { number: 'M7', selected: false },
-      { number: 'M8', selected: false },
-      { number: 'M9', selected: false },
+      { number: 'M1', selected: false, available: true },
+      { number: 'M2', selected: false, available: true },
+      { number: 'M3', selected: false, available: true },
+      { number: 'M4', selected: false, available: true },
+      { number: 'M5', selected: false, available: true },
+      { number: 'M6', selected: false, available: true },
+      { number: 'M7', selected: false, available: true },
+      { number: 'M8', selected: false, available: true },
+      { number: 'M9', selected: false, available: true },
+      // ...
     ],
     [
-      { number: 'M1', selected: false },
-      { number: 'M2', selected: false },
-      { number: 'M3', selected: false },
-      { number: 'M4', selected: false },
-      { number: 'M5', selected: false },
-      { number: 'M6', selected: false },
-      { number: 'M7', selected: false },
-      { number: 'M8', selected: false },
-      { number: 'M9', selected: false },
+      { number: 'M1', selected: false, available: true },
+      { number: 'M2', selected: false, available: true },
+      { number: 'M3', selected: false, available: true },
+      { number: 'M4', selected: false, available: true },
+      { number: 'M5', selected: false, available: true },
+      { number: 'M6', selected: false, available: true },
+      { number: 'M7', selected: false, available: true },
+      { number: 'M8', selected: false, available: true },
+      { number: 'M9', selected: false, available: true },
+      // ...
     ],
     [
-      { number: 'M1', selected: false },
-      { number: 'M2', selected: false },
-      { number: 'M3', selected: false },
-      { number: 'M4', selected: false },
-      { number: 'M5', selected: false },
-      { number: 'M6', selected: false },
-      { number: 'M7', selected: false },
-      { number: 'M8', selected: false },
-      { number: 'M9', selected: false },
+      { number: 'M1', selected: false, available: true },
+      { number: 'M2', selected: false, available: true },
+      { number: 'M3', selected: false, available: true },
+      { number: 'M4', selected: false, available: true },
+      { number: 'M5', selected: false, available: true },
+      { number: 'M6', selected: false, available: true },
+      { number: 'M7', selected: false, available: true },
+      { number: 'M8', selected: false, available: true },
+      { number: 'M9', selected: false, available: true },
+      // ...
     ],
     // ...
   ];
 
   selectSeat(seat: Seat) {
-    seat.selected = !seat.selected;
+    if (seat.available)
+      seat.selected = !seat.selected;
   }
-  //TODO: If no seat is selected, make button unavailable.
   onButtonClick(event: Event){
+    this.seats.flat()
+      .filter(seat=>seat.selected)
+      .forEach(seat=>seat.available=false);
     this.selectedSeats = this.seats
       .flat()
       .filter(seat=>seat.selected)
       .map(seat => seat.number);
+
     this.router.navigate(['/checkout',this.selectedSeats]);
   }
 }

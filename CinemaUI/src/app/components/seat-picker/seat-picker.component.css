@@ -9,14 +9,26 @@
 }
 .seat {
   border: 1px solid #ccc;
+  background-color: #212622;
+  color: #fff10b;
   width: 50px;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.seat:hover{
+  background-color: #fff10b;
+  color: #212622;
+  transition: all .2s ease-in-out;
 }
 .seat.selected {
-  background-color: #ccc;
+  background-color: green;
+  color: antiquewhite;
+}
+.seat.unavailable {
+  background-color: darkred;
 }

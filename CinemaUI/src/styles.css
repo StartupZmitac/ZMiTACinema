@@ -41,6 +41,10 @@ body {
   background-color: #fff10b;
   color: #353d36;
 }
+.btn-primary:active{
+  background-color: #fff10b;
+  color: #353d36;
+}
 .btn-dark{
   background-color: #212622;
   color: #fff10b;
