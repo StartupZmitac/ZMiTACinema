@@ -1,4 +1,5 @@
 using CinemaAPI.Controllers;
+using CinemaAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,15 @@ builder.Services.AddDbContext<CinemaDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
 
+    using var context = new CinemaDbContext(
+        serviceProvider.GetRequiredService<DbContextOptions<CinemaDbContext>>());
+
+    SeedData.Initialize(context);
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
