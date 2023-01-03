@@ -17,8 +17,6 @@ export class SeatPickerComponent implements OnInit {
   ngOnInit(): void
   {
     this.getRoom();
-    this.createRoom();
-
   }
   //TODO: get these from route
   locationName: string = "Miechów";
@@ -58,13 +56,18 @@ export class SeatPickerComponent implements OnInit {
     this.rservice.getRoomByNum(this.roomNum,this.locationName)
     .subscribe({
       next: (room) => {
-        this.rooms = room
+        this.rooms = room;
+        console.log(room.room_number)
+        console.log(this.rooms.room_number)
+        this.createRoom()
       },
       error:(response) =>{
         console.log(response)
       }
     }
     )
+
+    console.log(this.rooms.room_number)
   }
   createRoom()
   {
@@ -80,7 +83,6 @@ export class SeatPickerComponent implements OnInit {
       //this.seats[i][j] = {number: 'M' + i, selected: false, available: true};
     }
     
-    console.log("dziala createroom");
     this.takenSeatsDecode();
 
   }

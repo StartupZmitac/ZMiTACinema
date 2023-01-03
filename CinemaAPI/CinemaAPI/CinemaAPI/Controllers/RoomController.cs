@@ -49,7 +49,7 @@ namespace CinemaAPI.Controllers
             //TODO: make sure we only get one room this way
             var room = await _cinemaDbContext.Rooms.Where(x=> x.room_number == id && x._location.city==location).ToListAsync();
 
-            return Ok(room);
+            return Ok(room[0]);
         }
         [HttpGet]
         [Route("{id:Guid}")]
