@@ -42,16 +42,24 @@ namespace CinemaAPI.Controllers
 
             return (Ok(room));
         }
+        [HttpGet]
+        [Route("room-num")]
+        public async Task<IActionResult> getRoom(int id, string location) 
+        {
+            //TODO: make sure we only get one room this way
+            var room = await _cinemaDbContext.Rooms.Where(x=> x.room_number == id && x._location.city==location).ToListAsync();
 
+            return Ok(room[0]);
+        }
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> getRoom([FromRoute] Guid id) 
         {
-            var room = await _cinemaDbContext.Rooms.FindAsync(id);
+            //TODO: make sure we only get one room this way
+            var room = await _cinemaDbContext.Rooms.ToListAsync();
 
             return Ok(room);
         }
-
         [HttpGet]
         public async Task<IActionResult> getAllRooms()
         {

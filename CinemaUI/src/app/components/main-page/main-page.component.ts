@@ -40,6 +40,7 @@ export class MainPageComponent implements OnInit {
     this.getScreenings()
   }
   onHourClick(event: Event){
+    //forward roomnum and location of screening
     this.router.navigate(['/seat-picker']);
   }
   getScreenings(){
