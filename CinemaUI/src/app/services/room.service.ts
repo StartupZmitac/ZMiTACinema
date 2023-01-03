@@ -22,6 +22,6 @@ export class RoomService {
       id: number,
       location: location
     }
-    return this.http.get<Room>(url,{params:data})
+    return this.http.get<Room>(url, { params: data })
   }
 }

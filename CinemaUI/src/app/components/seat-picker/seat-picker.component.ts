@@ -16,12 +16,11 @@ export class SeatPickerComponent implements OnInit {
   }
   ngOnInit(): void
   {
-   // this.getRoom();
-      this.createRoom();
+    this.getRoom();
   }
   //TODO: get these from route
-  locationName: string = "Miechów";
-  roomNum: number = 0;
+  locationName: string = "Miechow";
+  roomNum: number = 1;
 
   selectedSeats: (string | undefined)[] = [];
   seats: Seat[][] = [
@@ -39,52 +38,34 @@ export class SeatPickerComponent implements OnInit {
       .map(seat => seat.number);
     this.router.navigate(['/checkout',this.selectedSeats]);
   }
-
-  rooms: Room =
-  {
-    id: Guid.create(),
-    column: 5,
-    row: 5,
-    taken_seats: "0C0R,1C1R,",
-    unavailable_seats: "2C1R,",
-    room_number: 5,
-    id_location: Guid.create(),
-    _location: [],
-    tickets: [],
-    screenings: []
-  }
   getRoom(){
-    this.rservice.getRoomByNum(this.roomNum,this.locationName)
-    .subscribe({
-      next: (room) => {
-        this.rooms = room;
-        console.log(room.room_number)
-        console.log(this.rooms.room_number)
-      },
-      error:(response) =>{
-        console.log(response)
+    this.rservice.getRoomByNum(this.roomNum, this.locationName)
+      .subscribe({
+        next: (room) => {
+          this.createRoom(room);
+        },
+        error: (response) => {
+          console.log(response);
+        }
       }
-    }
-    )
+      )
 
-    console.log(this.rooms.room_number)
   }
-  createRoom()
+  createRoom(room: Room)
   {
     let temps: Seat[] = [];
-    for(var i = 0;i < this.rooms.column; i++)
+    for(var i = 0;i < room.column; i++)
     {
-      for(var j = 0;j < this.rooms.row; j++)
+      for(var j = 0;j < room.row; j++)
       {
         temps.push({number: 'M' + j, isTaken: false, unavailable: true});
       }
       this.seats.push(temps);
       temps = [];
-      //this.seats[i][j] = {number: 'M' + i, selected: false, available: true};
     }
 
-    this.seatsDecode(this.rooms.taken_seats, true);
-    this.seatsDecode(this.rooms.unavailable_seats, false)
+    this.seatsDecode(room.taken_seats, true);
+    this.seatsDecode(room.unavailable_seats, false)
 
   }
 
