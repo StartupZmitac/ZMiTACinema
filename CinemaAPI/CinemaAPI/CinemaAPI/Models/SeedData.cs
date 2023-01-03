@@ -51,9 +51,9 @@ namespace CinemaAPI.Models
                 Age = 18,
                 Category = "Romanse",
                 Dubbing = false,
-                ImageSource = " ",
-                Language = "en-USA ",
-                Name = "Nieznajomy z wydzia³u",
+                ImageSource = "",
+                Language = "en-USA",
+                Name = "Nieznajomy z wydzialu",
                 Sub = true,
                 Time = 120
             };
@@ -63,9 +63,9 @@ namespace CinemaAPI.Models
                 Id_Film = Guid.NewGuid(),
                 Is3D = false,
                 Age = 16,
-                Category = " Akcja ",
+                Category = "Akcja",
                 Dubbing = true,
-                ImageSource = " ",
+                ImageSource = "",
                 Language = "en-USA",
                 Name = "Poprawka",
                 Sub = false,
@@ -79,7 +79,7 @@ namespace CinemaAPI.Models
                 Age = 16,
                 Category = "Akcja",
                 Dubbing = true,
-                ImageSource = " ",
+                ImageSource = "",
                 Language = "en-USA",
                 Name = "Poprawka 2",
                 Sub = true,
@@ -93,7 +93,7 @@ namespace CinemaAPI.Models
                 Age = 16,
                 Category = "Akcja",
                 Dubbing = true,
-                ImageSource = " ",
+                ImageSource = "",
                 Language = "en-USA",
                 Name = "Poprawka 3",
                 Sub = true,
@@ -107,8 +107,8 @@ namespace CinemaAPI.Models
                 Age = 16,
                 Category = "Akcja",
                 Dubbing = true,
-                ImageSource = " ",
-                Language = "en-USA ",
+                ImageSource = "",
+                Language = "en-USA",
                 Name = "Poprawka 4",
                 Sub = true,
                 Time = 90
@@ -122,8 +122,8 @@ namespace CinemaAPI.Models
                 room_number = 1,
                 row = 6,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
             var miechowPokoj2 = new Room()
@@ -133,8 +133,8 @@ namespace CinemaAPI.Models
                 room_number = 2,
                 row = 6,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
             var katowicePokoj1 = new Room()
@@ -144,8 +144,8 @@ namespace CinemaAPI.Models
                 room_number = 1,
                 row = 6,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
             var katowicePokoj2 = new Room()
@@ -153,10 +153,10 @@ namespace CinemaAPI.Models
                 id_location = katowice.id_location,
                 id_room = Guid.NewGuid(),
                 room_number = 2,
-                row = 6,
+                row = 7,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,6R4C,"
             };
 
             var knyszynPokoj1 = new Room()
@@ -164,10 +164,10 @@ namespace CinemaAPI.Models
                 id_location = knyszyn.id_location,
                 id_room = Guid.NewGuid(),
                 room_number = 1,
-                row = 6,
+                row = 4,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,"
             };
 
             var knyszynPokoj2 = new Room()
@@ -177,8 +177,8 @@ namespace CinemaAPI.Models
                 room_number = 2,
                 row = 6,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
             var wilkowyjePokoj1 = new Room()
@@ -188,8 +188,8 @@ namespace CinemaAPI.Models
                 room_number = 1,
                 row = 6,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
             var wilkowyjePokoj2 = new Room()
@@ -199,8 +199,8 @@ namespace CinemaAPI.Models
                 room_number = 2,
                 row = 6,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
             var wadowicePokoj1 = new Room()
@@ -210,8 +210,8 @@ namespace CinemaAPI.Models
                 room_number = 1,
                 row = 6,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
             var wadowicePokoj2 = new Room()
@@ -221,8 +221,8 @@ namespace CinemaAPI.Models
                 room_number = 2,
                 row = 6,
                 column = 9,
-                taken_seats = " ",
-                unavailable_seats = " "
+                taken_seats = "",
+                unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
             context.Locations.AddRange( miechow, katowice, knyszyn, wadowice, wilkowyje );
