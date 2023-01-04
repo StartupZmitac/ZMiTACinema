@@ -44,7 +44,8 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/seat-picker']);
   }
   getScreenings(){
-    this.service.getScreenings("2023-01-03", "Katowice")
+    if(this.localizationName!= undefined)
+    this.service.getScreenings("2023-01-03", this.localizationName)
     .subscribe({
       next: (screenings) =>{
         this.screenings = screenings;

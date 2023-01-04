@@ -14,10 +14,6 @@ export class ScreeningService {
 
   constructor(private http: HttpClient) { }
 
-  // getAllScreenings(): Observable<Screening[]>{
-  //   return this.http.get<Screening[]>(this.baseApiUrl+'/api/Screening')
-  // }
-
   getScreenings(date: string, location: string): Observable<Screening[]>{
 
     let url = this.baseApiUrl+'/api/Screening';
