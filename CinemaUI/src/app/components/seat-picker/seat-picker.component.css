@@ -30,5 +30,5 @@
   color: antiquewhite;
 }
 .seat.unavailable {
-  background-color: darkred;
+  background-color: grey;
 }
