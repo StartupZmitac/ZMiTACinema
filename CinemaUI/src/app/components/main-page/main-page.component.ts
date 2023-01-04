@@ -44,11 +44,12 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/seat-picker']);
   }
   getScreenings(){
-    this.service.getScreenings("2022-12-30", "string")
+    this.service.getScreenings("2023-01-03", "Katowice")
     .subscribe({
       next: (screenings) =>{
         this.screenings = screenings;
         console.log("got screenings")
+        console.log(screenings.length)
       },
       error: (response) => {
         console.log(response);

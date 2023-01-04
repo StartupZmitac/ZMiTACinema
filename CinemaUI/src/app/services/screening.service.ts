@@ -20,10 +20,10 @@ export class ScreeningService {
 
   getScreenings(date: string, location: string): Observable<Screening[]>{
 
-    let url = this.baseApiUrl+'/api/Screening?location=string&date=2022-12-30';
+    let url = this.baseApiUrl+'/api/Screening';
     let data = {
       date: date,
-      string: location
+      location: location
     }
     return this.http.get<Screening[]>(url,{params:data});
   }
