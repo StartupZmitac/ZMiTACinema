@@ -23,19 +23,20 @@ export class SeatPickerComponent implements OnInit {
   roomNum: number = 1;
 
   selectedSeats: (string | undefined)[] = [];
-  seats: Seat[][] = [
+  seats: Seat[][] = []
     // An array of rows, each containing an array of seats
-  ];
-
   selectSeat(seat: Seat) {
     seat.isTaken = !seat.isTaken;
   }
-  //TODO: If no seat is selected, make button unavailable.
   onButtonClick(event: Event){
+    this.seats.flat()
+      .filter(seat=>seat.selected)
+      .forEach(seat=>seat.available=false);
     this.selectedSeats = this.seats
       .flat()
       .filter(seat=>seat.isTaken)
       .map(seat => seat.number);
+
     this.router.navigate(['/checkout',this.selectedSeats]);
   }
   getRoom(){

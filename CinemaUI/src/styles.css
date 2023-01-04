@@ -2,3 +2,55 @@
 .navbar{
   height: 50px;
 }
+.navbar-light{
+  background-color: #212622 !important;
+}
+body {
+  background-color: #353d36;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: #fff10b !important;
+}
+.dropdown-menu{
+  background-color: #353d36 !important;
+}
+.dropdown-item{
+  color: #fff10b !important;
+}
+.dropdown-item:hover{
+  background-color: #212622 !important;
+}
+.jumbotron{
+  background-color: #212622 !important;
+  color: #fff10b !important;
+}
+.main-page-container{
+  background-color: #353d36;
+}
+.list-group-item{
+  background-color: #353d36 !important;
+  color: #fff10b;
+  border: none;
+}
+.btn-primary{
+  background-color: #353d36;
+  color: #fff10b;
+  border: none;
+}
+.btn-primary:hover{
+  background-color: #fff10b;
+  color: #353d36;
+}
+.btn-primary:active{
+  background-color: #fff10b;
+  color: #353d36;
+}
+.btn-dark{
+  background-color: #212622;
+  color: #fff10b;
+  border: none;
+}
+.btn-dark:hover{
+  background-color: #fff10b;
+  color: #212622;
+}
