@@ -26,12 +26,10 @@ export class SeatPickerComponent implements OnInit {
   seats: Seat[][] = []
     // An array of rows, each containing an array of seats
   selectSeat(seat: Seat) {
-    seat.isTaken = !seat.isTaken;
+    if (seat.unavailable)
+      seat.isTaken = !seat.isTaken;
   }
   onButtonClick(event: Event){
-    this.seats.flat()
-      .filter(seat=>seat.selected)
-      .forEach(seat=>seat.available=false);
     this.selectedSeats = this.seats
       .flat()
       .filter(seat=>seat.isTaken)
@@ -59,7 +57,7 @@ export class SeatPickerComponent implements OnInit {
     {
       for(var j = 0;j < room.row; j++)
       {
-        temps.push({number: 'M' + j, isTaken: false, unavailable: true});
+        temps.push({selected: false, number: 'M' + j, isTaken: false, unavailable: true});
       }
       this.seats.push(temps);
       temps = [];
