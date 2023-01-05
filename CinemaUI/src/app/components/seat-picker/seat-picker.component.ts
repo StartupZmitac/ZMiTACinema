@@ -26,8 +26,8 @@ export class SeatPickerComponent implements OnInit {
   seats: Seat[][] = []
     // An array of rows, each containing an array of seats
   selectSeat(seat: Seat) {
-    if (seat.unavailable)
-      seat.isTaken = !seat.isTaken;
+    if (!seat.isTaken)
+      seat.selected = !seat.selected;
   }
   onButtonClick(event: Event){
     this.selectedSeats = this.seats

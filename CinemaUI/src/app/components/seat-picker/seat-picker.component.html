@@ -6,7 +6,9 @@
 <div class="seat-picker">
   <div *ngFor="let row of seats" class="seat-row">
     <div *ngFor="let seat of row" class="seat"
-         [class.selected]="seat.isTaken"
+         [class.selected]="seat.selected"
+         [class.isTaken]="seat.isTaken"
+         [class.unavailable]="seat.unavailable"
          (click)="selectSeat(seat)">
       {{ seat.number }}
     </div>
