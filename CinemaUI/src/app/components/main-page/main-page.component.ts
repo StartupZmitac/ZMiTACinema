@@ -17,7 +17,7 @@ export class MainPageComponent implements OnInit {
 
 }*/
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import { Screening } from 'src/app/models/screening.model';
 import { ScreeningService } from 'src/app/services/screening.service';
 
@@ -30,19 +30,28 @@ export class MainPageComponent implements OnInit {
 
   time: Date = new Date();
   localizationName: string | null | undefined;
-  testLocation: string = "string"
   screenings: Screening[] = [];
 
-  constructor(private service: ScreeningService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private service: ScreeningService, private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.localizationName = this.route.snapshot.paramMap.get('localizationName');
     this.getScreenings()
   }
-  onHourClick(event: Event){
+
+  onHourClick(event: Event, _room: number, location: string){
     //forward roomnum and location of screening
-    this.router.navigate(['/seat-picker']);
+    let navigationExtras = {
+      queryParams:{
+        location: location,
+        room: _room
+      }
+    }
+      console.log(navigationExtras.queryParams.location, navigationExtras.queryParams.room);
+      this.router.navigate(['/seat-picker', navigationExtras]);
   }
+
   getScreenings(){
     if(this.localizationName!= undefined)
     this.service.getScreenings("2023-01-03", this.localizationName)

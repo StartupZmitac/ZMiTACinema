@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Seat } from 'src/app/models/seat.model';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { Room } from 'src/app/models/room.model';
-import { Guid } from 'guid-typescript';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -12,16 +11,19 @@ import { RoomService } from 'src/app/services/room.service';
   providers: [RoomService]
 })
 export class SeatPickerComponent implements OnInit {
-  constructor(private router:Router, private rservice: RoomService) {
+  constructor(private router:Router,private route: ActivatedRoute, private rservice: RoomService) {
   }
   ngOnInit(): void
   {
-    this.getRoom();
+    this.route.queryParams.subscribe(queryParams => {
+      let localizationName = queryParams['location'];
+      let room = queryParams['room'];
+      console.log(queryParams['location'], queryParams['room'],'zmitac')
+      this.getRoom(localizationName, room);
+    });
+
   }
   //TODO: get these from route
-  locationName: string = "Miechow";
-  roomNum: number = 1;
-
   selectedSeats: (string | undefined)[] = [];
   seats: Seat[][] = []
     // An array of rows, each containing an array of seats
@@ -37,8 +39,9 @@ export class SeatPickerComponent implements OnInit {
 
     this.router.navigate(['/checkout',this.selectedSeats]);
   }
-  getRoom(){
-    this.rservice.getRoomByNum(this.roomNum, this.locationName)
+  getRoom(localizationName: string, room: number){
+
+    this.rservice.getRoomByNum(Number(room), String(localizationName))
       .subscribe({
         next: (room) => {
           this.createRoom(room);
