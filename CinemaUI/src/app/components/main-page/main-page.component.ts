@@ -1,21 +1,3 @@
-/*import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-
-@Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.css']
-})
-export class MainPageComponent implements OnInit {
-  localizationName: string | null | undefined;
-
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.localizationName = this.route.snapshot.paramMap.get('localizationName');
-  }
-
-}*/
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import { Screening } from 'src/app/models/screening.model';
@@ -42,14 +24,15 @@ export class MainPageComponent implements OnInit {
 
   onHourClick(event: Event, _room: number, location: string){
     //forward roomnum and location of screening
-    let navigationExtras = {
-      queryParams:{
+    // queryParams:{
+    //     location: location,
+    //     room: _room
+    //   }
+    //console.log(navigationExtras.queryParams.location, navigationExtras.queryParams.room);
+      this.router.navigate(['/seat-picker'],{ queryParams: {
         location: location,
-        room: _room
-      }
-    }
-      console.log(navigationExtras.queryParams.location, navigationExtras.queryParams.room);
-      this.router.navigate(['/seat-picker', navigationExtras]);
+        room: _room.toString()
+      }});
   }
 
   getScreenings(){

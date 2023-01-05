@@ -15,13 +15,14 @@ export class SeatPickerComponent implements OnInit {
   }
   ngOnInit(): void
   {
-    this.route.queryParams.subscribe(queryParams => {
-      let localizationName = queryParams['location'];
-      let room = queryParams['room'];
-      console.log(queryParams['location'], queryParams['room'],'zmitac')
-      this.getRoom(localizationName, room);
-    });
-
+    this.route.queryParamMap
+    .subscribe((params)=>{
+      console.log(params)
+      let location = params.get('location')
+      let room = params.get('room')
+      if(location&&room)
+      this.getRoom(location, Number(room))
+    })
   }
   //TODO: get these from route
   selectedSeats: (string | undefined)[] = [];
