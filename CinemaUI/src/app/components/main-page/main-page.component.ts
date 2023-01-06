@@ -23,12 +23,6 @@ export class MainPageComponent implements OnInit {
   }
 
   onHourClick(event: Event, _room: number, location: string){
-    //forward roomnum and location of screening
-    // queryParams:{
-    //     location: location,
-    //     room: _room
-    //   }
-    //console.log(navigationExtras.queryParams.location, navigationExtras.queryParams.room);
       this.router.navigate(['/seat-picker'],{ queryParams: {
         location: location,
         room: _room.toString()
