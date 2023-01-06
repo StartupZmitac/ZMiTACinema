@@ -17,10 +17,15 @@ namespace CinemaAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> addTicket([FromBody] Ticket ticketRequest)
         {
+            Validator validator = new Validator();
+
+            if (validator.checkTime(ticketRequest.Time) == false)
+            {
+                return BadRequest();
+            }
+
             ticketRequest.Id = Guid.NewGuid();
-
             await _cinemaDbContext.Tickets.AddAsync(ticketRequest);
-
             await _cinemaDbContext.SaveChangesAsync();
 
             return (Ok());
@@ -70,6 +75,13 @@ namespace CinemaAPI.Controllers
             if (modifyTicket == null)
             { return NotFound(); }
 
+            Validator validator = new Validator();
+
+            if (validator.checkTime(ticketRequest.Time) == false)
+            {
+                return BadRequest();
+            }
+
             modifyTicket.Time = ticketRequest.Time;
             modifyTicket.Seat = ticketRequest.Seat;
             modifyTicket.Room = ticketRequest.Room;
@@ -101,8 +113,26 @@ namespace CinemaAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> changeSeatAvailability()
+        public async Task<IActionResult> changeSeatAvailability(Ticket ticketRequest)
         {
+            string ticketSeat = ticketRequest.Seat;
+            var room = await _cinemaDbContext.Rooms.FindAsync(ticketRequest.id_room);
+            string[] takenSeats = room.taken_seats.Split(",");
+            string[] unavailableSeats = room.unavailable_seats.Split(",");
+            for (int i = 0; i < takenSeats.Length - 1; i++)
+            {
+                if (ticketSeat.Equals(takenSeats[i]))
+                {
+                    return BadRequest();
+                }
+            }
+            for (int i = 0; i < unavailableSeats.Length - 1; i++)
+            {
+                if (ticketSeat.Equals(unavailableSeats[i]))
+                { 
+                    return BadRequest(); 
+                }
+            }
             return Ok();
         }
     }
