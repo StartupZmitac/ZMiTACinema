@@ -21,7 +21,7 @@ export class SeatPickerComponent implements OnInit {
       let location = params.get('location')
       let room = params.get('room')
       if(location&&room)
-      this.getRoom(location, Number(room))
+        this.getRoom(location, Number(room))
     })
   }
   //TODO: get these from route
@@ -35,10 +35,14 @@ export class SeatPickerComponent implements OnInit {
   onButtonClick(event: Event){
     this.selectedSeats = this.seats
       .flat()
-      .filter(seat=>seat.isTaken)
+      .filter(seat=>seat.selected)
       .map(seat => seat.number);
-
-    this.router.navigate(['/checkout',this.selectedSeats]);
+    console.log(this.selectedSeats);
+    this.router.navigate(['/checkout'],{
+      queryParams: {
+        seats: this.selectedSeats.join(',')
+      }
+    });
   }
   getRoom(localizationName: string, room: number){
 

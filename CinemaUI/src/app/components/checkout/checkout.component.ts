@@ -12,8 +12,10 @@ export class CheckoutComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
   selectedSeats: any[] = [];
 
-  ngOnInit(): void {
-    //this.selectedSeats = this.route.snapshot.paramMap.get('localizationName');
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.selectedSeats = params['seats'].split(',');
+    });
   }
 
 }
