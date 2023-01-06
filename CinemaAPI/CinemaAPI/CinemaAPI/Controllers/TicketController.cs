@@ -17,10 +17,15 @@ namespace CinemaAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> addTicket([FromBody] Ticket ticketRequest)
         {
+            Validator validator = new Validator();
+
+            if (validator.checkTime(ticketRequest.Time) == false)
+            {
+                return BadRequest();
+            }
+
             ticketRequest.Id = Guid.NewGuid();
-
             await _cinemaDbContext.Tickets.AddAsync(ticketRequest);
-
             await _cinemaDbContext.SaveChangesAsync();
 
             return (Ok());
@@ -70,11 +75,18 @@ namespace CinemaAPI.Controllers
             if (modifyTicket == null)
             { return NotFound(); }
 
+            Validator validator = new Validator();
+
+            if (validator.checkTime(ticketRequest.Time) == false)
+            {
+                return BadRequest();
+            }
+
             modifyTicket.Time = ticketRequest.Time;
             modifyTicket.Seat = ticketRequest.Seat;
             modifyTicket.Room = ticketRequest.Room;
-            modifyTicket.IsPaid= ticketRequest.IsPaid;
-            modifyTicket.IsChecked= ticketRequest.IsChecked;
+            modifyTicket.IsPaid = ticketRequest.IsPaid;
+            modifyTicket.IsChecked = ticketRequest.IsChecked;
             modifyTicket.Film = ticketRequest.Film;
             modifyTicket.Type = ticketRequest.Type;
             modifyTicket.id_room = ticketRequest.id_room;
@@ -86,7 +98,7 @@ namespace CinemaAPI.Controllers
 
         [HttpPut]
         [Route("{id2:Guid}")]
-        public async Task<IActionResult> checkTicket([FromRoute] Guid id2, Ticket ticketRequest) 
+        public async Task<IActionResult> checkTicket([FromRoute] Guid id2, Ticket ticketRequest)
         {
             var modifyTicket = await _cinemaDbContext.Tickets.FindAsync(id2);
 
@@ -101,8 +113,30 @@ namespace CinemaAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> changeSeatAvailability()
+        public async Task<IActionResult> changeSeatAvailability(Ticket ticketRequest)
         {
+            string ticketSeat = ticketRequest.Seat.Trim();
+            var room = await _cinemaDbContext.Rooms.FindAsync(ticketRequest.id_room);
+            if (room == null)
+            {
+                return NotFound();
+            }
+            string[] takenSeats = room.taken_seats.Split(",");
+            string[] unavailableSeats = room.unavailable_seats.Split(",");
+            for (int i = 0; i < takenSeats.Length - 1; i++)
+            {
+                if (ticketSeat.Equals(takenSeats[i].Trim()))
+                {
+                    return BadRequest();
+                }
+            }
+            for (int i = 0; i < unavailableSeats.Length - 1; i++)
+            {
+                if (ticketSeat.Equals(unavailableSeats[i].Trim()))
+                {
+                    return BadRequest();
+                }
+            }
             return Ok();
         }
     }
