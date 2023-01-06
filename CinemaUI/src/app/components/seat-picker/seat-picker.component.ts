@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { Seat } from 'src/app/models/seat.model';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { Room } from 'src/app/models/room.model';
-import { Guid } from 'guid-typescript';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -12,33 +11,42 @@ import { RoomService } from 'src/app/services/room.service';
   providers: [RoomService]
 })
 export class SeatPickerComponent implements OnInit {
-  constructor(private router:Router, private rservice: RoomService) {
+  constructor(private router:Router,private route: ActivatedRoute, private rservice: RoomService) {
   }
   ngOnInit(): void
   {
-    this.getRoom();
+    this.route.queryParamMap
+    .subscribe((params)=>{
+      console.log(params)
+      let location = params.get('location')
+      let room = params.get('room')
+      if(location&&room)
+        this.getRoom(location, Number(room))
+    })
   }
   //TODO: get these from route
-  locationName: string = "Miechow";
-  roomNum: number = 1;
-
   selectedSeats: (string | undefined)[] = [];
   seats: Seat[][] = []
     // An array of rows, each containing an array of seats
   selectSeat(seat: Seat) {
-    if (seat.unavailable)
-      seat.isTaken = !seat.isTaken;
+    if (!seat.isTaken)
+      seat.selected = !seat.selected;
   }
   onButtonClick(event: Event){
     this.selectedSeats = this.seats
       .flat()
-      .filter(seat=>seat.isTaken)
+      .filter(seat=>seat.selected)
       .map(seat => seat.number);
-
-    this.router.navigate(['/checkout',this.selectedSeats]);
+    console.log(this.selectedSeats);
+    this.router.navigate(['/checkout'],{
+      queryParams: {
+        seats: this.selectedSeats.join(',')
+      }
+    });
   }
-  getRoom(){
-    this.rservice.getRoomByNum(this.roomNum, this.locationName)
+  getRoom(localizationName: string, room: number){
+
+    this.rservice.getRoomByNum(Number(room), String(localizationName))
       .subscribe({
         next: (room) => {
           this.createRoom(room);
@@ -53,11 +61,11 @@ export class SeatPickerComponent implements OnInit {
   createRoom(room: Room)
   {
     let temps: Seat[] = [];
-    for(var i = 0;i < room.column; i++)
+    for(var i = 0;i < room.row; i++)
     {
-      for(var j = 0;j < room.row; j++)
+      for(var j = 0;j < room.column; j++)
       {
-        temps.push({selected: false, number: 'M' + j, isTaken: false, unavailable: true});
+        temps.push({selected: false, number: i + 'M' + j, isTaken: false, unavailable: true});
       }
       this.seats.push(temps);
       temps = [];
