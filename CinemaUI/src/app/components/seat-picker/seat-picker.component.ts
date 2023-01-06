@@ -71,14 +71,12 @@ export class SeatPickerComponent implements OnInit {
 
   seatsDecode(toDecode: string, taken: boolean)
   {
-    //gada z api i bierze dane o roomie po id (skad id?)
-    //this.seats;
     var temp = "";
     var roww = 0;
     var coll = 0;
     for(var i =0; i<toDecode.length ; i++)
     {
-      if(!isNaN(Number(toDecode[i]))){ //nie dziala
+      if(!isNaN(Number(toDecode[i]))){ 
         temp += toDecode[i];
       }
       else if(toDecode[i] == "C")
