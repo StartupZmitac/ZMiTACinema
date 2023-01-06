@@ -23,12 +23,6 @@ export class MainPageComponent implements OnInit {
   }
 
   onHourClick(event: Event, _room: number, location: string){
-    //forward roomnum and location of screening
-    // queryParams:{
-    //     location: location,
-    //     room: _room
-    //   }
-    //console.log(navigationExtras.queryParams.location, navigationExtras.queryParams.room);
       this.router.navigate(['/seat-picker'],{ queryParams: {
         location: location,
         room: _room.toString()
@@ -37,7 +31,7 @@ export class MainPageComponent implements OnInit {
 
   getScreenings(){
     if(this.localizationName!= undefined)
-    this.service.getScreenings("2023-01-03", this.localizationName)
+    this.service.getScreenings("2023-01-06", this.localizationName)
     .subscribe({
       next: (screenings) =>{
         this.screenings = screenings;
