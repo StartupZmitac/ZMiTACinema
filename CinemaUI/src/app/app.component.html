@@ -7,32 +7,16 @@
 
 <app-navbar></app-navbar>
 <div *ngIf="router.url === '/'">
-<div class="container">
-  <div class="jumbotron text-center">
-    <h3>Please choose your cinema's location</h3>
-    <div class="list-group">
-      <a class="list-group-item list-group-item-action">
-        <button id="first-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Katowice">Katowice</button>
-      </a>
-      <a class="list-group-item list-group-item-action">
-        <button id="second-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Wadowice">Wadowice</button>
-        </a>
-      <a class="list-group-item list-group-item-action">
-        <button id="third-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Wilkowyje">Wilkowyje</button>
-      </a>
-      <a class="list-group-item list-group-item-action">
-        <button id="fourth-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Miechów">Miechów</button>
-      </a>
-      <a class="list-group-item list-group-item-action">
-        <button id="fifth-city" class="btn btn-dark" (click)="onButtonClick($event)" value="Knyszyn">Knyszyn</button>
-      </a>
-    <div>
-      <button type="button" class="btn btn-primary text-left" style="margin-top: 10px">Log in</button>
-      <button type="button" class="btn btn-primary text-right" style="margin-left: 30px; margin-top: 10px">Cancel ticket</button>
+  <div class="jumbotron jumbotron-fluid bg-dark text-white">
+    <div class="container">
+      <h1 class="display-4">Welcome to ZMiTACinema!</h1>
+      <p class="lead">Experience the magic of the movies at ZMiTACinema. From blockbuster hits to indie films, we have something for everyone.</p>
+      <hr class="my-4">
+    </div>
+    <div class="container">
+      <p>In order to start browsing our greatest films, please first choose a cinema location on top of page!</p>
     </div>
   </div>
-  </div>
-</div>
 </div>
 
 <router-outlet></router-outlet>
