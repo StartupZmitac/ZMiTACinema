@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import { Seat } from 'src/app/models/seat.model';
 import {Router} from "@angular/router";
 import { Room } from 'src/app/models/room.model';
-import { Guid } from 'guid-typescript';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -103,9 +102,9 @@ export class SeatPickerComponent implements OnInit {
       }
       else
       {
-        var temp = "";
-        var roww = 0;
-        var coll = 0;
+        temp = "";
+        roww = 0;
+        coll = 0;
       }
 
     }
