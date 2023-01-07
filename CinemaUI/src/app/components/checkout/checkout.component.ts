@@ -7,10 +7,15 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-
-  //TODO: Select amount of tickets from different types. Do not assign type to seat - assign type to ticket.
-  constructor(private route: ActivatedRoute, private router: Router) { }
   selectedSeats: any[] = [];
+  normalTickets: number;
+  reducedTickets: number;
+  //TODO: Select amount of tickets from different types. Do not assign type to seat - assign type to ticket.
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.normalTickets = 0;
+    this.reducedTickets = 0;
+  }
+
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

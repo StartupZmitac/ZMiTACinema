@@ -8,6 +8,7 @@ import {MainPageComponent} from "./components/main-page/main-page.component";
 import {SeatPickerComponent} from "./components/seat-picker/seat-picker.component";
 import {CheckoutComponent} from "./components/checkout/checkout.component";
 import { NavbarComponent } from './components/navbar/navbar.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,12 +18,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     CheckoutComponent,
     NavbarComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule, // Import the AppRoutingModule here
-    RouterModule.forRoot([]) // Remove the routes from the root module
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule, // Import the AppRoutingModule here
+        RouterModule.forRoot([]),
+        FormsModule,
+        // Remove the routes from the root module
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
