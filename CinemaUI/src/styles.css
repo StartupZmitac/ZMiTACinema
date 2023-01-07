@@ -1,12 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 .navbar{
   height: 50px;
 }
 .navbar-light{
   background-color: #212622 !important;
 }
-body {
-  background-color: #353d36;
+body{
+  background-color: #353d36 !important;
+  color: #fff10b !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 15px !important;
 }
 .navbar-light .navbar-nav .nav-link {
   color: #fff10b !important;
@@ -33,17 +37,17 @@ body {
   border: none;
 }
 .btn-primary{
-  background-color: #353d36;
-  color: #fff10b;
-  border: none;
+  background-color: #353d36 !important;
+  color: #fff10b !important;
+  border: none !important;
 }
 .btn-primary:hover{
-  background-color: #fff10b;
-  color: #353d36;
+  background-color: #fff10b !important;
+  color: #353d36 !important;
 }
 .btn-primary:active{
-  background-color: #fff10b;
-  color: #353d36;
+  background-color: #fff10b !important;
+  color: #353d36 !important;
 }
 .btn-dark{
   background-color: #212622;

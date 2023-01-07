@@ -15,7 +15,7 @@
   </div>
 </div>
 <div class="col-md-12 text-center" style="margin-top: 30px">
-  <button type="button" class="btn btn-dark" (click)="onButtonClick($event)" >Confirm selected seats</button>
+  <button type="button" class="btn btn-dark" (click)="onButtonClick($event)" *ngIf="anySeatsSelected()">Confirm selected seats</button>
 </div>
 
 </body>

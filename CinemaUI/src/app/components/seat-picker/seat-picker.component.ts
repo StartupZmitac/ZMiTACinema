@@ -65,7 +65,7 @@ export class SeatPickerComponent implements OnInit {
     {
       for(var j = 0;j < room.column; j++)
       {
-        temps.push({selected: false, number: i + 'M' + j, isTaken: false, unavailable: true});
+        temps.push({selected: false, number: 'R'+ i + 'M' + j, isTaken: false, unavailable: true});
       }
       this.seats.push(temps);
       temps = [];
@@ -75,8 +75,9 @@ export class SeatPickerComponent implements OnInit {
     this.seatsDecode(room.unavailable_seats, false)
 
   }
-
-
+  anySeatsSelected(): boolean {
+    return this.seats.some(row => row.some(seat => seat.selected));
+  }
   seatsDecode(toDecode: string, taken: boolean)
   {
     var temp = "";
