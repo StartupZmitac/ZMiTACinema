@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.getLocations();
     // Check if a city has been saved in local storage
-    const savedCity = localStorage.getItem('selectedCity');
+    const savedCity = sessionStorage.getItem('selectedCity');
     if (savedCity) {
       this.localizationName = savedCity;
     }
@@ -39,7 +39,10 @@ export class NavbarComponent implements OnInit {
   setLocalizationName(value: string) {
     this.localizationName = value;
     // Save the selected city to local storage
-    localStorage.setItem('selectedCity', value);
+    sessionStorage.setItem('selectedCity', value);
+    this.router.navigate(['/main-page', this.localizationName]);
+  }
+  navigateToLocalization(){
     this.router.navigate(['/main-page', this.localizationName]);
   }
 }

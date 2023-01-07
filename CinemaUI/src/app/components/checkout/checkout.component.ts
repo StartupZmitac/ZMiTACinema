@@ -16,7 +16,12 @@ export class CheckoutComponent implements OnInit {
     this.reducedTickets = 0;
   }
 
-
+  onReserveClick(event: Event, _room: number, location: string){
+    this.router.navigate(['/seat-picker'],{ queryParams: {
+        location: location,
+        room: _room.toString()
+      }});
+  }
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.selectedSeats = params['seats'].split(',');
