@@ -15,6 +15,9 @@ body{
 .navbar-light .navbar-nav .nav-link {
   color: #fff10b !important;
 }
+.nav-link{
+  cursor: pointer;
+}
 .dropdown-menu{
   background-color: #353d36 !important;
 }
