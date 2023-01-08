@@ -236,24 +236,39 @@ namespace CinemaAPI.Models
             context.Screenings.AddRange(
 
                 //Miechow
+                //nieznajomy
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj1.room_number,
                     Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("13:00"),
                     Location = miechow.city,
                     id_room = miechowPokoj1.id_room,
                     Id_Film = nieznajomy.Id_Film
 
                 },
 
+                
+                 new Screening()
+                 {
+                     Screening_ID = Guid.NewGuid(),
+                     Room = miechowPokoj1.room_number,
+                     Film = nieznajomy.Name,
+                     Time = DateTime.Parse("15:30"),
+                     Location = miechow.city,
+                     id_room = miechowPokoj1.id_room,
+                     Id_Film = nieznajomy.Id_Film
+
+                 },
+
+                //poprawka
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj2.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("12:30"),
                     Location = miechow.city,
                     id_room = miechowPokoj2.id_room,
                     Id_Film = poprawka.Id_Film
@@ -263,9 +278,34 @@ namespace CinemaAPI.Models
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
+                    Room = miechowPokoj2.room_number,
+                    Film = poprawka.Name,
+                    Time = DateTime.Parse("15:00"),
+                    Location = miechow.city,
+                    id_room = miechowPokoj2.id_room,
+                    Id_Film = poprawka.Id_Film
+
+                },
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = miechowPokoj2.room_number,
+                    Film = poprawka.Name,
+                    Time = DateTime.Parse("17:30"),
+                    Location = miechow.city,
+                    id_room = miechowPokoj2.id_room,
+                    Id_Film = poprawka.Id_Film
+
+                },
+
+                //poprawka2
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj1.room_number,
                     Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("16:00"),
                     Location = miechow.city,
                     id_room = miechowPokoj1.id_room,
                     Id_Film = poprawka_2.Id_Film
@@ -276,8 +316,21 @@ namespace CinemaAPI.Models
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj1.room_number,
+                    Film = poprawka_2.Name,
+                    Time = DateTime.Parse("18:00"),
+                    Location = miechow.city,
+                    id_room = miechowPokoj1.id_room,
+                    Id_Film = poprawka_2.Id_Film
+
+                },
+
+                //poprawka3
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = miechowPokoj1.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("09:00"),
                     Location = miechow.city,
                     id_room = miechowPokoj1.id_room,
                     Id_Film = poprawka_3.Id_Film
@@ -287,87 +340,167 @@ namespace CinemaAPI.Models
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
-                    Room = miechowPokoj2.room_number,
-                    Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Room = miechowPokoj1.room_number,
+                    Film = poprawka_3.Name,
+                    Time = DateTime.Parse("19:00"),
                     Location = miechow.city,
-                    id_room = miechowPokoj2.id_room,
+                    id_room = miechowPokoj1.id_room,
+                    Id_Film = poprawka_3.Id_Film
+
+                },
+
+
+
+                //Katowice
+                //nieznajomy
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj1.room_number,
+                    Film = nieznajomy.Name,
+                    Time = DateTime.Parse("17:00"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj1.id_room,
+                    Id_Film = nieznajomy.Id_Film
+
+                },
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj2.room_number,
+                    Film = nieznajomy.Name,
+                    Time = DateTime.Parse("18:00"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj2.id_room,
+                    Id_Film = nieznajomy.Id_Film
+
+                },
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj2.room_number,
+                    Film = nieznajomy.Name,
+                    Time = DateTime.Parse("20:30"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj2.id_room,
+                    Id_Film = nieznajomy.Id_Film
+
+                },
+
+                //poprawka
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj2.room_number,
+                    Film = poprawka.Name,
+                    Time = DateTime.Parse("08:00"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj2.id_room,
+                    Id_Film = poprawka.Id_Film
+
+                },
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj2.room_number,
+                    Film = poprawka.Name,
+                    Time = DateTime.Parse("10:15"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj2.id_room,
+                    Id_Film = poprawka.Id_Film
+
+                },
+
+                //poprawka2
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj1.room_number,
+                    Film = poprawka_2.Name,
+                    Time = DateTime.Parse("10:00"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj1.id_room,
+                    Id_Film = poprawka_2.Id_Film
+
+                },
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj1.room_number,
+                    Film = poprawka_2.Name,
+                    Time = DateTime.Parse("11:45"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj1.id_room,
+                    Id_Film = poprawka_2.Id_Film
+
+                },
+
+                //poprawka3
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj1.room_number,
+                    Film = poprawka_3.Name,
+                    Time = DateTime.Parse("12:15"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj1.id_room,
+                    Id_Film = poprawka_3.Id_Film
+
+                },
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj1.room_number,
+                    Film = poprawka_3.Name,
+                    Time = DateTime.Parse("13:30"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj1.id_room,
+                    Id_Film = poprawka_3.Id_Film
+
+                },
+
+                //poprawka4
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = katowicePokoj1.room_number,
+                    Film = poprawka_4.Name,
+                    Time = DateTime.Parse("15:00"),
+                    Location = katowice.city,
+                    id_room = katowicePokoj1.id_room,
                     Id_Film = poprawka_4.Id_Film
 
                 },
 
-                //Katowice
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = katowicePokoj2.room_number,
-                    Film = nieznajomy.Name,
-                    Time = DateTime.Now,
-                    Location = katowice.city,
-                    id_room = katowicePokoj2.id_room,
-                    Id_Film = nieznajomy.Id_Film
-
-                },
-
-                new Screening()
-                {
-                    Screening_ID = Guid.NewGuid(),
-                    Room = katowicePokoj2.room_number,
-                    Film = poprawka.Name,
-                    Time = DateTime.Now,
-                    Location = katowice.city,
-                    id_room = katowicePokoj2.id_room,
-                    Id_Film = poprawka.Id_Film
-
-                },
-
-                new Screening()
-                {
-                    Screening_ID = Guid.NewGuid(),
-                    Room = katowicePokoj1.room_number,
-                    Film = poprawka_2.Name,
-                    Time = DateTime.Now,
-                    Location = katowice.city,
-                    id_room = katowicePokoj1.id_room,
-                    Id_Film = poprawka_2.Id_Film
-
-                },
-
-                new Screening()
-                {
-                    Screening_ID = Guid.NewGuid(),
-                    Room = katowicePokoj1.room_number,
-                    Film = poprawka_3.Name,
-                    Time = DateTime.Now,
-                    Location = katowice.city,
-                    id_room = katowicePokoj1.id_room,
-                    Id_Film = poprawka_3.Id_Film
-
-                },
-
-                new Screening()
-                {
-                    Screening_ID = Guid.NewGuid(),
-                    Room = katowicePokoj1.room_number,
                     Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("16:00"),
                     Location = katowice.city,
-                    id_room = katowicePokoj1.id_room,
+                    id_room = katowicePokoj2.id_room,
                     Id_Film = poprawka_4.Id_Film
 
                 },
 
 
                 //Knyszyn
+                //poprawka
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
-                    Room = knyszynPokoj1.room_number,
-                    Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Room = knyszynPokoj2.room_number,
+                    Film = poprawka.Name,
+                    Time = DateTime.Parse("08:00"),
                     Location = knyszyn.city,
-                    id_room = knyszynPokoj1.id_room,
-                    Id_Film = nieznajomy.Id_Film
+                    id_room = knyszynPokoj2.id_room,
+                    Id_Film = poprawka.Id_Film
 
                 },
 
@@ -376,7 +509,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj2.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("10:15"),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj2.id_room,
                     Id_Film = poprawka.Id_Film
@@ -387,8 +520,21 @@ namespace CinemaAPI.Models
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj1.room_number,
+                    Film = poprawka.Name,
+                    Time = DateTime.Parse("14:30"),
+                    Location = knyszyn.city,
+                    id_room = knyszynPokoj1.id_room,
+                    Id_Film = poprawka.Id_Film
+
+                },
+
+                //poprawka2
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = knyszynPokoj1.room_number,
                     Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("10:30"),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj1.id_room,
                     Id_Film = poprawka_2.Id_Film
@@ -398,12 +544,50 @@ namespace CinemaAPI.Models
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
+                    Room = knyszynPokoj1.room_number,
+                    Film = poprawka_2.Name,
+                    Time = DateTime.Parse("12:30"),
+                    Location = knyszyn.city,
+                    id_room = knyszynPokoj1.id_room,
+                    Id_Film = poprawka_2.Id_Film
+
+                },
+
+                //poprawka3
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = knyszynPokoj1.room_number,
+                    Film = poprawka_3.Name,
+                    Time = DateTime.Parse("10:30"),
+                    Location = knyszyn.city,
+                    id_room = knyszynPokoj1.id_room,
+                    Id_Film = poprawka_3.Id_Film
+
+                },
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj2.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("15:00"),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj2.id_room,
                     Id_Film = poprawka_3.Id_Film
+
+                },
+
+                //poprawka4
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = knyszynPokoj1.room_number,
+                    Film = poprawka_4.Name,
+                    Time = DateTime.Parse("17:00"),
+                    Location = knyszyn.city,
+                    id_room = knyszynPokoj1.id_room,
+                    Id_Film = poprawka_4.Id_Film
 
                 },
 
@@ -412,7 +596,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj1.room_number,
                     Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("19:00"),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj1.id_room,
                     Id_Film = poprawka_4.Id_Film
@@ -420,12 +604,13 @@ namespace CinemaAPI.Models
                 },
 
                 //Wadowice
+                //nieznajomy
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = wadowicePokoj2.room_number,
                     Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("18:00"),
                     Location = wadowice.city,
                     id_room = wadowicePokoj2.id_room,
                     Id_Film = nieznajomy.Id_Film
@@ -436,20 +621,46 @@ namespace CinemaAPI.Models
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = wadowicePokoj2.room_number,
+                    Film = nieznajomy.Name,
+                    Time = DateTime.Parse("20:15"),
+                    Location = wadowice.city,
+                    id_room = wadowicePokoj2.id_room,
+                    Id_Film = nieznajomy.Id_Film
+
+                },
+
+                //poprawka
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = wadowicePokoj2.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("08:00"),
                     Location = wadowice.city,
                     id_room = wadowicePokoj2.id_room,
                     Id_Film = poprawka.Id_Film
 
                 },
 
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = wadowicePokoj1.room_number,
+                    Film = poprawka.Name,
+                    Time = DateTime.Parse("10:00"),
+                    Location = wadowice.city,
+                    id_room = wadowicePokoj1.id_room,
+                    Id_Film = poprawka.Id_Film
+
+                },
+
+                //poprawka2
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room =wadowicePokoj1.room_number,
                     Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("12:30"),
                     Location = wadowice.city,
                     id_room = wadowicePokoj1.id_room,
                     Id_Film = poprawka_2.Id_Film
@@ -459,9 +670,22 @@ namespace CinemaAPI.Models
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
+                    Room = wadowicePokoj2.room_number,
+                    Film = poprawka_2.Name,
+                    Time = DateTime.Parse("11:00"),
+                    Location = wadowice.city,
+                    id_room = wadowicePokoj2.id_room,
+                    Id_Film = poprawka_2.Id_Film
+
+                },
+
+                //poprawka3
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
                     Room = wadowicePokoj1.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("14:30"),
                     Location = wadowice.city,
                     id_room = wadowicePokoj1.id_room,
                     Id_Film = poprawka_3.Id_Film
@@ -471,22 +695,35 @@ namespace CinemaAPI.Models
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
-                    Room = wadowicePokoj1.room_number,
-                    Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Room = wadowicePokoj2.room_number,
+                    Film = poprawka_3.Name,
+                    Time = DateTime.Parse("15:00"),
                     Location = wadowice.city,
-                    id_room = wadowicePokoj1.id_room,
-                    Id_Film = poprawka_4.Id_Film
+                    id_room = wadowicePokoj2.id_room,
+                    Id_Film = poprawka_3.Id_Film
 
                 },
-                
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = wadowicePokoj1.room_number,
+                    Film = poprawka_3.Name,
+                    Time = DateTime.Parse("17:00"),
+                    Location = wadowice.city,
+                    id_room = wadowicePokoj1.id_room,
+                    Id_Film = poprawka_3.Id_Film
+
+                },
+
                 //Wilkowyje
+                //nieznajomy
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj1.room_number,
                     Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("18:30"),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj1.id_room,
                     Id_Film = nieznajomy.Id_Film
@@ -497,8 +734,21 @@ namespace CinemaAPI.Models
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj1.room_number,
+                    Film = nieznajomy.Name,
+                    Time = DateTime.Parse("20:45"),
+                    Location = wilkowyje.city,
+                    id_room = wilkowyjePokoj1.id_room,
+                    Id_Film = nieznajomy.Id_Film
+
+                },
+
+                //poprawka
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = wilkowyjePokoj1.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("10:00"),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj1.id_room,
                     Id_Film = poprawka.Id_Film
@@ -508,11 +758,24 @@ namespace CinemaAPI.Models
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
-                    Room = wilkowyjePokoj1.room_number,
-                    Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Room = wilkowyjePokoj2.room_number,
+                    Film = poprawka.Name,
+                    Time = DateTime.Parse("11:15"),
                     Location = wilkowyje.city,
-                    id_room = wilkowyjePokoj1.id_room,
+                    id_room = wilkowyjePokoj2.id_room,
+                    Id_Film = poprawka.Id_Film
+
+                },
+
+                //poprawka2
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = wilkowyjePokoj2.room_number,
+                    Film = poprawka_2.Name,
+                    Time = DateTime.Parse("17:20"),
+                    Location = wilkowyje.city,
+                    id_room = wilkowyjePokoj2.id_room,
                     Id_Film = poprawka_2.Id_Film
 
                 },
@@ -520,9 +783,22 @@ namespace CinemaAPI.Models
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
+                    Room = wilkowyjePokoj1.room_number,
+                    Film = poprawka_2.Name,
+                    Time = DateTime.Parse("15:00"),
+                    Location = wilkowyje.city,
+                    id_room = wilkowyjePokoj1.id_room,
+                    Id_Film = poprawka_2.Id_Film
+
+                },
+
+                //poprawka3
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj2.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.Parse("13:30"),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj2.id_room,
                     Id_Film = poprawka_3.Id_Film
@@ -533,10 +809,35 @@ namespace CinemaAPI.Models
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj2.room_number,
-                    Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Film = poprawka_3.Name,
+                    Time = DateTime.Parse("15:25"),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj2.id_room,
+                    Id_Film = poprawka_3.Id_Film
+
+                },
+
+                //poprawka4
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = wilkowyjePokoj2.room_number,
+                    Film = poprawka_4.Name,
+                    Time = DateTime.Parse("19:05"),
+                    Location = wilkowyje.city,
+                    id_room = wilkowyjePokoj2.id_room,
+                    Id_Film = poprawka_4.Id_Film
+
+                },
+
+                new Screening()
+                {
+                    Screening_ID = Guid.NewGuid(),
+                    Room = wilkowyjePokoj1.room_number,
+                    Film = poprawka_4.Name,
+                    Time = DateTime.Parse("13:00"),
+                    Location = wilkowyje.city,
+                    id_room = wilkowyjePokoj1.id_room,
                     Id_Film = poprawka_4.Id_Film
 
                 });
