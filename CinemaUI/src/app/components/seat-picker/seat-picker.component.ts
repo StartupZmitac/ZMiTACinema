@@ -112,9 +112,9 @@ export class SeatPickerComponent implements OnInit {
       }
       else
       {
-        var temp = "";
-        var roww = 0;
-        var coll = 0;
+        temp = "";
+        roww = 0;
+        coll = 0;
       }
 
     }
