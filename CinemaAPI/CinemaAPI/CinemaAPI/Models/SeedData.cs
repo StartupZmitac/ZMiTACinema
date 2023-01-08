@@ -144,7 +144,7 @@ namespace CinemaAPI.Models
                 room_number = 1,
                 row = 6,
                 column = 9,
-                taken_seats = "",
+                taken_seats = "5R5C,",
                 unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 

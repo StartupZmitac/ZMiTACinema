@@ -35,3 +35,8 @@
 .seat.isTaken:hover{
   color: #fff10b;
 }
+.seat.unavailable{
+  background-color: #353d36;
+  border: none;
+  color:  #353d36;
+}
