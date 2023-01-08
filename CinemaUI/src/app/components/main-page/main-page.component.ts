@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Screening } from 'src/app/models/screening.model';
 import { ScreeningService } from 'src/app/services/screening.service';
 
@@ -31,7 +31,7 @@ export class MainPageComponent implements OnInit {
 
   getScreenings(){
     if(this.localizationName!= undefined)
-    this.service.getScreenings("2023-01-06", this.localizationName)
+    this.service.getScreenings("2023-01-07", this.localizationName)
     .subscribe({
       next: (screenings) =>{
         this.screenings = screenings;
