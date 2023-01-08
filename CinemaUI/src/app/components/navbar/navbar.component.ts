@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
 
   setLocalizationName(value: string) {
     this.localizationName = value;
-    // Save the selected city to local storage
+    // Save the selected city to session storage
     sessionStorage.setItem('selectedCity', value);
     this.router.navigate(['/main-page', this.localizationName]);
   }
