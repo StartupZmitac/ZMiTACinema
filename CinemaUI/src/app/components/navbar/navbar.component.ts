@@ -45,5 +45,8 @@ export class NavbarComponent implements OnInit {
   navigateToLocalization(){
     this.router.navigate(['/main-page', this.localizationName]);
   }
+  cancelTicketButton(){
+    this.router.navigate(['/cancel-ticket']);
+  }
 }
 

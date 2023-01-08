@@ -1,0 +1,10 @@
+<form (ngSubmit)="onSubmit()" class="d-flex flex-column align-items-center mt-5">
+  <div class="form-group mb-3">
+    <label for="ticketId" class="font-weight-bold">Ticket ID:</label>
+    <input type="text" class="form-control" id="ticketId" [(ngModel)]="ticketId" name="ticketId" required>
+  </div>
+  <button type="submit" class="btn btn-dark px-5 py-2">Manage Ticket</button>
+</form>
+<div *ngIf="errorMessage" class="alert alert-danger mt-3">
+  {{errorMessage}}
+</div>
