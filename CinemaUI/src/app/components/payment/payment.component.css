@@ -1,0 +1,15 @@
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.payment-title {
+  margin-bottom: 20px;
+  color: ghostwhite;
+}
+.payment-form {
+  width: 50%;
+}
+

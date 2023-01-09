@@ -36,7 +36,7 @@ export class MainPageComponent implements OnInit {
 
   getScreenings(){
     if(this.localizationName!= undefined)
-    this.service.getScreenings("2023-01-09", this.localizationName)
+    this.service.getScreenings("2023-01-08", this.localizationName)
     .subscribe({
       next: (screenings) =>{
         this.screenings = screenings;
