@@ -11,6 +11,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import {FormsModule} from "@angular/forms";
 import { CancelTicketComponent } from './components/cancel-ticket/cancel-ticket.component';
 import { SummaryComponent } from './components/summary/summary.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { PricesPageComponent } from './components/prices-page/prices-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { SummaryComponent } from './components/summary/summary.component';
     CheckoutComponent,
     NavbarComponent,
     CancelTicketComponent,
-    SummaryComponent
+    SummaryComponent,
+    PaymentComponent,
+    PricesPageComponent
   ],
     imports: [
         HttpClientModule,
