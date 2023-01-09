@@ -15,7 +15,13 @@ export class CheckoutComponent implements OnInit {
     this.normalTickets = 0;
     this.reducedTickets = 0;
   }
-
+  onBuyClick(event: Event){
+    this.router.navigate(['/payment'],{ queryParams: {
+        seats: this.selectedSeats,
+        normalTicketsAmount: this.normalTickets,
+        reducedTicketsAmount: this.reducedTickets
+      }});
+  }
   onReserveClick(event: Event, _room: number, location: string){
     this.router.navigate(['/seat-picker'],{ queryParams: {
         location: location,

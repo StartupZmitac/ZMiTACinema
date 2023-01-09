@@ -5,7 +5,6 @@
     <li *ngFor="let seat of selectedSeats">{{seat}}</li>
   </ul>
 </div>
-<!-- We can also add display of this cinema room with already selected seats by user-->
 <div *ngIf="selectedSeats.length > 0" style="display: flex; flex-direction: column; align-items: center;">
   <h3 class="text-center mb-3">Choose ticket types:</h3>
   <div class="form-group col-sm-6 mb-3">
@@ -18,7 +17,7 @@
   </div>
   <div *ngIf="normalTickets+reducedTickets==selectedSeats.length" class="text-center">
     <button type="button" class="btn btn-dark px-5 py-2" style="margin-right: 20px;">Reserve</button>
-    <button type="button" class="btn btn-dark px-5 py-2">Buy</button>
+    <button type="button" class="btn btn-dark px-5 py-2"(click)="onBuyClick($event)">Buy</button>
   </div>
 </div>
 </body>

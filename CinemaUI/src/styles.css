@@ -61,3 +61,16 @@ body{
   background-color: #fff10b;
   color: #212622;
 }
+.form-control {
+  background-color: #212622;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+.form-control:focus{
+  background-color: #212622;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+.modal-content{
+  background-color: #212622 !important;
+}

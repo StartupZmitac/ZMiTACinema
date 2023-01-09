@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cancel-ticket',
@@ -7,14 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CancelTicketComponent implements OnInit {
 
-  ticketId: string | undefined;
+  ticketID: string | undefined;
   errorMessage: string | undefined;
+  testID: string = "testID";
+  ticketIDFound: boolean | undefined;
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.ticketIDFound = false;
+  }
 
   ngOnInit(): void {
   }
   onSubmit(){
-
+    if (this.ticketID==this.testID){
+      this.ticketIDFound = true;
+    }
+    else
+      this.ticketIDFound = false;
+  }
+  redirectToStart(event: Event){
+    this.router.navigate(['/']);
   }
 }
