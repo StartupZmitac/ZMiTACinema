@@ -10,6 +10,7 @@ import {CheckoutComponent} from "./components/checkout/checkout.component";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {FormsModule} from "@angular/forms";
 import { CancelTicketComponent } from './components/cancel-ticket/cancel-ticket.component';
+import { SummaryComponent } from './components/summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CancelTicketComponent } from './components/cancel-ticket/cancel-ticket.
     SeatPickerComponent,
     CheckoutComponent,
     NavbarComponent,
-    CancelTicketComponent
+    CancelTicketComponent,
+    SummaryComponent
   ],
     imports: [
         HttpClientModule,

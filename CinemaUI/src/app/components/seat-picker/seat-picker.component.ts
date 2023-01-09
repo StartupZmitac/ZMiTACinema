@@ -24,7 +24,6 @@ export class SeatPickerComponent implements OnInit {
         this.getRoom(location, Number(room))
     })
   }
-  //TODO: get these from route
   selectedSeats: (string | undefined)[] = [];
   seats: Seat[][] = []
     // An array of rows, each containing an array of seats
@@ -37,7 +36,7 @@ export class SeatPickerComponent implements OnInit {
       .flat()
       .filter(seat=>seat.selected)
       .map(seat => seat.number);
-    console.log(this.selectedSeats);
+    //console.log(this.selectedSeats);
     this.router.navigate(['/checkout'],{
       queryParams: {
         seats: this.selectedSeats.join(',')
@@ -65,15 +64,13 @@ export class SeatPickerComponent implements OnInit {
     {
       for(var j = 0;j < room.column; j++)
       {
-        temps.push({selected: false, number: 'R'+ i + 'M' + j, isTaken: false, unavailable: true});
+        temps.push({selected: false, number: 'R'+ i + 'M' + j, isTaken: false, unavailable: false});
       }
       this.seats.push(temps);
       temps = [];
     }
-
     this.seatsDecode(room.taken_seats, true);
-    this.seatsDecode(room.unavailable_seats, false)
-
+    this.seatsDecode(room.unavailable_seats, false);
   }
   anySeatsSelected(): boolean {
     return this.seats.some(row => row.some(seat => seat.selected));
@@ -85,7 +82,7 @@ export class SeatPickerComponent implements OnInit {
     var coll = 0;
     for(var i =0; i<toDecode.length ; i++)
     {
-      if(!isNaN(Number(toDecode[i]))){ 
+      if(!isNaN(Number(toDecode[i]))){
         temp += toDecode[i];
       }
       else if(toDecode[i] == "C")
@@ -102,13 +99,15 @@ export class SeatPickerComponent implements OnInit {
       else if(toDecode[i] == ",")
       {
         if(taken){
-          this.seats[coll][roww].isTaken = true;
+
+          this.seats[roww][coll].isTaken = true;
+          console.log(this.seats[coll][roww].number);
         }
         else{
-          this.seats[coll][roww].unavailable = true;
+          this.seats[roww][coll].unavailable = true;
         }
-        console.log(coll);
-        console.log(roww);
+        //console.log(coll);
+        //console.log(roww);
       }
       else
       {
@@ -118,6 +117,7 @@ export class SeatPickerComponent implements OnInit {
       }
 
     }
+    console.log(this.seats);
 
   }
 
