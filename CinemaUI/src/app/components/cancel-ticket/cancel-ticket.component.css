@@ -5,20 +5,4 @@
   justify-content: center;
   text-align: center;
 }
-.ticket-summary {
-  background-color: #212622;
-  padding: 20px;
-  border-radius: 5px;
-}
 
-.ticket-summary h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.ticket-summary p {
-  margin-bottom: 10px;
-  font-size: 18px;
-}

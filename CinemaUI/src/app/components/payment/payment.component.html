@@ -13,6 +13,6 @@
       <label for="cvv">CVV</label>
       <input type="text" class="form-control" id="cvv" placeholder="Enter CVV">
     </div>
-    <button type="submit" class="btn btn-dark btn-lg btn-block">Pay</button>
+    <button type="submit" class="btn btn-dark btn-lg btn-block" (click)="redirectToSummary($event)">Pay</button>
   </form>
 </div>
