@@ -100,11 +100,11 @@ export class SeatPickerComponent implements OnInit {
       {
         if(taken){
 
-          this.seats[coll][roww].isTaken = true;
+          this.seats[roww][coll].isTaken = true;
           console.log(this.seats[coll][roww].number);
         }
         else{
-          this.seats[coll][roww].unavailable = true;
+          this.seats[roww][coll].unavailable = true;
         }
         //console.log(coll);
         //console.log(roww);
