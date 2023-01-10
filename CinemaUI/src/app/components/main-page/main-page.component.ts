@@ -22,10 +22,10 @@ export class MainPageComponent implements OnInit {
     this.getScreenings()
   }
 
-  onHourClick(event: Event, _room: number, location: string){
+  onHourClick(event: Event, screening: Screening){
       this.router.navigate(['/seat-picker'],{ queryParams: {
-        location: location,
-        room: _room.toString()
+        location: screening.location,
+        room: screening.room.toString()
       }});
   }
 
