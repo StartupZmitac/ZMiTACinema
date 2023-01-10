@@ -115,6 +115,7 @@ namespace CinemaAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> changeSeatAvailability(Ticket ticketRequest)
         {
+            Validator validator = new Validator();
             string ticketSeat = ticketRequest.Seat.Trim();
             var room = await _cinemaDbContext.Rooms.FindAsync(ticketRequest.id_room);
             if (room == null)
@@ -125,14 +126,14 @@ namespace CinemaAPI.Controllers
             string[] unavailableSeats = room.unavailable_seats.Split(",");
             for (int i = 0; i < takenSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(takenSeats[i].Trim()))
+                if (ticketSeat.Equals(takenSeats[i].Trim()) || !validator.checkColumnRowOutOfRange(takenSeats[i], room.column, room.row))
                 {
                     return BadRequest();
                 }
             }
             for (int i = 0; i < unavailableSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(unavailableSeats[i].Trim()))
+                if (ticketSeat.Equals(unavailableSeats[i].Trim()) || !validator.checkColumnRowOutOfRange(unavailableSeats[i], room.column, room.row))
                 {
                     return BadRequest();
                 }

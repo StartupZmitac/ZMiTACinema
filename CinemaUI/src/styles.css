@@ -15,6 +15,9 @@ body{
 .navbar-light .navbar-nav .nav-link {
   color: #fff10b !important;
 }
+.nav-link{
+  cursor: pointer;
+}
 .dropdown-menu{
   background-color: #353d36 !important;
 }
@@ -57,4 +60,33 @@ body{
 .btn-dark:hover{
   background-color: #fff10b;
   color: #212622;
+}
+.form-control {
+  background-color: #212622;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+.form-control:focus{
+  background-color: #212622;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+.modal-content{
+  background-color: #212622 !important;
+}
+.ticket-summary {
+  background-color: #212622;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.ticket-summary h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.ticket-summary p {
+  margin-bottom: 10px;
+  font-size: 18px;
 }

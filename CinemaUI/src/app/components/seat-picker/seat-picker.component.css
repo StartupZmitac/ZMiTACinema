@@ -31,7 +31,12 @@
 }
 .seat.isTaken{
   background-color: grey;
+  color: ghostwhite;
+  pointer-events: none;
+  cursor: default;
 }
-.seat.isTaken:hover{
-  color: #fff10b;
+.seat.unavailable{
+  visibility: hidden;
+  pointer-events: none;
+  cursor: default;
 }

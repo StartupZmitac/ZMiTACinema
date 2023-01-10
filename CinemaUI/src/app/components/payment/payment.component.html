@@ -1,0 +1,18 @@
+<div class="payment-container">
+  <h1 class="payment-title">Payment</h1>
+  <form class="payment-form">
+    <div class="form-group">
+      <label for="cardNumber">Card Number</label>
+      <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number">
+    </div>
+    <div class="form-group">
+      <label for="expirationDate">Expiration Date</label>
+      <input type="text" class="form-control" id="expirationDate" placeholder="Enter expiration date">
+    </div>
+    <div class="form-group">
+      <label for="cvv">CVV</label>
+      <input type="text" class="form-control" id="cvv" placeholder="Enter CVV">
+    </div>
+    <button type="submit" class="btn btn-dark btn-lg btn-block" (click)="redirectToSummary($event)">Pay</button>
+  </form>
+</div>

@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()" class="ticketCancelContainer">
+  <div class="form-group mb-3">
+    <label for="ticketId" class="font-weight-bold">Ticket ID:</label>
+    <input type="text" class="form-control" id="ticketId" [(ngModel)]="ticketID" name="ticketID" required>
+  </div>
+  <button type="submit" class="btn btn-dark px-5 py-2">Manage Ticket</button>
+</form>
+<div *ngIf="errorMessage" class="alert alert-danger mt-3">
+  {{errorMessage}}
+</div>
+<br>
+<div *ngIf="ticketIDFound===true">
+  <div class="ticket-summary">
+    <h3>Ticket Summary</h3>
+    <p>Ticket ID: {{testID}}</p>
+    <p>Seats Selected: [seats data] </p>
+    <p>Normal Tickets: [normal tickets amount]</p>
+    <p>Reduced Tickets: [reduced tickets amount]</p>
+    <p>Price: [calculated price]</p>
+  </div>
+  <br><br>
+  <div style="display: flex; align-items: center; justify-content: center">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      Confirm ticket cancel
+    </button>
+  </div>
+</div>
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ticket Cancelled</h4>
+      </div>
+      <div class="modal-body">
+        The ticket has been cancelled.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="redirectToStart($event)">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
