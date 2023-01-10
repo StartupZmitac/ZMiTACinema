@@ -21,8 +21,16 @@ export class SeatPickerComponent implements OnInit {
       console.log(params)
       let location = params.get('location')
       let room = params.get('room')
-      if(location&&room)
+      
+      if(location&&room){
+
+      //check if cookies exist, if not add them here
+      if(!(this.cookieService.check('location')&&this.cookieService.check('room'))){
+        this.cookieService.set('location',location)
+        this.cookieService.set('room', room)
+      }
         this.getRoom(location, Number(room))
+    }
     })
   }
   selectedSeats: (string | undefined)[] = [];
@@ -32,7 +40,7 @@ export class SeatPickerComponent implements OnInit {
     if (!seat.isTaken)
       seat.selected = !seat.selected;
   }
-  setSeats(seats: string){
+  private setSeats(seats: string){
     this.cookieService.set('seats', seats)
   }
   onButtonClick(event: Event){
@@ -47,7 +55,7 @@ export class SeatPickerComponent implements OnInit {
       }
     });
   }
-  getRoom(localizationName: string, room: number){
+  private getRoom(localizationName: string, room: number){
 
     this.rservice.getRoomByNum(Number(room), String(localizationName))
       .subscribe({
@@ -60,7 +68,7 @@ export class SeatPickerComponent implements OnInit {
       }
       )
   }
-  createRoom(room: Room)
+  private createRoom(room: Room)
   {
     let temps: Seat[] = [];
     for(var i = 0;i < room.row; i++)
@@ -78,7 +86,7 @@ export class SeatPickerComponent implements OnInit {
   anySeatsSelected(): boolean {
     return this.seats.some(row => row.some(seat => seat.selected));
   }
-  seatsDecode(toDecode: string, taken: boolean)
+  private seatsDecode(toDecode: string, taken: boolean)
   {
     var temp = "";
     var roww = 0;

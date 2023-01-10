@@ -38,9 +38,7 @@ export class CheckoutComponent implements OnInit {
     console.log(location, room, seat, reduced)
   }
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.selectedSeats = params['seats'].split(',');
-    });
+    this.selectedSeats = this.cookieService.get('seats').split(',')
   }
 
 }

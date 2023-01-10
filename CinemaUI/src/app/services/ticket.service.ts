@@ -18,7 +18,6 @@ export class TicketService {
   }
 
   createTickets(location: string, room: string, seat: string[], reduced: number){
-    console.log(location, room, seat, reduced)
     let self = this
     seat.forEach(function (val){
       if(reduced>0){
