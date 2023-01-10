@@ -13,6 +13,7 @@ import { CancelTicketComponent } from './components/cancel-ticket/cancel-ticket.
 import { SummaryComponent } from './components/summary/summary.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { PricesPageComponent } from './components/prices-page/prices-page.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { PricesPageComponent } from './components/prices-page/prices-page.compon
         FormsModule,
         // Remove the routes from the root module
     ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

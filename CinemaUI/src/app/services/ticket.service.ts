@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import { Observable, Subject } from 'rxjs';
 import { Ticket } from '../models/ticket.model';
 import { Screening } from '../models/screening.model';
-import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -19,21 +18,12 @@ export class TicketService {
     return this.http.get<Ticket[]>(this.baseApiUrl+'/api/Ticket')
   }
   createTicket(screening: Screening, seat: string, type: string){
-
-    let req: Ticket = {
-      id: Guid.create(),
-      isChecked: false,
-      film: screening.film,
-      isPaid: false,
-      room: screening.room,
-      //todo: multiple seats on one ticket
+    //only send necessary data to backend
+    //seat number, type, Screening id
+    let req = {
+      screening: screening.id,
       seat: seat,
-      type: type,
-      time: screening.time,
-      id_room: screening.id_room,
-      //is this necessary?
-      _room: screening._room
-
+      type: type
     }
     this.http.post(this.baseApiUrl+'/api/Ticket', req)
   }

@@ -3,6 +3,7 @@ import { Seat } from 'src/app/models/seat.model';
 import {ActivatedRoute, Router} from "@angular/router";
 import { Room } from 'src/app/models/room.model';
 import { RoomService } from 'src/app/services/room.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'seat-picker',
@@ -11,7 +12,7 @@ import { RoomService } from 'src/app/services/room.service';
   providers: [RoomService]
 })
 export class SeatPickerComponent implements OnInit {
-  constructor(private router:Router,private route: ActivatedRoute, private rservice: RoomService) {
+  constructor(private cookieService: CookieService, private router:Router,private route: ActivatedRoute, private rservice: RoomService) {
   }
   ngOnInit(): void
   {
@@ -31,12 +32,15 @@ export class SeatPickerComponent implements OnInit {
     if (!seat.isTaken)
       seat.selected = !seat.selected;
   }
+  setSeats(seats: string){
+    this.cookieService.set('seats', seats)
+  }
   onButtonClick(event: Event){
     this.selectedSeats = this.seats
       .flat()
       .filter(seat=>seat.selected)
       .map(seat => seat.number);
-    //console.log(this.selectedSeats);
+    this.setSeats(this.selectedSeats.join(','))
     this.router.navigate(['/checkout'],{
       queryParams: {
         seats: this.selectedSeats.join(',')
@@ -55,7 +59,6 @@ export class SeatPickerComponent implements OnInit {
         }
       }
       )
-
   }
   createRoom(room: Room)
   {
