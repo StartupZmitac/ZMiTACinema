@@ -3,6 +3,7 @@ import { Seat } from 'src/app/models/seat.model';
 import {ActivatedRoute, Router} from "@angular/router";
 import { Room } from 'src/app/models/room.model';
 import { RoomService } from 'src/app/services/room.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'seat-picker',
@@ -11,7 +12,7 @@ import { RoomService } from 'src/app/services/room.service';
   providers: [RoomService]
 })
 export class SeatPickerComponent implements OnInit {
-  constructor(private router:Router,private route: ActivatedRoute, private rservice: RoomService) {
+  constructor(private cookieService: CookieService, private router:Router,private route: ActivatedRoute, private rservice: RoomService) {
   }
   ngOnInit(): void
   {
@@ -20,8 +21,16 @@ export class SeatPickerComponent implements OnInit {
       console.log(params)
       let location = params.get('location')
       let room = params.get('room')
-      if(location&&room)
+      
+      if(location&&room){
+
+      //check if cookies exist, if not add them here
+      if(!(this.cookieService.check('location')&&this.cookieService.check('room'))){
+        this.cookieService.set('location',location)
+        this.cookieService.set('room', room)
+      }
         this.getRoom(location, Number(room))
+    }
     })
   }
   selectedSeats: (string | undefined)[] = [];
@@ -31,19 +40,22 @@ export class SeatPickerComponent implements OnInit {
     if (!seat.isTaken)
       seat.selected = !seat.selected;
   }
+  private setSeats(seats: string){
+    this.cookieService.set('seats', seats)
+  }
   onButtonClick(event: Event){
     this.selectedSeats = this.seats
       .flat()
       .filter(seat=>seat.selected)
       .map(seat => seat.number);
-    //console.log(this.selectedSeats);
+    this.setSeats(this.selectedSeats.join(','))
     this.router.navigate(['/checkout'],{
       queryParams: {
         seats: this.selectedSeats.join(',')
       }
     });
   }
-  getRoom(localizationName: string, room: number){
+  private getRoom(localizationName: string, room: number){
 
     this.rservice.getRoomByNum(Number(room), String(localizationName))
       .subscribe({
@@ -55,9 +67,8 @@ export class SeatPickerComponent implements OnInit {
         }
       }
       )
-
   }
-  createRoom(room: Room)
+  private createRoom(room: Room)
   {
     let temps: Seat[] = [];
     for(var i = 0;i < room.row; i++)
@@ -75,7 +86,7 @@ export class SeatPickerComponent implements OnInit {
   anySeatsSelected(): boolean {
     return this.seats.some(row => row.some(seat => seat.selected));
   }
-  seatsDecode(toDecode: string, taken: boolean)
+  private seatsDecode(toDecode: string, taken: boolean)
   {
     var temp = "";
     var roww = 0;

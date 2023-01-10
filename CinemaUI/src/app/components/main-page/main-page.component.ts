@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Screening } from 'src/app/models/screening.model';
 import { ScreeningService } from 'src/app/services/screening.service';
 
@@ -15,16 +16,15 @@ export class MainPageComponent implements OnInit {
   screenings: Screening[] = [];
   currentFilm: string | null | undefined;
 
-  constructor(private service: ScreeningService, private route: ActivatedRoute, private router: Router) {
+  constructor(private cookieService: CookieService, private service: ScreeningService, private route: ActivatedRoute, private router: Router) {
   }
-
   ngOnInit(): void {
     this.localizationName = this.route.snapshot.paramMap.get('localizationName');
     this.getScreenings();
-
+    this.cookieService.deleteAll();
   }
-
   onHourClick(event: Event, screening: Screening){
+    this.setScreening(screening);
       this.router.navigate(['/seat-picker'],{ queryParams: {
         location: screening.location,
         room: screening.room.toString()
@@ -33,7 +33,11 @@ export class MainPageComponent implements OnInit {
   setCurrentFilm(film: string) {
     this.currentFilm = film;
   }
-
+  setScreening(screening: Screening){
+    console.log(screening)
+    this.cookieService.set('room', screening.room.toString())
+    this.cookieService.set('location', screening.location)
+  }
   getScreenings(){
     if(this.localizationName!= undefined)
     this.service.getScreenings("2023-01-08", this.localizationName)

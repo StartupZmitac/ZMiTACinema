@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, Subject } from 'rxjs';
+import { Observable} from 'rxjs';
 import { Ticket } from '../models/ticket.model';
-import { Screening } from '../models/screening.model';
-import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -18,23 +16,30 @@ export class TicketService {
   getTickets(): Observable<Ticket[]>{
     return this.http.get<Ticket[]>(this.baseApiUrl+'/api/Ticket')
   }
-  createTicket(screening: Screening, seat: string, type: string){
 
-    let req: Ticket = {
-      id: Guid.create(),
-      isChecked: false,
-      film: screening.film,
-      isPaid: false,
-      room: screening.room,
-      //todo: multiple seats on one ticket
+  createTickets(location: string, room: string, seat: string[], reduced: number){
+    let self = this
+    seat.forEach(function (val){
+      if(reduced>0){
+        self.createTicket(location, room, val, 'reduced')
+      }
+      else{
+        self.createTicket(location, room, val, 'normal')
+      }
+      reduced--;
+    })
+  }
+
+  private createTicket(location: string, room: string, seat: string, type: string){
+    //only send necessary data to backend
+    //seat number, type, Screening id
+    let req = {
+      location: location,
+      room: room,
       seat: seat,
-      type: type,
-      time: screening.time,
-      id_room: screening.id_room,
-      //is this necessary?
-      _room: screening._room
-
+      type: type
     }
-    this.http.post(this.baseApiUrl+'/api/Ticket', req)
+    console.log(req)
+    //this.http.post(this.baseApiUrl+'/api/Ticket', req)
   }
 }
