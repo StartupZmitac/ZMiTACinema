@@ -29,7 +29,7 @@ export class TicketService {
       //todo: multiple seats on one ticket
       seat: seat,
       type: type,
-      time: Date(),
+      time: screening.time,
       id_room: screening.id_room,
       //is this necessary?
       _room: screening._room
