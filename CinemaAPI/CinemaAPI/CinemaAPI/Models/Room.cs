@@ -8,7 +8,6 @@ namespace CinemaAPI.Models
     {
         public Room() 
         { 
-            this.Tickets = new HashSet<Ticket>();
             this.Screenings = new HashSet<Screening>();
         }
 
@@ -23,8 +22,6 @@ namespace CinemaAPI.Models
         [JsonIgnore]
         [ForeignKey("id_location")]
         public virtual Location? _location { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<Ticket> Tickets { get; set; }
         [JsonIgnore]
         public virtual ICollection<Screening> Screenings { get; set; }
     }
