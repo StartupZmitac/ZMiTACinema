@@ -26,9 +26,17 @@
   transition: all .2s ease-in-out;
 }
 .seat.selected {
-  background-color: green;
-  color: antiquewhite;
+  background-color: #fff10b;
+  color: #212622;
 }
-.seat.unavailable {
+.seat.isTaken{
   background-color: grey;
+  color: ghostwhite;
+  pointer-events: none;
+  cursor: default;
+}
+.seat.unavailable{
+  visibility: hidden;
+  pointer-events: none;
+  cursor: default;
 }

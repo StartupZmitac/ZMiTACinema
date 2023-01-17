@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import { CookieService } from 'ngx-cookie-service';
 import { Location } from 'src/app/models/location.model';
 import {LocationService} from "../../services/location.service";
 
@@ -12,13 +13,18 @@ import {LocationService} from "../../services/location.service";
 export class NavbarComponent implements OnInit {
   locations: Location[] = [];
   localizationName = 'Choose city';
-  constructor(public router: Router, private lservice: LocationService) {}
+
+  constructor(private cookieService: CookieService, public router: Router, private lservice: LocationService) {}
 
   ngOnInit(): void {
     this.getLocations();
+    // Check if a city has been saved in local storage
+    const savedCity = sessionStorage.getItem('selectedCity');
+    if (savedCity) {
+      this.localizationName = savedCity;
+    }
   }
-
-  getLocations(){
+  getLocations() {
     this.lservice.getLocations()
       .subscribe({
         next: (locations) => {
@@ -27,11 +33,20 @@ export class NavbarComponent implements OnInit {
         error: (response) => {
           console.log(response);
         }
-      })
+      });
   }
-  setLocalizationName(value: string){
+  
+  setLocalizationName(value: string) {
     this.localizationName = value;
-    this.router.navigate(['/main-page',this.localizationName]);
+    // Save the selected city to session storage
+    sessionStorage.setItem('selectedCity', value);;
+    this.router.navigate(['/main-page', this.localizationName]);
+  }
+  navigateToLocalization(){
+    this.router.navigate(['/main-page', this.localizationName]);
+  }
+  cancelTicketButton(){
+    this.router.navigate(['/cancel-ticket']);
   }
 }
 

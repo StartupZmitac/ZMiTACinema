@@ -8,6 +8,12 @@ import {MainPageComponent} from "./components/main-page/main-page.component";
 import {SeatPickerComponent} from "./components/seat-picker/seat-picker.component";
 import {CheckoutComponent} from "./components/checkout/checkout.component";
 import { NavbarComponent } from './components/navbar/navbar.component';
+import {FormsModule} from "@angular/forms";
+import { CancelTicketComponent } from './components/cancel-ticket/cancel-ticket.component';
+import { SummaryComponent } from './components/summary/summary.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { PricesPageComponent } from './components/prices-page/prices-page.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -15,15 +21,21 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MainPageComponent,
     SeatPickerComponent,
     CheckoutComponent,
-    NavbarComponent
+    NavbarComponent,
+    CancelTicketComponent,
+    SummaryComponent,
+    PaymentComponent,
+    PricesPageComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    AppRoutingModule, // Import the AppRoutingModule here
-    RouterModule.forRoot([]) // Remove the routes from the root module
-  ],
-  providers: [],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule, // Import the AppRoutingModule here
+        RouterModule.forRoot([]),
+        FormsModule,
+        // Remove the routes from the root module
+    ],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,6 +31,19 @@ public class Validator
         return false;
     }
 
+    public bool checkColumnRowOutOfRange(string toCheck, int column, int row) //WARNING: BECAUSE OF BROKEN IDEXES, METHOD MIGHT NOT WORK PROPERLY
+    {
+        //string temp = toCheck.Replace("C", ",");
+        //temp = temp.Replace("R", ",");
+        //temp = temp.Remove(temp.Length - 1); idk how Split works
+        Char[] delimiters = {'C', 'R'};
+        string[] values = toCheck.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+
+        if (int.Parse(values[0]) > row || int.Parse(values[1]) > column) //TODO: Check if method works with different columns and rows from ticket
+            return false;
+        return true;
+    }
+    
 
 
 }

@@ -13,7 +13,7 @@ export class AppComponent {
   onButtonClick(event: Event){
     const buttonId = (event.target as HTMLButtonElement).id;
     const buttonValue = (event.target as HTMLButtonElement).value;
-      if (buttonId === 'seat-picker-button')
+      if (buttonId === 'seat-picker-button')//???
         this.router.navigate(['/seat-picker']);
       else
         this.router.navigate(['/main-page',buttonValue]);

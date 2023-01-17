@@ -17,8 +17,8 @@ namespace CinemaAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> addTicket([FromBody] Ticket ticketRequest)
         {
-            ticketRequest.Id = Guid.NewGuid();
-
+            Validator validator = new Validator();
+            
             StatusCodeResult result = changeSeatAvailability(ticketRequest);
 
             if (result.Equals(StatusCode(400)))
@@ -29,6 +29,7 @@ namespace CinemaAPI.Controllers
             {
                 return NotFound();
             }
+
             await _cinemaDbContext.Tickets.AddAsync(ticketRequest);
             await _cinemaDbContext.SaveChangesAsync();
             return (Ok());
@@ -103,7 +104,7 @@ namespace CinemaAPI.Controllers
 
         [HttpPut]
         [Route("{id2:Guid}")]
-        public async Task<IActionResult> checkTicket([FromRoute] Guid id2, Ticket ticketRequest) 
+        public async Task<IActionResult> checkTicket([FromRoute] Guid id2, Ticket ticketRequest)
         {
             var modifyTicket = await _cinemaDbContext.Tickets.FindAsync(id2);
 
@@ -116,8 +117,7 @@ namespace CinemaAPI.Controllers
 
             return (Ok(modifyTicket));
         }
-
-        
+       
         private StatusCodeResult changeSeatAvailability(Ticket ticketRequest)
         {
             string ticketSeat = ticketRequest.Seat;
@@ -143,11 +143,12 @@ namespace CinemaAPI.Controllers
                 if (ticketSeat.Equals(takenSeats[i]))
                 {
                     return StatusCode(400);
+
                 }
             }
             for (int i = 0; i < unavailableSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(unavailableSeats[i]))
+                if (ticketSeat.Equals(unavailableSeats[i])|| !validator.checkColumnRowOutOfRange(unavailableSeats[i], room.column, room.row))
                 { 
                     return StatusCode(400);
                 }

@@ -1,2 +1,23 @@
-<h1>Selected seats: </h1>
-<p>[Data]</p>
+<body>
+<h1 class="text-center mb-3">Selected seats: </h1>
+<div class="text-center mb-3">
+  <ul class="list-unstyled">
+    <li *ngFor="let seat of selectedSeats">{{seat}}</li>
+  </ul>
+</div>
+<div *ngIf="selectedSeats.length > 0" style="display: flex; flex-direction: column; align-items: center;">
+  <h3 class="text-center mb-3">Choose ticket types:</h3>
+  <div class="form-group col-sm-6 mb-3">
+    <label for="normal-tickets" class="font-weight-bold">Normal tickets:</label>
+    <input type="number" class="form-control" id="normal-tickets" [(ngModel)]="normalTickets" min="0" max="{{selectedSeats.length}}">
+  </div>
+  <div class="form-group col-sm-6 mb-3">
+    <label for="student-tickets" class="font-weight-bold">Reduced tickets:</label>
+    <input type="number" class="form-control" id="student-tickets" [(ngModel)]="reducedTickets" min="0" max="{{selectedSeats.length - normalTickets}}">
+  </div>
+  <div *ngIf="normalTickets+reducedTickets==selectedSeats.length" class="text-center">
+    <button type="button" class="btn btn-dark px-5 py-2" style="margin-right: 20px;" (click)="onReserveClick($event)">Reserve</button>
+    <button type="button" class="btn btn-dark px-5 py-2"(click)="onBuyClick($event)">Buy</button>
+  </div>
+</div>
+</body>
