@@ -146,9 +146,11 @@ namespace CinemaAPI.Controllers
 
                 }
             }
+
+            Validator validator = new Validator();
             for (int i = 0; i < unavailableSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(unavailableSeats[i])|| !validator.checkColumnRowOutOfRange(unavailableSeats[i], room.column, room.row))
+                if (ticketSeat.Equals(unavailableSeats[i])|| !validator.checkColumnRowOutOfRange(unavailableSeats[i], connectedRoom.column, connectedRoom.row))
                 { 
                     return StatusCode(400);
                 }
