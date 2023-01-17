@@ -11,12 +11,15 @@
 <div class="main-page-container">
 <div class="jumbotron">
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let film of screenings">
+    <li class="list-group-item" *ngFor="let screening of screenings">
       <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item">{{ film.film}}</li>
+        <li class="list-group-item" *ngIf="screening.film != currentFilm">{{ screening.film}}</li>
+        <button type="button" class="btn btn-dark" (click)="onHourClick($event, screening)" >{{screening.time}}</button>
       </ul>
+      {{ setCurrentFilm(screening.film) }}
     </li>
   </ul>
+
 </div>
 </div>
 </body>

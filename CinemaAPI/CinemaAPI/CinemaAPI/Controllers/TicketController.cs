@@ -110,7 +110,7 @@ namespace CinemaAPI.Controllers
 
         [HttpPut]
         [Route("{id2:Guid}")]
-        public async Task<IActionResult> checkTicket([FromRoute] Guid id2, Ticket ticketRequest) 
+        public async Task<IActionResult> checkTicket([FromRoute] Guid id2, Ticket ticketRequest)
         {
             var modifyTicket = await _cinemaDbContext.Tickets.FindAsync(id2);
 
@@ -149,11 +149,12 @@ namespace CinemaAPI.Controllers
                 if (ticketSeat.Equals(takenSeats[i]))
                 {
                     return StatusCode(400);
+
                 }
             }
             for (int i = 0; i < unavailableSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(unavailableSeats[i]))
+                if (ticketSeat.Equals(unavailableSeats[i])|| !validator.checkColumnRowOutOfRange(unavailableSeats[i], room.column, room.row))
                 { 
                     return StatusCode(400);
                 }

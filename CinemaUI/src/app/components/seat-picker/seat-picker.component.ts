@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { Seat } from 'src/app/models/seat.model';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { Room } from 'src/app/models/room.model';
-import { Guid } from 'guid-typescript';
 import { RoomService } from 'src/app/services/room.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'seat-picker',
@@ -12,33 +12,52 @@ import { RoomService } from 'src/app/services/room.service';
   providers: [RoomService]
 })
 export class SeatPickerComponent implements OnInit {
-  constructor(private router:Router, private rservice: RoomService) {
+  constructor(private cookieService: CookieService, private router:Router,private route: ActivatedRoute, private rservice: RoomService) {
   }
   ngOnInit(): void
   {
-    this.getRoom();
-  }
-  //TODO: get these from route
-  locationName: string = "Miechow";
-  roomNum: number = 1;
+    this.route.queryParamMap
+    .subscribe((params)=>{
+      console.log(params)
+      let location = params.get('location')
+      let room = params.get('room')
+      
+      if(location&&room){
 
+      //check if cookies exist, if not add them here
+      if(!(this.cookieService.check('location')&&this.cookieService.check('room'))){
+        this.cookieService.set('location',location)
+        this.cookieService.set('room', room)
+      }
+        this.getRoom(location, Number(room))
+    }
+    })
+  }
   selectedSeats: (string | undefined)[] = [];
   seats: Seat[][] = []
     // An array of rows, each containing an array of seats
   selectSeat(seat: Seat) {
-    if (seat.unavailable)
-      seat.isTaken = !seat.isTaken;
+    if (!seat.isTaken)
+      seat.selected = !seat.selected;
+  }
+  private setSeats(seats: string){
+    this.cookieService.set('seats', seats)
   }
   onButtonClick(event: Event){
     this.selectedSeats = this.seats
       .flat()
-      .filter(seat=>seat.isTaken)
+      .filter(seat=>seat.selected)
       .map(seat => seat.number);
-
-    this.router.navigate(['/checkout',this.selectedSeats]);
+    this.setSeats(this.selectedSeats.join(','))
+    this.router.navigate(['/checkout'],{
+      queryParams: {
+        seats: this.selectedSeats.join(',')
+      }
+    });
   }
-  getRoom(){
-    this.rservice.getRoomByNum(this.roomNum, this.locationName)
+  private getRoom(localizationName: string, room: number){
+
+    this.rservice.getRoomByNum(Number(room), String(localizationName))
       .subscribe({
         next: (room) => {
           this.createRoom(room);
@@ -48,35 +67,33 @@ export class SeatPickerComponent implements OnInit {
         }
       }
       )
-
   }
-  createRoom(room: Room)
+  private createRoom(room: Room)
   {
     let temps: Seat[] = [];
-    for(var i = 0;i < room.column; i++)
+    for(var i = 0;i < room.row; i++)
     {
-      for(var j = 0;j < room.row; j++)
+      for(var j = 0;j < room.column; j++)
       {
-        temps.push({selected: false, number: 'M' + j, isTaken: false, unavailable: true});
+        temps.push({selected: false, number: 'R'+ i + 'M' + j, isTaken: false, unavailable: false});
       }
       this.seats.push(temps);
       temps = [];
     }
-
     this.seatsDecode(room.taken_seats, true);
-    this.seatsDecode(room.unavailable_seats, false)
-
+    this.seatsDecode(room.unavailable_seats, false);
   }
-
-
-  seatsDecode(toDecode: string, taken: boolean)
+  anySeatsSelected(): boolean {
+    return this.seats.some(row => row.some(seat => seat.selected));
+  }
+  private seatsDecode(toDecode: string, taken: boolean)
   {
     var temp = "";
     var roww = 0;
     var coll = 0;
     for(var i =0; i<toDecode.length ; i++)
     {
-      if(!isNaN(Number(toDecode[i]))){ 
+      if(!isNaN(Number(toDecode[i]))){
         temp += toDecode[i];
       }
       else if(toDecode[i] == "C")
@@ -93,22 +110,25 @@ export class SeatPickerComponent implements OnInit {
       else if(toDecode[i] == ",")
       {
         if(taken){
-          this.seats[coll][roww].isTaken = true;
+
+          this.seats[roww][coll].isTaken = true;
+          console.log(this.seats[coll][roww].number);
         }
         else{
-          this.seats[coll][roww].unavailable = true;
+          this.seats[roww][coll].unavailable = true;
         }
-        console.log(coll);
-        console.log(roww);
+        //console.log(coll);
+        //console.log(roww);
       }
       else
       {
-        var temp = "";
-        var roww = 0;
-        var coll = 0;
+        temp = "";
+        roww = 0;
+        coll = 0;
       }
 
     }
+    console.log(this.seats);
 
   }
 

@@ -5,8 +5,8 @@
   </button>
   <div class="collapse navbar-collapse" style="margin-top: 20px" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Repertoire</a>
+      <li class="nav-item" *ngIf="localizationName!='Choose city'">
+        <a class="nav-link" [attr.disabled]="localizationName === 'Choose city' ? true : null" (click)="navigateToLocalization()">Repertoire</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Pricing</a>
@@ -19,6 +19,16 @@
           <a class="dropdown-item" *ngFor="let location of locations" (click)="setLocalizationName(location.city)">{{location.city}}</a>
         </div>
       </li>
+      <div class="float-right">
+        <ul class="navbar-nav">
+          <li class="nav-item" style="margin-top: 8px;">
+            <button type="button" class="btn btn-primary float-left">Log in</button>
+          </li>
+          <li class="nav-item" style="margin-top: 8px; margin-left: 10px;">
+            <button type="button" class="btn btn-primary float-right" (click)="cancelTicketButton()">Cancel ticket</button>
+          </li>
+        </ul>
+      </div>
     </ul>
   </div>
 </nav>

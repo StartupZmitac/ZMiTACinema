@@ -7,7 +7,7 @@ export interface Ticket
     isChecked: boolean;
     film: string;
     isPaid: boolean;
-    room: boolean;
+    room: number;
     seat: string;
     type: string;
     time: Date;

@@ -1,15 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 .navbar{
   height: 50px;
 }
 .navbar-light{
   background-color: #212622 !important;
 }
-body {
-  background-color: #353d36;
+body{
+  background-color: #353d36 !important;
+  color: #fff10b !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 15px !important;
 }
 .navbar-light .navbar-nav .nav-link {
   color: #fff10b !important;
+}
+.nav-link{
+  cursor: pointer;
 }
 .dropdown-menu{
   background-color: #353d36 !important;
@@ -33,17 +40,17 @@ body {
   border: none;
 }
 .btn-primary{
-  background-color: #353d36;
-  color: #fff10b;
-  border: none;
+  background-color: #353d36 !important;
+  color: #fff10b !important;
+  border: none !important;
 }
 .btn-primary:hover{
-  background-color: #fff10b;
-  color: #353d36;
+  background-color: #fff10b !important;
+  color: #353d36 !important;
 }
 .btn-primary:active{
-  background-color: #fff10b;
-  color: #353d36;
+  background-color: #fff10b !important;
+  color: #353d36 !important;
 }
 .btn-dark{
   background-color: #212622;
@@ -53,4 +60,33 @@ body {
 .btn-dark:hover{
   background-color: #fff10b;
   color: #212622;
+}
+.form-control {
+  background-color: #212622;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+.form-control:focus{
+  background-color: #212622;
+  border-color: #6c757d;
+  color: #6c757d;
+}
+.modal-content{
+  background-color: #212622 !important;
+}
+.ticket-summary {
+  background-color: #212622;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.ticket-summary h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.ticket-summary p {
+  margin-bottom: 10px;
+  font-size: 18px;
 }
