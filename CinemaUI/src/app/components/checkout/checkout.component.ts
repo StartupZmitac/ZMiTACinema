@@ -30,12 +30,11 @@ export class CheckoutComponent implements OnInit {
     this.router.navigate(['/summary']);
   }
   private reserveTicket(){
-    let location = this.cookieService.get('location')
-    let room = this.cookieService.get('room')
+    let screening_id = this.cookieService.get('screening')
     let seat = this.cookieService.get('seats').split(',')
     let reduced = this.reducedTickets
-    this.tservice.createTickets(location, room, seat, reduced)
-    console.log(location, room, seat, reduced)
+    this.tservice.createTickets(screening_id, seat, reduced)
+    console.log(screening_id, seat, reduced)
   }
   ngOnInit() {
     this.selectedSeats = this.cookieService.get('seats').split(',')

@@ -37,6 +37,7 @@ export class MainPageComponent implements OnInit {
     console.log(screening)
     this.cookieService.set('room', screening.room.toString())
     this.cookieService.set('location', screening.location)
+    this.cookieService.set('screening', screening.screening_ID.toString())
   }
   getScreenings(){
     if(this.localizationName!= undefined)

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable} from 'rxjs';
 import { Ticket } from '../models/ticket.model';
+import { Guid } from 'guid-typescript';
 
 @Injectable({
   providedIn: 'root'
@@ -17,25 +18,24 @@ export class TicketService {
     return this.http.get<Ticket[]>(this.baseApiUrl+'/api/Ticket')
   }
 
-  createTickets(location: string, room: string, seat: string[], reduced: number){
+  createTickets(screening_id: string, seat: string[], reduced: number){
     let self = this
     seat.forEach(function (val){
       if(reduced>0){
-        self.createTicket(location, room, val, 'reduced')
+        self.createTicket(screening_id, val, 'reduced')
       }
       else{
-        self.createTicket(location, room, val, 'normal')
+        self.createTicket(screening_id, val, 'normal')
       }
       reduced--;
     })
   }
 
-  private createTicket(location: string, room: string, seat: string, type: string){
+  private createTicket(screening_id: string, seat: string, type: string){
     //only send necessary data to backend
     //seat number, type, Screening id
     let req = {
-      location: location,
-      room: room,
+      screening_id: screening_id,
       seat: seat,
       type: type
     }

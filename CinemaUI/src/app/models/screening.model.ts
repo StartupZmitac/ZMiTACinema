@@ -4,7 +4,7 @@ import { Film } from "./film.model";
 
 export interface Screening
 {
-    id: Guid;
+    screening_ID: Guid;
     room:number;
     film:string;
     time: Date;
