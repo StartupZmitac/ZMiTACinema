@@ -25,16 +25,16 @@ namespace CinemaAPI.Controllers
             newTicket.IsPaid = false;
             newTicket.Screening_ID = Guid.Parse(screening_id);
 
-            StatusCodeResult result = changeSeatAvailability(newTicket);
+            //StatusCodeResult result = changeSeatAvailability(newTicket);
 
-            if (result.Equals(StatusCode(400)))
-            {
-                return BadRequest();
-            }
-            else if (result.Equals(StatusCode(404)))
-            {
-                return NotFound();
-            }
+            // if (result.Equals(StatusCode(400)))
+            // {
+            //     return BadRequest();
+            // }
+            // else if (result.Equals(StatusCode(404)))
+            // {
+            //     return NotFound();
+            // }
 
             await _cinemaDbContext.Tickets.AddAsync(newTicket);
             await _cinemaDbContext.SaveChangesAsync();
