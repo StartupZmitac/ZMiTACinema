@@ -15,11 +15,17 @@ namespace CinemaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> addTicket([FromBody] Ticket ticketRequest)
+        public async Task<IActionResult> addTicket(string screening_id, string seat, string type)
         {
-            ticketRequest.Id = Guid.NewGuid();
+            Ticket newTicket = new Ticket();
+            newTicket.Id = Guid.NewGuid();
+            newTicket.Type = type;
+            newTicket.Seat= seat;
+            newTicket.IsChecked = false;
+            newTicket.IsPaid = false;
+            newTicket.Screening_ID = Guid.Parse(screening_id);
 
-            StatusCodeResult result = changeSeatAvailability(ticketRequest);
+            StatusCodeResult result = changeSeatAvailability(newTicket);
 
             if (result.Equals(StatusCode(400)))
             {
@@ -29,7 +35,8 @@ namespace CinemaAPI.Controllers
             {
                 return NotFound();
             }
-            await _cinemaDbContext.Tickets.AddAsync(ticketRequest);
+
+            await _cinemaDbContext.Tickets.AddAsync(newTicket);
             await _cinemaDbContext.SaveChangesAsync();
             return (Ok());
         }
@@ -116,7 +123,6 @@ namespace CinemaAPI.Controllers
 
             return (Ok(modifyTicket));
         }
-
         
         private StatusCodeResult changeSeatAvailability(Ticket ticketRequest)
         {
