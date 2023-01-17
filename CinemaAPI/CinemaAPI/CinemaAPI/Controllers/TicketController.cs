@@ -18,18 +18,23 @@ namespace CinemaAPI.Controllers
         public async Task<IActionResult> addTicket([FromBody] Ticket ticketRequest)
         {
             Validator validator = new Validator();
+            
+            StatusCodeResult result = changeSeatAvailability(ticketRequest);
 
-            if (validator.checkTime(ticketRequest.Time) == false)
+            if (result.Equals(StatusCode(400)))
             {
                 return BadRequest();
             }
+            else if (result.Equals(StatusCode(404)))
+            {
+                return NotFound();
+            }
 
-            ticketRequest.Id = Guid.NewGuid();
             await _cinemaDbContext.Tickets.AddAsync(ticketRequest);
             await _cinemaDbContext.SaveChangesAsync();
-
             return (Ok());
         }
+
         [HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> removeTicket([FromRoute] Guid id)
@@ -75,21 +80,22 @@ namespace CinemaAPI.Controllers
             if (modifyTicket == null)
             { return NotFound(); }
 
-            Validator validator = new Validator();
+            StatusCodeResult result = changeSeatAvailability(ticketRequest);
 
-            if (validator.checkTime(ticketRequest.Time) == false)
+            if (result.Equals(StatusCode(400)))
             {
                 return BadRequest();
             }
+            else if (result.Equals(StatusCode(404)))
+            {
+                return NotFound();
+            }
 
-            modifyTicket.Time = ticketRequest.Time;
             modifyTicket.Seat = ticketRequest.Seat;
-            modifyTicket.Room = ticketRequest.Room;
-            modifyTicket.IsPaid = ticketRequest.IsPaid;
-            modifyTicket.IsChecked = ticketRequest.IsChecked;
-            modifyTicket.Film = ticketRequest.Film;
+            modifyTicket.IsPaid= ticketRequest.IsPaid;
+            modifyTicket.IsChecked= ticketRequest.IsChecked;
             modifyTicket.Type = ticketRequest.Type;
-            modifyTicket.id_room = ticketRequest.id_room;
+            modifyTicket.Screening_ID = ticketRequest.Screening_ID;
 
             await _cinemaDbContext.SaveChangesAsync();
 
@@ -111,34 +117,43 @@ namespace CinemaAPI.Controllers
 
             return (Ok(modifyTicket));
         }
-
-        [HttpPut]
-        public async Task<IActionResult> changeSeatAvailability(Ticket ticketRequest)
+       
+        private StatusCodeResult changeSeatAvailability(Ticket ticketRequest)
         {
-            Validator validator = new Validator();
-            string ticketSeat = ticketRequest.Seat.Trim();
-            var room = await _cinemaDbContext.Rooms.FindAsync(ticketRequest.id_room);
-            if (room == null)
+            string ticketSeat = ticketRequest.Seat;
+            var connectedScreening = _cinemaDbContext.Screenings.Find(ticketRequest.Screening_ID);
+
+            if (connectedScreening == null)
             {
-                return NotFound();
+                return StatusCode(404);
             }
-            string[] takenSeats = room.taken_seats.Split(",");
-            string[] unavailableSeats = room.unavailable_seats.Split(",");
+
+            var connectedRoom = _cinemaDbContext.Rooms.Find(connectedScreening.id_room);
+
+            if (connectedRoom == null)
+            {
+                return StatusCode(404);
+            }
+
+            string[] takenSeats = connectedRoom.taken_seats.Split(",");
+            string[] unavailableSeats = connectedRoom.unavailable_seats.Split(",");
+
             for (int i = 0; i < takenSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(takenSeats[i].Trim()) || !validator.checkColumnRowOutOfRange(takenSeats[i], room.column, room.row))
+                if (ticketSeat.Equals(takenSeats[i]))
                 {
-                    return BadRequest();
+                    return StatusCode(400);
+
                 }
             }
             for (int i = 0; i < unavailableSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(unavailableSeats[i].Trim()) || !validator.checkColumnRowOutOfRange(unavailableSeats[i], room.column, room.row))
-                {
-                    return BadRequest();
+                if (ticketSeat.Equals(unavailableSeats[i])|| !validator.checkColumnRowOutOfRange(unavailableSeats[i], room.column, room.row))
+                { 
+                    return StatusCode(400);
                 }
             }
-            return Ok();
+            return StatusCode(200);
         }
     }
 }
