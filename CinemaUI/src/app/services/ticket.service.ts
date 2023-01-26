@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable} from 'rxjs';
 import { Ticket } from '../models/ticket.model';
@@ -22,24 +22,31 @@ export class TicketService {
     let self = this
     seat.forEach(function (val){
       if(reduced>0){
-        self.createTicket(screening_id, val, 'reduced')
+        self.createTicket(screening_id, val, "reduced").subscribe((data)=>{
+          console.log(data)
+        })
       }
       else{
-        self.createTicket(screening_id, val, 'normal')
+        self.createTicket(screening_id, val, "normal").subscribe((data)=>{
+          console.log(data)
+        })
       }
       reduced--;
     })
   }
 
-  private createTicket(screening_id: string, seat: string, type: string){
+  private createTicket(screening_id: string, seat: string, type: string): Observable<any> {
     //only send necessary data to backend
     //seat number, type, Screening id
-    let req = {
-      screening_id: screening_id,
+    let ticket: Ticket = {
+      id: Guid.createEmpty().toString(),
+      isChecked: false,
+      isPaid: false,
       seat: seat,
-      type: type
+      type: type,
+      screening_ID: screening_id
     }
-    console.log(req)
-    //this.http.post(this.baseApiUrl+'/api/Ticket', req)
+
+    return this.http.post<Ticket>(this.baseApiUrl+'/api/Ticket', ticket)
   }
 }

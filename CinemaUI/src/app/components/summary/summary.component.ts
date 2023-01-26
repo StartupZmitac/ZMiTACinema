@@ -10,7 +10,7 @@ export class SummaryComponent implements OnInit {
 
   constructor(private cookieService: CookieService) { 
 
-    this.cookieService.deleteAll();
+    //this.cookieService.deleteAll();
   }
 
   ngOnInit(): void {
