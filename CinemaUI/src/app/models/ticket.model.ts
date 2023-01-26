@@ -3,14 +3,10 @@ import { Room } from "./room.model";
 
 export interface Ticket
 {
-    id: Guid;
+    id: string|null;
     isChecked: boolean;
-    film: string;
     isPaid: boolean;
-    room: number;
     seat: string;
     type: string;
-    time: Date;
-    id_room: Guid;
-    _room: Room[];
+    screening_ID: string
 }

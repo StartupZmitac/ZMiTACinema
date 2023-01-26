@@ -22,12 +22,12 @@ export class TicketService {
     let self = this
     seat.forEach(function (val){
       if(reduced>0){
-        self.createTicket({screening_id: screening_id, seat: val, type: "reduced"}).subscribe((data)=>{
+        self.createTicket(screening_id, val, "reduced").subscribe((data)=>{
           console.log(data)
         })
       }
       else{
-        self.createTicket({screening_id: screening_id, seat: val, type: "normal"}).subscribe((data)=>{
+        self.createTicket(screening_id, val, "normal").subscribe((data)=>{
           console.log(data)
         })
       }
@@ -35,9 +35,18 @@ export class TicketService {
     })
   }
 
-  private createTicket(req: {screening_id: string, seat: string, type: string}): Observable<any> {
+  private createTicket(screening_id: string, seat: string, type: string): Observable<any> {
     //only send necessary data to backend
     //seat number, type, Screening id
-    return this.http.post<Ticket>(this.baseApiUrl+'/api/Ticket', {params: req})
+    let ticket: Ticket = {
+      id: Guid.createEmpty().toString(),
+      isChecked: false,
+      isPaid: false,
+      seat: seat,
+      type: type,
+      screening_ID: screening_id
+    }
+
+    return this.http.post<Ticket>(this.baseApiUrl+'/api/Ticket', ticket)
   }
 }
