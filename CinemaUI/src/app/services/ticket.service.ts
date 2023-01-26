@@ -38,9 +38,6 @@ export class TicketService {
   private createTicket(req: {screening_id: string, seat: string, type: string}): Observable<any> {
     //only send necessary data to backend
     //seat number, type, Screening id
-    
-
-    console.log("hello "+req)
-    return this.http.post<Ticket>(this.baseApiUrl+'/api/Ticket', req)
+    return this.http.post<Ticket>(this.baseApiUrl+'/api/Ticket', {params: req})
   }
 }
