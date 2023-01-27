@@ -25,17 +25,17 @@ export class TicketService {
     return this.randomIntFromInterval(10000,99999);
   }
 
-  createTickets(screening_id: string, seat: string[], reduced: number){
+  createTickets(screening_id: string, seat: string[], reduced: number, isPaid: boolean){
     let self = this
     let id = this.generateId()
     seat.forEach(function (val){
       if(reduced>0){
-        self.createTicket(screening_id, val, "reduced", id).subscribe((data)=>{
+        self.createTicket(screening_id, val, "reduced", id, isPaid).subscribe((data)=>{
           console.log(data)
         })
       }
       else{
-        self.createTicket(screening_id, val, "normal", id).subscribe((data)=>{
+        self.createTicket(screening_id, val, "normal", id, isPaid).subscribe((data)=>{
           console.log(data)
         })
       }
@@ -43,14 +43,14 @@ export class TicketService {
     })
   }
 
-  private createTicket(screening_id: string, seat: string, type: string, id: number): Observable<any> {
+  private createTicket(screening_id: string, seat: string, type: string, id: number, isPaid: boolean): Observable<any> {
     //only send necessary data to backend
     //seat number, type, Screening id
     let ticket: Ticket = {
       id: Guid.createEmpty().toString(),
       transaction_id: id.toString(),
       isChecked: false,
-      isPaid: false,
+      isPaid: isPaid,
       seat: seat,
       type: type,
       screening_ID: screening_id
