@@ -20,13 +20,15 @@ namespace CinemaAPI.Controllers
         {
             Ticket newTicket = ticket;
             newTicket.Id = Guid.NewGuid();
-            bool result = changeSeatAvailability(newTicket).Result;
+            bool result = changeSeatAvailability(newTicket);
 
             if (result == false)
             {
                  return BadRequest();
             }
-
+            var connectedScreening = await _cinemaDbContext.Screenings.FindAsync(newTicket.Screening_ID);
+            var connectedRoom = await _cinemaDbContext.Rooms.FindAsync(connectedScreening.id_room);
+            connectedRoom.taken_seats = connectedRoom.taken_seats + newTicket.Seat + ",";
             newTicket.IsChecked = false;
             newTicket.IsPaid = false;
             await _cinemaDbContext.Tickets.AddAsync(newTicket);
@@ -95,7 +97,7 @@ namespace CinemaAPI.Controllers
                 return NotFound(); 
             }
 
-            bool result = changeSeatAvailability(ticketRequest).Result;
+            bool result = changeSeatAvailability(ticketRequest);
 
             if (result == false)
             {
@@ -108,6 +110,9 @@ namespace CinemaAPI.Controllers
             modifyTicket.Type = ticketRequest.Type;
             modifyTicket.Screening_ID = ticketRequest.Screening_ID;
             modifyTicket.Transaction_ID = ticketRequest.Transaction_ID;
+            var connectedScreening = await _cinemaDbContext.Screenings.FindAsync(modifyTicket.Screening_ID);
+            var connectedRoom = await _cinemaDbContext.Rooms.FindAsync(connectedScreening.id_room);
+            connectedRoom.taken_seats = connectedRoom.taken_seats + modifyTicket.Seat + ",";
 
             await _cinemaDbContext.SaveChangesAsync();
 
@@ -130,19 +135,26 @@ namespace CinemaAPI.Controllers
             return (Ok(modifyTicket));
         }
         
-        private async Task<bool> changeSeatAvailability(Ticket ticketRequest)
+        private bool changeSeatAvailability(Ticket ticketRequest)
         {
             string ticketSeat = ticketRequest.Seat;
-            var connectedScreening = await _cinemaDbContext.Screenings.FindAsync(ticketRequest.Screening_ID);
+
+            var connectedScreening = _cinemaDbContext.Screenings.Find(ticketRequest.Screening_ID);
 
             if (connectedScreening == null)
             {
                 return false;
             }
 
-            var connectedRoom = await _cinemaDbContext.Rooms.FindAsync(connectedScreening.id_room);
+            var connectedRoom = _cinemaDbContext.Rooms.Find(connectedScreening.id_room);
 
             if (connectedRoom == null)
+            {
+                return false;
+            }
+
+            Validator validator = new Validator();
+            if (validator.checkColumnRowOutOfRange(ticketSeat, connectedRoom.column, connectedRoom.row) == false)
             {
                 return false;
             }
@@ -158,16 +170,14 @@ namespace CinemaAPI.Controllers
                 }
             }
 
-            Validator validator = new Validator();
             for (int i = 0; i < unavailableSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(unavailableSeats[i]) || !validator.checkColumnRowOutOfRange(unavailableSeats[i], connectedRoom.column, connectedRoom.row))
+                if (ticketSeat.Equals(unavailableSeats[i]))
                 { 
                     return false;
                 }
             }
-            connectedRoom.taken_seats = connectedRoom.taken_seats + ticketSeat + ",";
-            await _cinemaDbContext.SaveChangesAsync();
+
             return true;
         }
     }
