@@ -8,6 +8,7 @@ public class Ticket
 {
     [Key]
     public Guid Id { get; set; }
+    public string Transaction_ID { get; set; }
     public bool IsChecked { get; set; }
     public bool IsPaid { get; set; }
     public string? Seat { get; set; }
