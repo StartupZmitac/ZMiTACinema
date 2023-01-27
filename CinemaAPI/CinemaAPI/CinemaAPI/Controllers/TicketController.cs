@@ -154,7 +154,7 @@ namespace CinemaAPI.Controllers
             }
 
             Validator validator = new Validator();
-            if (validator.checkColumnRowOutOfRange(ticketSeat, connectedRoom.column, connectedRoom.row) == false)
+            if (validator.checkColumnRowOutOfRange(ticketSeat, connectedRoom.column, connectedRoom.row) == false || validator.checkTime(connectedScreening.Time) == false)
             {
                 return false;
             }
