@@ -1,5 +1,6 @@
 ﻿using CinemaAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinemaAPI.Controllers
 {
@@ -7,19 +8,65 @@ namespace CinemaAPI.Controllers
     [Route("api/[controller]")]
     public class AdminController : Controller
     {
+        private readonly CinemaDbContext cinemaDbContext;
+
+        public AdminController(CinemaDbContext cinemaDbContext)
+        {
+            this.cinemaDbContext = cinemaDbContext;
+        }
 
         [HttpPost]
-        public async Task<IActionResult> addAdmin() { return Ok(); }
+        public async Task<IActionResult> addAdmin([FromBody] Admin adminReqest) 
+        {
+            adminReqest.Id = Guid.NewGuid();
+            await cinemaDbContext.AddAsync(adminReqest);
+            await cinemaDbContext.SaveChangesAsync();
+            return Ok(); 
+        }
         [HttpDelete]
-        public async Task<IActionResult> removeAdmin() { return Ok(); }
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> removeAdmin([FromRoute] Guid id) 
+        {
+            var toDelete = await cinemaDbContext.Admins.FindAsync(id);
+            if (toDelete == null)
+            {
+                return NotFound();
+            }
+            cinemaDbContext.Admins.Remove(toDelete);
+            await cinemaDbContext.SaveChangesAsync();
+            return Ok(toDelete);
+        }
         [HttpPut]
-        public async Task<IActionResult> modifyAdmin() { return Ok(); }
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> modifyAdmin([FromRoute] Guid id, Admin adminReqest) 
+        {
+            var toModify = await cinemaDbContext.Admins.FindAsync(id);
+            if (toModify == null)
+            {
+                return NotFound();
+            }
+            toModify.password = adminReqest.password;
+            toModify.login = adminReqest.login;
+            await cinemaDbContext.SaveChangesAsync();
+            return Ok();
+        }
         [HttpGet]
-        public async Task<IActionResult> getAllAdmin() { return Ok(); }
+        public async Task<IActionResult> getAllAdmin() 
+        {
+            var admins = await cinemaDbContext.Admins.ToListAsync();
+
+            return Ok(admins);
+        }
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> getAdmin([FromRoute] Guid id) { return Ok(); }
-
-
+        public async Task<IActionResult> getAdmin([FromRoute] Guid id) 
+        {
+            var admin = await cinemaDbContext.Admins.FindAsync(id);
+            if (admin == null)
+            {
+                return NotFound();
+            }
+            return Ok(admin);
+        }
     }
 }

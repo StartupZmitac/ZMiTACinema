@@ -1,6 +1,7 @@
 ﻿using CinemaAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace CinemaAPI.Controllers
 {
@@ -19,38 +20,50 @@ namespace CinemaAPI.Controllers
         {
             Ticket newTicket = ticket;
             newTicket.Id = Guid.NewGuid();
-            //StatusCodeResult result = changeSeatAvailability(newTicket);
+            bool result = changeSeatAvailability(newTicket).Result;
 
-            // if (result.Equals(StatusCode(400)))
-            // {
-            //     return BadRequest();
-            // }
-            // else if (result.Equals(StatusCode(404)))
-            // {
-            //     return NotFound();
-            // }
+            if (result == false)
+            {
+                 return BadRequest();
+            }
 
+            newTicket.IsChecked = false;
+            newTicket.IsPaid = false;
             await _cinemaDbContext.Tickets.AddAsync(newTicket);
             await _cinemaDbContext.SaveChangesAsync();
             return (Ok());
         }
 
         [HttpDelete]
-        [Route("{id:Guid}")]
-        public async Task<IActionResult> removeTicket([FromRoute] Guid id)
+        [Route("{id}")]
+        public async Task<IActionResult> removeTicket([FromRoute] string id)
         {
-            var ticket = await _cinemaDbContext.Tickets.FindAsync(id);
+            var tickets = await _cinemaDbContext.Tickets.Where(x => x.Transaction_ID == id).ToListAsync();
 
-            if (ticket == null)
+            if (tickets == null)
             {
                 return NotFound();
             }
 
-            _cinemaDbContext.Tickets.Remove(ticket);
-
+            var connectedScreening = await _cinemaDbContext.Screenings.FindAsync(tickets[0].Screening_ID);
+            var connectedRoom = await _cinemaDbContext.Rooms.FindAsync(connectedScreening.id_room);
+            ArrayList takenSeats = new ArrayList();
+            takenSeats.AddRange(connectedRoom.taken_seats.Split(",", StringSplitOptions.RemoveEmptyEntries));
+            string ticketSeat = "";
+            foreach (var ticket in tickets)
+            {
+                ticketSeat = ticket.Seat;
+                takenSeats.Remove(ticketSeat);
+                _cinemaDbContext.Tickets.Remove(ticket);
+            }
+            string temp = "";
+            for (int i = 0; i < takenSeats.Count; i++) 
+            {
+                temp += (string)takenSeats[i] + ",";
+            }
+            connectedRoom.taken_seats = temp;
             await _cinemaDbContext.SaveChangesAsync();
-
-            return (Ok(ticket));
+            return (Ok(tickets));
         }
 
         [HttpGet]
@@ -78,17 +91,15 @@ namespace CinemaAPI.Controllers
             var modifyTicket = await _cinemaDbContext.Tickets.FindAsync(id);
 
             if (modifyTicket == null)
-            { return NotFound(); }
+            { 
+                return NotFound(); 
+            }
 
-            StatusCodeResult result = changeSeatAvailability(ticketRequest);
+            bool result = changeSeatAvailability(ticketRequest).Result;
 
-            if (result.Equals(StatusCode(400)))
+            if (result == false)
             {
                 return BadRequest();
-            }
-            else if (result.Equals(StatusCode(404)))
-            {
-                return NotFound();
             }
 
             modifyTicket.Seat = ticketRequest.Seat;
@@ -96,6 +107,7 @@ namespace CinemaAPI.Controllers
             modifyTicket.IsChecked= ticketRequest.IsChecked;
             modifyTicket.Type = ticketRequest.Type;
             modifyTicket.Screening_ID = ticketRequest.Screening_ID;
+            modifyTicket.Transaction_ID = ticketRequest.Transaction_ID;
 
             await _cinemaDbContext.SaveChangesAsync();
 
@@ -118,44 +130,45 @@ namespace CinemaAPI.Controllers
             return (Ok(modifyTicket));
         }
         
-        private StatusCodeResult changeSeatAvailability(Ticket ticketRequest)
+        private async Task<bool> changeSeatAvailability(Ticket ticketRequest)
         {
             string ticketSeat = ticketRequest.Seat;
-            var connectedScreening = _cinemaDbContext.Screenings.Find(ticketRequest.Screening_ID);
+            var connectedScreening = await _cinemaDbContext.Screenings.FindAsync(ticketRequest.Screening_ID);
 
             if (connectedScreening == null)
             {
-                return StatusCode(404);
+                return false;
             }
 
-            var connectedRoom = _cinemaDbContext.Rooms.Find(connectedScreening.id_room);
+            var connectedRoom = await _cinemaDbContext.Rooms.FindAsync(connectedScreening.id_room);
 
             if (connectedRoom == null)
             {
-                return StatusCode(404);
+                return false;
             }
 
-            string[] takenSeats = connectedRoom.taken_seats.Split(",");
-            string[] unavailableSeats = connectedRoom.unavailable_seats.Split(",");
+            string[] takenSeats = connectedRoom.taken_seats.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            string[] unavailableSeats = connectedRoom.unavailable_seats.Split(",", StringSplitOptions.RemoveEmptyEntries);
 
             for (int i = 0; i < takenSeats.Length - 1; i++)
             {
                 if (ticketSeat.Equals(takenSeats[i]))
                 {
-                    return StatusCode(400);
-
+                    return false;
                 }
             }
 
             Validator validator = new Validator();
             for (int i = 0; i < unavailableSeats.Length - 1; i++)
             {
-                if (ticketSeat.Equals(unavailableSeats[i])|| !validator.checkColumnRowOutOfRange(unavailableSeats[i], connectedRoom.column, connectedRoom.row))
+                if (ticketSeat.Equals(unavailableSeats[i]) || !validator.checkColumnRowOutOfRange(unavailableSeats[i], connectedRoom.column, connectedRoom.row))
                 { 
-                    return StatusCode(400);
+                    return false;
                 }
             }
-            return StatusCode(200);
+            connectedRoom.taken_seats = connectedRoom.taken_seats + ticketSeat + ",";
+            await _cinemaDbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

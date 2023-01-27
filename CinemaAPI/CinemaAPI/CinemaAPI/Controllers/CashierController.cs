@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CinemaAPI.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinemaAPI.Controllers
 {
@@ -6,16 +8,64 @@ namespace CinemaAPI.Controllers
     [Route("api/[controller]")]
     public class CashierController : Controller
     {
+        private readonly CinemaDbContext cinemaDbContext;
+
+        public CashierController(CinemaDbContext cinemaDbContext)
+        {
+            this.cinemaDbContext = cinemaDbContext;
+        }
         [HttpPost]
-        public async Task<IActionResult> addCashier() { return Ok(); }
+        public async Task<IActionResult> addCashier([FromBody] Cashier cashierReqest) 
+        { 
+            cashierReqest.Id = Guid.NewGuid();
+            await cinemaDbContext.AddAsync(cashierReqest);
+            await cinemaDbContext.SaveChangesAsync();
+            return Ok();
+        }
         [HttpDelete]
-        public async Task<IActionResult> removeCashier() { return Ok(); }
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> removeCashier([FromRoute] Guid id) 
+        {
+            var toDelete = await cinemaDbContext.Cashiers.FindAsync(id);
+            if (toDelete == null)
+            {
+                return NotFound();
+            }
+            cinemaDbContext.Cashiers.Remove(toDelete);
+            await cinemaDbContext.SaveChangesAsync();
+            return Ok(toDelete); 
+        }
         [HttpPut]
-        public async Task<IActionResult> modifyCashier() { return Ok(); }
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> modifyCashier([FromRoute] Guid id, Cashier cashierReqest) 
+        {
+            var toModify = await cinemaDbContext.Cashiers.FindAsync(id);
+            if (toModify == null)
+            {
+                return NotFound();
+            }
+            toModify.password = cashierReqest.password;
+            toModify.login = cashierReqest.login;
+            await cinemaDbContext.SaveChangesAsync();
+            return Ok(); 
+        }
         [HttpGet]
-        public async Task<IActionResult> getAllCashier() { return Ok(); }
+        public async Task<IActionResult> getAllCashier() 
+        {
+            var cashiers = await cinemaDbContext.Cashiers.ToListAsync();
+
+            return Ok(cashiers);
+        }
         [HttpGet]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> getCashier([FromRoute] Guid id) { return Ok(); }
+        public async Task<IActionResult> getCashier([FromRoute] Guid id) 
+        {
+            var cashier = await cinemaDbContext.Cashiers.FindAsync(id);
+            if (cashier == null)
+            {
+                return NotFound();
+            }
+            return Ok(cashier);
+        }
     }
 }
