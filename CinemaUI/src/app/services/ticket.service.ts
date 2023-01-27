@@ -63,4 +63,7 @@ export class TicketService {
   getTransaction(transaction_id: string): Observable<Ticket[]>{
     return this.http.get<Ticket[]>(this.baseApiUrl+'/api/Ticket/transaction?transactionId='+transaction_id)
   }
+  deleteTicket(id: string): Observable<any>{
+    return this.http.delete<Ticket>(this.baseApiUrl+'/api/Ticket/'+ id)
+  }
 }
