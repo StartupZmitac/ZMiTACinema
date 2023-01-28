@@ -75,7 +75,7 @@ export class SeatPickerComponent implements OnInit {
     {
       for(var j = 0;j < room.column; j++)
       {
-        temps.push({selected: false, number: 'R'+ i + 'M' + j, isTaken: false, unavailable: false});
+        temps.push({selected: false, number: i +'R'+ j + 'C', isTaken: false, unavailable: false});
       }
       this.seats.push(temps);
       temps = [];
