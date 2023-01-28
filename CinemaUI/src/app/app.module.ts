@@ -14,6 +14,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { PricesPageComponent } from './components/prices-page/prices-page.component';
 import { CookieService } from 'ngx-cookie-service';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CookieService } from 'ngx-cookie-service';
     CancelTicketComponent,
     SummaryComponent,
     PaymentComponent,
-    PricesPageComponent
+    PricesPageComponent,
+    UserLoginComponent
   ],
     imports: [
         HttpClientModule,
