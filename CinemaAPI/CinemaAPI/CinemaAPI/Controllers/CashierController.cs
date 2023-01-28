@@ -15,10 +15,10 @@ namespace CinemaAPI.Controllers
             this.cinemaDbContext = cinemaDbContext;
         }
         [HttpPost]
-        public async Task<IActionResult> addCashier([FromBody] Cashier cashierReqest) 
+        public async Task<IActionResult> addCashier([FromBody] Cashier cashierRequest) 
         { 
-            cashierReqest.Id = Guid.NewGuid();
-            await cinemaDbContext.AddAsync(cashierReqest);
+            cashierRequest.Id = Guid.NewGuid();
+            await cinemaDbContext.AddAsync(cashierRequest);
             await cinemaDbContext.SaveChangesAsync();
             return Ok();
         }
@@ -37,15 +37,15 @@ namespace CinemaAPI.Controllers
         }
         [HttpPut]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> modifyCashier([FromRoute] Guid id, Cashier cashierReqest) 
+        public async Task<IActionResult> modifyCashier([FromRoute] Guid id, Cashier cashierRequest) 
         {
             var toModify = await cinemaDbContext.Cashiers.FindAsync(id);
             if (toModify == null)
             {
                 return NotFound();
             }
-            toModify.password = cashierReqest.password;
-            toModify.login = cashierReqest.login;
+            toModify.password = cashierRequest.password;
+            toModify.login = cashierRequest.login;
             await cinemaDbContext.SaveChangesAsync();
             return Ok(); 
         }

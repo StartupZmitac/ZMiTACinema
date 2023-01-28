@@ -16,10 +16,10 @@ namespace CinemaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> addAdmin([FromBody] Admin adminReqest) 
+        public async Task<IActionResult> addAdmin([FromBody] Admin adminRequest) 
         {
-            adminReqest.Id = Guid.NewGuid();
-            await cinemaDbContext.AddAsync(adminReqest);
+            adminRequest.Id = Guid.NewGuid();
+            await cinemaDbContext.AddAsync(adminRequest);
             await cinemaDbContext.SaveChangesAsync();
             return Ok(); 
         }
@@ -38,15 +38,15 @@ namespace CinemaAPI.Controllers
         }
         [HttpPut]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> modifyAdmin([FromRoute] Guid id, Admin adminReqest) 
+        public async Task<IActionResult> modifyAdmin([FromRoute] Guid id, Admin adminRequest) 
         {
             var toModify = await cinemaDbContext.Admins.FindAsync(id);
             if (toModify == null)
             {
                 return NotFound();
             }
-            toModify.password = adminReqest.password;
-            toModify.login = adminReqest.login;
+            toModify.password = adminRequest.password;
+            toModify.login = adminRequest.login;
             await cinemaDbContext.SaveChangesAsync();
             return Ok();
         }
