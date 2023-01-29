@@ -59,4 +59,7 @@ export class TicketService {
 
     return this.http.post<Ticket>(this.baseApiUrl+'/api/Ticket', ticket)
   }
+  deleteTicket(transaction_id: string): Observable<Ticket>{
+    return this.http.delete<Ticket>(this.baseApiUrl+'/api/Ticket/'+ transaction_id)
+  }
 }
