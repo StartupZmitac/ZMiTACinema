@@ -8,16 +8,4 @@ form {
   background-color: #212622;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-.form-control-cities {
-  height: 40px;
-  font-size: 16px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid gray;
-  background-color: #212622;
-  display: block;
-  width: 50%;
-  margin: 0 auto;
-  text-align: center;
-}
 

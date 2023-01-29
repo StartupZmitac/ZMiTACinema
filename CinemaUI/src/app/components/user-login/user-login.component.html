@@ -12,13 +12,10 @@
           <label for="inputPassword">Password</label>
           <input type="password" class="form-control" id="inputPassword">
         </div>
-        <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit()">Submit</button>
+        <button type="submit" class="btn btn-primary btn-block" (click)="redirectToAdminPage()">Submit</button>
       </form>
     </div>
   </div>
 </div>
-<div class="form-group" *ngIf="submitted">
-  <select class="form-control-cities" [(ngModel)]="selectedLocation">
-    <option *ngFor="let location of locations" [value]="location">{{location.city}}</option>
-  </select>
-</div>
+
+
