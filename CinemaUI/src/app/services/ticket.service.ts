@@ -25,7 +25,7 @@ export class TicketService {
     return this.randomIntFromInterval(10000,99999);
   }
 
-  createTickets(screening_id: string, seat: string[], reduced: number, isPaid: boolean){
+  createTickets(screening_id: string, seat: string[], reduced: number, isPaid: boolean): string{
     let self = this
     let id = this.generateId()
     seat.forEach(function (val){
@@ -41,6 +41,7 @@ export class TicketService {
       }
       reduced--;
     })
+    return id.toString()
   }
 
   private createTicket(screening_id: string, seat: string, type: string, id: number, isPaid: boolean): Observable<any> {
@@ -59,7 +60,12 @@ export class TicketService {
 
     return this.http.post<Ticket>(this.baseApiUrl+'/api/Ticket', ticket)
   }
-  deleteTicket(transaction_id: string): Observable<Ticket>{
-    return this.http.delete<Ticket>(this.baseApiUrl+'/api/Ticket/'+ transaction_id)
+
+  deleteTicket(transaction_id: string): Observable<Ticket[]>{
+    return this.http.delete<Ticket[]>(this.baseApiUrl+'/api/Ticket/'+ transaction_id)
+  }
+
+  getTransaction(transaction_id:string): Observable<Ticket[]>{
+    return this.http.get<Ticket[]>(this.baseApiUrl+'/api/Ticket/transaction?transactionId='+ transaction_id)
   }
 }

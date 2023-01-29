@@ -12,15 +12,14 @@
 <div *ngIf="ticketIDFound===true">
   <div class="ticket-summary">
     <h3>Ticket Summary</h3>
-    <p>Ticket ID: {{testID}}</p>
-    <p>Seats Selected: [seats data] </p>
-    <p>Normal Tickets: [normal tickets amount]</p>
-    <p>Reduced Tickets: [reduced tickets amount]</p>
-    <p>Price: [calculated price]</p>
+    <p>Ticket ID: {{ticketID}}</p>
+    <p>Seats Selected: {{seats}} </p>
+    <p>Normal Tickets: {{normal}}</p>
+    <p>Reduced Tickets: {{reduced}}</p>
   </div>
   <br><br>
   <div style="display: flex; align-items: center; justify-content: center">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="cancelTicket()">
       Confirm ticket cancel
     </button>
   </div>
