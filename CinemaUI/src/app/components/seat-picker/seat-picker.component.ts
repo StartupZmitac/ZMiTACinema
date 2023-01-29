@@ -23,7 +23,6 @@ export class SeatPickerComponent implements OnInit {
       let room = params.get('room')
       
       if(location&&room){
-
       //check if cookies exist, if not add them here
       if(!(this.cookieService.check('location')&&this.cookieService.check('room'))){
         this.cookieService.set('location',location)
