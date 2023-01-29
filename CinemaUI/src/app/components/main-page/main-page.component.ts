@@ -23,7 +23,7 @@ export class MainPageComponent implements OnInit {
     this.getScreenings();
     this.cookieService.deleteAll();
   }
-  onHourClick(event: Event, screening: Screening){
+  onHourClick(screening: Screening){
     this.setScreening(screening);
       this.router.navigate(['/seat-picker'],{ queryParams: {
         location: screening.location,

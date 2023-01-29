@@ -12,6 +12,8 @@ import { CookieService } from 'ngx-cookie-service';
   providers: [RoomService]
 })
 export class SeatPickerComponent implements OnInit {
+  selectedSeats: (string | undefined)[] = [];
+  seats: Seat[][] = []
   constructor(private cookieService: CookieService, private router:Router,private route: ActivatedRoute, private rservice: RoomService) {
   }
   ngOnInit(): void
@@ -21,7 +23,7 @@ export class SeatPickerComponent implements OnInit {
       console.log(params)
       let location = params.get('location')
       let room = params.get('room')
-      
+
       if(location&&room){
 
       //check if cookies exist, if not add them here
@@ -33,8 +35,7 @@ export class SeatPickerComponent implements OnInit {
     }
     })
   }
-  selectedSeats: (string | undefined)[] = [];
-  seats: Seat[][] = []
+
     // An array of rows, each containing an array of seats
   selectSeat(seat: Seat) {
     if (!seat.isTaken)
@@ -43,7 +44,7 @@ export class SeatPickerComponent implements OnInit {
   private setSeats(seats: string){
     this.cookieService.set('seats', seats)
   }
-  onButtonClick(event: Event){
+  onButtonClick(){
     this.selectedSeats = this.seats
       .flat()
       .filter(seat=>seat.selected)

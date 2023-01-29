@@ -18,14 +18,14 @@ export class CheckoutComponent implements OnInit {
     this.normalTickets = 0;
     this.reducedTickets = 0;
   }
-  onBuyClick(event: Event){
+  onBuyClick(){
     //take the user through a mock payment service page
     this.router.navigate(['/payment']);
 
     //send unpaid ticket to db
     //once payment succeeds, change to paid
   }
-  onReserveClick(event: Event){
+  onReserveClick(){
     this.reserveTicket()
     this.cookieService.set('reduced', this.reducedTickets.toString())
     this.router.navigate(['/summary'],{
