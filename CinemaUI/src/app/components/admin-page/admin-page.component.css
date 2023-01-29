@@ -16,3 +16,59 @@ form {
   margin: 0 auto;
   text-align: center;
 }
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input {
+  margin-left: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: #353d36;
+}
+
+input:focus {
+  outline: none;
+  border-color: blue;
+}
+.room-creator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.seat-row {
+  display: flex;
+}
+.seat {
+  border: 1px solid #ccc;
+  background-color: #212622;
+  color: #fff10b;
+  width: 50px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.seat:hover{
+  background-color: #fff10b;
+  color: #212622;
+  transition: all .2s ease-in-out;
+}
+.seat.selected {
+  background-color: #fff10b;
+  color: #212622;
+}

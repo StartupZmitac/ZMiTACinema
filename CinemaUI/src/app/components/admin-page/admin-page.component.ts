@@ -12,15 +12,18 @@ import {customRoom} from "../../models/customRoom";
 export class AdminPageComponent implements OnInit {
 
   locations: Location[] = [];
-  selectedLocation: string; //TODO: Correct undefined
+  selectedLocation: string;
+  newLocationName: string;
   showCreateScreeningRoomForm = false;
   dataInputted = false;
+  showAddLocalization = false;
   unavailableSeats: (string | undefined)[] = [];
   createdRoom: customRoom;
   seats: Seat[][] = []
   constructor(private lservice: LocationService) {
     this.selectedLocation="";
     this.createdRoom = { column: 10, row: 10, taken_seats: "", unavailable_seats: "", room_number: 0, _locationName: this.selectedLocation  };
+    this.newLocationName = "";
   }
 
   ngOnInit(): void {
@@ -30,6 +33,32 @@ export class AdminPageComponent implements OnInit {
   }
   selectSeat(seat: Seat) {
     seat.selected = !seat.selected;
+  }
+  generateSeats(){
+      let tempSeats: Seat[] = [];
+      for(var i = 1;i <= this.createdRoom.row; i++)
+      {
+        for(var j = 1;j <= this.createdRoom.column; j++)
+        {
+          tempSeats.push({selected: false, number: i +'R'+ j + 'C', isTaken: false, unavailable: false});
+        }
+        this.seats.push(tempSeats);
+        tempSeats = [];
+      }
+      this.dataInputted=true;
+  }
+  parseSelectedIntoUnavailable(){
+    console.log(this.seats);
+    for(var i = 0;i < this.createdRoom.row; i++)
+    {
+      for(var j = 0;j < this.createdRoom.column; j++)
+      {
+        if (this.seats[i][j].selected==true)
+          this.unavailableSeats.push(this.seats[i][j].number+",");
+      }
+    }
+    //TODO: Send list of unavailable seats to database and localization name
+    console.log(this.unavailableSeats);
   }
   getLocations() {
     this.lservice.getLocations()

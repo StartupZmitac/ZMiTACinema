@@ -4,31 +4,44 @@
   </select>
 </div>
 
-<div class="container">
-<button class="btn-dark" (click)="showCreateScreeningRoomForm = !showCreateScreeningRoomForm">Create screening room</button>
-</div>
+<div class="jumbotron">
+  <div class="container">
+    <button class="btn-primary" (click)="showCreateScreeningRoomForm = !showCreateScreeningRoomForm">Create screening room</button>
+  </div>
   <div *ngIf="showCreateScreeningRoomForm" class="container">
-  <div>
-    <label>Enter amount of rows:</label>
-    <input [(ngModel)]="createdRoom.row">
-  </div>
-  <div>
-    <label>Enter amount of columns:</label>
-    <input [(ngModel)]="createdRoom.column">
-  </div>
-    <div class="container">
-    <button class="btn-dark" (click)="dataInputted = !dataInputted">Generate room</button>
+    <div>
+      <label>Enter amount of rows:</label>
+      <input [(ngModel)]="createdRoom.row">
     </div>
-    <div  *ngIf="dataInputted">
-    <div class="room-creator">
+    <div>
+      <label>Enter amount of columns:</label>
+      <input [(ngModel)]="createdRoom.column">
+    </div>
+    <div>
+      <label>Enter room number:</label>
+      <input [(ngModel)]="createdRoom.room_number">
+    </div>
+    <div class="container">
+    <button class="btn-primary" (click)="generateSeats()">Generate room</button>
+    </div>
+    <div class="room-creator" *ngIf="dataInputted">
       <div *ngFor="let row of seats" class="seat-row">
         <div *ngFor="let seat of row" class="seat"
              [class.selected]="seat.selected"
-             [class.unavailable]="seat.unavailable"
              (click)="selectSeat(seat)">
           {{ seat.number }}
         </div>
       </div>
+      <button class="btn-primary" (click)="parseSelectedIntoUnavailable()">Confirm creating</button>
     </div>
+  </div>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <button class="btn-primary" (click)="showAddLocalization = !showAddLocalization">Add localization</button>
+  </div>
+  <div *ngIf="showAddLocalization">
+    <label>Enter localization name:</label>
+    <input [(ngModel)]="newLocationName">
   </div>
 </div>
