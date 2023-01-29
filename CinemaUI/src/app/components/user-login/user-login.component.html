@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container my-5" *ngIf="!submitted">
   <h2 class="text-center">Admin Login</h2>
   <div class="row justify-content-center">
     <div class="col-lg-6">
@@ -12,8 +12,13 @@
           <label for="inputPassword">Password</label>
           <input type="password" class="form-control" id="inputPassword">
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        <button type="submit" class="btn btn-primary btn-block" (click)="onSubmit()">Submit</button>
       </form>
     </div>
   </div>
+</div>
+<div class="form-group" *ngIf="submitted">
+  <select class="form-control-cities" [(ngModel)]="selectedLocation">
+    <option *ngFor="let location of locations" [value]="location">{{location.city}}</option>
+  </select>
 </div>

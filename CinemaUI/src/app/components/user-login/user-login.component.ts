@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { UserService } from 'src/app/services/user.service';
 import {LocationService} from "../../services/location.service";
+import {Location} from "../../models/location.model";
 
 @Component({   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
@@ -14,12 +15,15 @@ export class LoginComponent implements OnInit {
     form!: FormGroup;
     loading = false;
     submitted = false;
+    locations: Location[] = [];
+    selectedLocation: Location | undefined; //TODO: Correct undefined
 
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
+        private lservice: LocationService
     ) { }
 
     ngOnInit() {
@@ -27,8 +31,19 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
+        this.getLocations();
     }
-
+    getLocations() {
+    this.lservice.getLocations()
+      .subscribe({
+        next: (locations) => {
+          this.locations = locations;
+        },
+        error: (response) => {
+          console.log(response);
+        }
+      });
+  }
     // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
 
