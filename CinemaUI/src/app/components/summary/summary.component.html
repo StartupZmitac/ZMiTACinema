@@ -1,4 +1,4 @@
-<div class="ticket-summary" *ngIf="ticketID">
+<div class="ticket-summary" *ngIf="ticketID&&(normal>0||reduced>0)&&seats!=''">
   <h3>Ticket Summary</h3>
     <p>Ticket ID: {{ticketID}}</p>
     <p>Seats Selected: {{seats}} </p>

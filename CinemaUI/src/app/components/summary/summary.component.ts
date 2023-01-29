@@ -29,8 +29,6 @@ export class SummaryComponent implements OnInit {
       this.getTicket(params.get('ticketId'))
         
     })
-
-    
   }
   private getTicket(ticketId:string|null){
     if(ticketId){
