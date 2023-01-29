@@ -1,4 +1,8 @@
-<div class="ticket-summary" *ngIf="ticketID&&(normal>0||reduced>0)&&seats!=''">
+<div class="col-md-12 text-center" style="margin-top: 30px">
+  <button type="button" class="btn btn-dark" (click)="refreshTicket()">Show ticket details</button>
+</div>
+
+<div class="ticket-summary" *ngIf="show===true">
   <h3>Ticket Summary</h3>
     <p>Ticket ID: {{ticketID}}</p>
     <p>Seats Selected: {{seats}} </p>
