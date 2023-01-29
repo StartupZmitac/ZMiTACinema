@@ -4,8 +4,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { UserService } from 'src/app/services/user.service';
+import {LocationService} from "../../services/location.service";
 
-@Component({ templateUrl: 'user-login.component.html' })
+@Component({   selector: 'app-user-login',
+  templateUrl: './user-login.component.html',
+  styleUrls: ['./user-login.component.css'],
+  providers: [LocationService, FormBuilder]})
 export class LoginComponent implements OnInit {
     form!: FormGroup;
     loading = false;

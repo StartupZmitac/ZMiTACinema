@@ -35,11 +35,11 @@ export class NavbarComponent implements OnInit {
         }
       });
   }
-  
+
   setLocalizationName(value: string) {
     this.localizationName = value;
     // Save the selected city to session storage
-    sessionStorage.setItem('selectedCity', value);;
+    sessionStorage.setItem('selectedCity', value);
     this.router.navigate(['/main-page', this.localizationName]);
   }
   navigateToLocalization(){
@@ -47,6 +47,9 @@ export class NavbarComponent implements OnInit {
   }
   cancelTicketButton(){
     this.router.navigate(['/cancel-ticket']);
+  }
+  loginButton() {
+    this.router.navigate(['/user-login']);
   }
 }
 
