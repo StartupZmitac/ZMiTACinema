@@ -67,5 +67,17 @@ namespace CinemaAPI.Controllers
             }
             return Ok(cashier);
         }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> loginCashier([FromBody] Cashier cashierRequest)
+        {
+            var cashier = await cinemaDbContext.Cashiers.SingleOrDefaultAsync(x => x.login == cashierRequest.login && x.password == cashierRequest.password);
+            if (cashier == null)
+            {
+                return NotFound();
+            }
+            return Ok(cashier);
+        }
     }
 }
