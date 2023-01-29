@@ -1,0 +1,47 @@
+<div class="form-group">
+  <select class="form-control-cities" [(ngModel)]="selectedLocation">
+    <option *ngFor="let location of locations" [value]="location">{{location.city}}</option>
+  </select>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <button class="btn-primary" (click)="showCreateScreeningRoomForm = !showCreateScreeningRoomForm">Create screening room</button>
+  </div>
+  <div *ngIf="showCreateScreeningRoomForm" class="container">
+    <div>
+      <label>Enter amount of rows:</label>
+      <input [(ngModel)]="createdRoom.row">
+    </div>
+    <div>
+      <label>Enter amount of columns:</label>
+      <input [(ngModel)]="createdRoom.column">
+    </div>
+    <div>
+      <label>Enter room number:</label>
+      <input [(ngModel)]="createdRoom.room_number">
+    </div>
+    <div class="container">
+    <button class="btn-primary" (click)="generateSeats()">Generate room</button>
+    </div>
+    <div class="room-creator" *ngIf="dataInputted">
+      <div *ngFor="let row of seats" class="seat-row">
+        <div *ngFor="let seat of row" class="seat"
+             [class.selected]="seat.selected"
+             (click)="selectSeat(seat)">
+          {{ seat.number }}
+        </div>
+      </div>
+      <button class="btn-primary" (click)="parseSelectedIntoUnavailable()">Confirm creating</button>
+    </div>
+  </div>
+</div>
+<div class="jumbotron">
+  <div class="container">
+    <button class="btn-primary" (click)="showAddLocalization = !showAddLocalization">Add localization</button>
+  </div>
+  <div *ngIf="showAddLocalization">
+    <label>Enter localization name:</label>
+    <input [(ngModel)]="newLocationName">
+  </div>
+</div>

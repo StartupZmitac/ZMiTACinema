@@ -1,0 +1,11 @@
+.container {
+  border-radius: 10px;
+  padding: 30px;
+}
+form {
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #212622;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
