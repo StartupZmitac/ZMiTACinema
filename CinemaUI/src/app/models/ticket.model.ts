@@ -1,6 +1,3 @@
-import { Guid } from "guid-typescript";
-import { Room } from "./room.model";
-
 export interface Ticket
 {
     id: string|null;
@@ -9,5 +6,6 @@ export interface Ticket
     isPaid: boolean;
     seat: string;
     type: string;
-    screening_ID: string
+    screening_ID: string;
+    price_ID:string
 }

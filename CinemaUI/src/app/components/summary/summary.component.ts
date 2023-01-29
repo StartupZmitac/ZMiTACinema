@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Ticket } from 'src/app/models/ticket.model';
+import { TicketService } from 'src/app/services/ticket.service';
 
 @Component({
   selector: 'app-summary',
@@ -8,11 +10,15 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class SummaryComponent implements OnInit {
 
-  constructor(private cookieService: CookieService) { 
+  ticket: Ticket[] | undefined
 
-    //this.cookieService.deleteAll();
+  constructor(private cookieService: CookieService, private tservice: TicketService) { 
+    //pass transaction id from buy/reserve
   }
 
   ngOnInit(): void {
+    // this.tservice.getTransaction("").subscribe(data=>
+    //   this.ticket = data
+    // )
   }
 }

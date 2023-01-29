@@ -17,4 +17,8 @@ public class Ticket
     [JsonIgnore]
     [ForeignKey("Screening_ID")]
     public virtual Screening? _screening { get; set; }
+    public Guid? Price_ID { get; set; }
+    [JsonIgnore]
+    [ForeignKey("Price_ID")]
+    public virtual Price? _price { get; set; }
 }
