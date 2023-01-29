@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import { TicketService } from 'src/app/services/ticket.service';
 
 @Component({
   selector: 'app-cancel-ticket',
@@ -13,7 +14,7 @@ export class CancelTicketComponent implements OnInit {
   testID: string = "testID";
   ticketIDFound: boolean | undefined;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private tservice: TicketService) {
     this.ticketIDFound = false;
   }
 
@@ -25,7 +26,14 @@ export class CancelTicketComponent implements OnInit {
     }
     else
       this.ticketIDFound = false;
+
+    
+    if(this.ticketID)
+      this.tservice.deleteTicket(this.ticketID).subscribe(data=>{
+        console.log(data)
+      })
   }
+
   redirectToStart(event: Event){
     this.router.navigate(['/']);
   }
