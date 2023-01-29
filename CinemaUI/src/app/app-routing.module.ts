@@ -6,6 +6,7 @@ import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {CancelTicketComponent} from "./components/cancel-ticket/cancel-ticket.component";
 import {PaymentComponent} from "./components/payment/payment.component";
 import {SummaryComponent} from "./components/summary/summary.component";
+import {LoginComponent} from "./components/user-login/user-login.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent},
   { path: 'cancel-ticket', component: CancelTicketComponent},
   { path: 'payment', component: PaymentComponent},
-  { path: 'summary', component: SummaryComponent}
+  { path: 'summary', component: SummaryComponent},
+  { path: 'user-login' , component: LoginComponent}
 ];
 
 @NgModule({
