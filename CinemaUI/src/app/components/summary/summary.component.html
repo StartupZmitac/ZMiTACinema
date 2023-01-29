@@ -1,8 +1,8 @@
-<div class="ticket-summary">
+<div class="ticket-summary" *ngIf="ticketID">
   <h3>Ticket Summary</h3>
-  <p>Ticket ID: testID </p>
-  <p>Seats Selected: [seats data] </p>
-  <p>Normal Tickets: [normal tickets amount]</p>
-  <p>Reduced Tickets: [reduced tickets amount]</p>
-  <p>Price: [calculated price]</p>
+    <p>Ticket ID: {{ticketID}}</p>
+    <p>Seats Selected: {{seats}} </p>
+    <p>Normal Tickets: {{normal}}</p>
+    <p>Reduced Tickets: {{reduced}}</p>
+  <p>Price: {{price}}</p>
 </div>

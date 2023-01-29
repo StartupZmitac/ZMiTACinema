@@ -10,19 +10,24 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class PaymentComponent implements OnInit {
 
+  ticketId= ''
   constructor(private router: Router, private tservice: TicketService,private cookieService: CookieService) {}
 
   ngOnInit(): void {
   }
   redirectToSummary(event: Event) {
     this.buyTicket()
-    this.router.navigate(['/summary']);
+    
+    this.router.navigate(['/summary'],{
+      queryParams: {
+      ticketId: this.ticketId
+    }});
   }
   private buyTicket(){
     let screening_id = this.cookieService.get('screening')
     let seats = this.cookieService.get('seats').split(',')
     let reduced = Number.parseInt( this.cookieService.get('reduced'))
-    this.tservice.createTickets(screening_id, seats, reduced, true)
+    this.ticketId = this.tservice.createTickets(screening_id, seats, reduced, true)
     console.log(screening_id, seats, reduced)
   }
 }

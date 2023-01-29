@@ -12,6 +12,7 @@ export class CheckoutComponent implements OnInit {
   selectedSeats: any[] = [];
   normalTickets: number;
   reducedTickets: number;
+  ticketId = ''
   //TODO: Select amount of tickets from different types. Do not assign type to seat - assign type to ticket.
   constructor(private cookieService: CookieService, private tservice: TicketService, private route: ActivatedRoute, private router: Router) {
     this.normalTickets = 0;
@@ -27,13 +28,16 @@ export class CheckoutComponent implements OnInit {
   onReserveClick(event: Event){
     this.reserveTicket()
     this.cookieService.set('reduced', this.reducedTickets.toString())
-    this.router.navigate(['/summary']);
+    this.router.navigate(['/summary'],{
+      queryParams: {
+      ticketId: this.ticketId
+    }})
   }
   private reserveTicket(){
     let screening_id = this.cookieService.get('screening')
     let seats = this.cookieService.get('seats').split(',')
     let reduced = this.reducedTickets
-    this.tservice.createTickets(screening_id, seats, reduced, false)
+    this.ticketId = this.tservice.createTickets(screening_id, seats, reduced, false)
     console.log(screening_id, seats, reduced)
   }
   ngOnInit() {
