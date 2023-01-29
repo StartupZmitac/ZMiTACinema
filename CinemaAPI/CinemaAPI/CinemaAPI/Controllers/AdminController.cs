@@ -68,5 +68,16 @@ namespace CinemaAPI.Controllers
             }
             return Ok(admin);
         }
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> loginAdmin([FromBody] Admin adminRequest)
+        {
+            var admin = await cinemaDbContext.Admins.SingleOrDefaultAsync(x => x.login == adminRequest.login && x.password == adminRequest.password);
+            if (admin == null)
+            {
+                return NotFound();
+            }
+            return Ok(admin);
+        }
     }
 }
