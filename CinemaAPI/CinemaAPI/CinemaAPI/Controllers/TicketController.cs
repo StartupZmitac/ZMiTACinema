@@ -30,6 +30,9 @@ namespace CinemaAPI.Controllers
             var connectedRoom = await _cinemaDbContext.Rooms.FindAsync(connectedScreening.id_room);
             connectedRoom.taken_seats = connectedRoom.taken_seats + newTicket.Seat + ",";
             newTicket.IsChecked = false;
+            var connectedPrice = await _cinemaDbContext.Prices.Where(x=>x.Type==ticket.Type).ToListAsync();
+            newTicket.Price_ID = connectedPrice[0].Id;
+            newTicket._price = connectedPrice[0];
             await _cinemaDbContext.Tickets.AddAsync(newTicket);
             await _cinemaDbContext.SaveChangesAsync();
             return (Ok());
@@ -75,7 +78,15 @@ namespace CinemaAPI.Controllers
 
             return Ok(ticket);
         }
+        
+        [HttpGet]
+        [Route("transaction")]
+        public async Task<IActionResult> getTicket(string transactionId)
+        {
+            var ticket = await _cinemaDbContext.Tickets.Where(x => x.Transaction_ID == transactionId).ToListAsync();
 
+            return Ok(ticket);
+        }
         [HttpGet]
         public async Task<IActionResult> getAllTickets()
         {

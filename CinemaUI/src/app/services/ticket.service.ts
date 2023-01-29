@@ -26,6 +26,7 @@ export class TicketService {
   }
 
   createTickets(screening_id: string, seat: string[], reduced: number){
+
     let self = this
     let id = this.generateId()
     seat.forEach(function (val){
@@ -44,8 +45,7 @@ export class TicketService {
   }
 
   private createTicket(screening_id: string, seat: string, type: string, id: number): Observable<any> {
-    //only send necessary data to backend
-    //seat number, type, Screening id
+ 
     let ticket: Ticket = {
       id: Guid.createEmpty().toString(),
       transaction_id: id.toString(),
@@ -53,9 +53,14 @@ export class TicketService {
       isPaid: false,
       seat: seat,
       type: type,
-      screening_ID: screening_id
+      screening_ID: screening_id,
+      price_ID: Guid.createEmpty().toString()
     }
 
     return this.http.post<Ticket>(this.baseApiUrl+'/api/Ticket', ticket)
+  }
+
+  getTransaction(transaction_id: string): Observable<Ticket[]>{
+    return this.http.get<Ticket[]>(this.baseApiUrl+'/api/Ticket/transaction?transactionId='+transaction_id)
   }
 }

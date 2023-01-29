@@ -53,9 +53,10 @@ namespace CinemaAPI.Controllers
         public async Task<IActionResult> getAllPrices()
         {
             var prices = await _cinemaDbContext.Prices.ToListAsync();
-
+        
             return Ok(prices);
         }
+        
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> getPrice([FromRoute] Guid id)
@@ -65,7 +66,21 @@ namespace CinemaAPI.Controllers
             {
                 return NotFound();
             }
+        
             return Ok(prices);
+        }
+
+        [HttpGet]
+        [Route("type")]
+        public async Task<IActionResult> getPrice(string type)
+        {
+            var price = await _cinemaDbContext.Prices.SingleOrDefaultAsync(x=>x.Type==type);
+
+            if (price == null)
+            {
+                return NotFound();
+            }
+            return Ok(price);
         }
     }
 }
