@@ -25,7 +25,9 @@ export class AdminPageComponent implements OnInit {
     this.createdRoom = { column: 10, row: 10, taken_seats: "", unavailable_seats: "", room_number: 0, _locationName: this.selectedLocation  };
     this.newLocationName = "";
   }
-
+  //TODO:ceny
+  //TODO:seans
+  //TODO:film
   ngOnInit(): void {
     this.getLocations();
     this.createdRoom.row = 10;
