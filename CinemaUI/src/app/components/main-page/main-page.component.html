@@ -20,13 +20,12 @@
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let screening of screenings">
       <ul class="list-group list-group-horizontal-sm">
-        <li class="list-group-item" *ngIf="screening.film != currentFilm">{{ screening.film}}</li>
+        <li class="list-group-item">{{ screening.film}}</li>
         <button type="button" class="btn btn-dark" (click)="onHourClick(screening)" >{{screening.time.toString().split("T")[1]}}</button>
+        {{ setCurrentFilm(screening.film) }}
       </ul>
-      {{ setCurrentFilm(screening.film) }}
     </li>
   </ul>
-
 </div>
 </div>
 </body>
