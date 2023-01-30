@@ -54,6 +54,7 @@ export class MainPageComponent implements OnInit {
   }
   loadScreeningsAgain(){
     console.log(this.selectedDay);
+    console.log(this.currentFilm);
     sessionStorage.setItem('selectedDay', this.selectedDay);
     this.getScreenings();
   }
@@ -66,9 +67,9 @@ export class MainPageComponent implements OnInit {
         console.log("got screenings")
         console.log(screenings.length)
         this.screenings = this.screenings.sort((a, b) => {
-          if (a.film < b.film) {
+          if (a.time < b.time) {
             return -1;
-          } else if (a.film > b.film) {
+          } else if (a.time > b.time) {
             return 1;
           } else {
             return 0;
