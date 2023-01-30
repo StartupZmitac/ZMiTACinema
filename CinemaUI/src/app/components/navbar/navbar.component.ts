@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {Router} from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
 import { Location } from 'src/app/models/location.model';
@@ -16,7 +16,11 @@ export class NavbarComponent implements OnInit {
   localizationName = 'Choose city';
 
   constructor(private cookieService: CookieService, public router: Router, private lservice: LocationService) {}
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['localizationName']) {
+      window.location.reload(); //Doesnt reload
+    }
+  }
   ngOnInit(): void {
     this.getLocations();
     // Check if a city has been saved in local storage
