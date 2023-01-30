@@ -19,7 +19,7 @@ export class UserService {
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+        this.userSubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('user')!));
         this.user = this.userSubject.asObservable();
     }
 
@@ -31,7 +31,7 @@ export class UserService {
         return this.http.post<Admin>(`${environment.baseApiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+                sessionStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;
             }));
@@ -39,7 +39,7 @@ export class UserService {
 
     logout() {
         // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/']);
     }
@@ -59,7 +59,7 @@ export class UserService {
                 if (id == this.userValue?.id) {
                     // update local storage
                     const user = { ...this.userValue, ...params };
-                    localStorage.setItem('user', JSON.stringify(user));
+                    sessionStorage.setItem('user', JSON.stringify(user));
 
                     // publish updated user to subscribers
                     this.userSubject.next(user);
