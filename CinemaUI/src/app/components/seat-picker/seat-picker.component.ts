@@ -34,7 +34,6 @@ export class SeatPickerComponent implements OnInit {
     }
     })
   }
-
     // An array of rows, each containing an array of seats
   selectSeat(seat: Seat) {
     if (!seat.isTaken)

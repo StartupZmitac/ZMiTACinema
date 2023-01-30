@@ -5,6 +5,7 @@ import {Location} from "../../models/location.model";
 import {customRoom} from "../../models/customRoom";
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -22,7 +23,7 @@ export class AdminPageComponent implements OnInit {
   unavailableSeats: (string | undefined)[] = [];
   createdRoom: customRoom;
   seats: Seat[][] = []
-  constructor(private lservice: LocationService,private cookieService: CookieService, private router: Router) {
+  constructor(private rservice: RoomService, private lservice: LocationService,private cookieService: CookieService, private router: Router) {
     this.selectedLocation="";
     this.createdRoom = { column: 10, row: 10, taken_seats: "", unavailable_seats: "", room_number: 0, _locationName: this.selectedLocation  };
     this.newLocationName = "";
@@ -78,5 +79,11 @@ export class AdminPageComponent implements OnInit {
           console.log(response);
         }
       });
+  }
+  addLocation(){
+    this.lservice.addLocation(this.newLocationName).subscribe(
+      data=>{
+        console.log(data)
+    })
   }
 }
