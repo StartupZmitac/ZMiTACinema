@@ -3,7 +3,7 @@ import { Room } from "./room.model";
 
 export interface Location
 {
-    id: Guid;
+    id: string;
     city: string;
     rooms: Room[];
 }
