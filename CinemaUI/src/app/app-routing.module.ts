@@ -8,6 +8,7 @@ import {PaymentComponent} from "./components/payment/payment.component";
 import {SummaryComponent} from "./components/summary/summary.component";
 import {LoginComponent} from "./components/user-login/user-login.component";
 import {AdminPageComponent} from "./components/admin-page/admin-page.component";
+import {PricesPageComponent} from "./components/prices-page/prices-page.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'payment', component: PaymentComponent},
   { path: 'summary', component: SummaryComponent},
   { path: 'user-login' , component: LoginComponent},
-  { path: 'admin-page', component: AdminPageComponent}
+  { path: 'admin-page', component: AdminPageComponent},
+  { path: 'prices-page', component: PricesPageComponent}
 ];
 
 @NgModule({

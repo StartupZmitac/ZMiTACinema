@@ -1,0 +1,33 @@
+.ticket-prices-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.ticket-price-box {
+  width: 200px;
+  height: 150px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  text-align: center;
+  margin: 10px;
+}
+
+.ticket-price-title {
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+.ticket-price {
+  font-size: 18px;
+  padding-top: 10px;
+}
+
+.normal {
+  background-color: #212622;
+}
+
+.reduced {
+  background-color: #212622;
+}
