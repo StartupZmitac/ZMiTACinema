@@ -40,6 +40,9 @@ export class NavbarComponent implements OnInit {
         }
       });
   }
+  navigateToPrices(){
+    this.router.navigate(['/prices-page']);
+  }
 
   setLocalizationName(value: string) {
     this.localizationName = value;
