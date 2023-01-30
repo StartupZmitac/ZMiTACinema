@@ -51,6 +51,14 @@ namespace CinemaAPI.Controllers
 
             return Ok(location);
         }
+        [HttpGet]
+        [Route("by-name")]
+        public async Task<IActionResult> getLocation(string name)
+        {
+            var location = await _cinemaDbContext.Locations.SingleOrDefaultAsync(x => x.city == name);
+
+            return Ok(location);
+        }
 
         [HttpGet]
         public async Task<IActionResult> getAllLocations() 

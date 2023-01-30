@@ -24,4 +24,5 @@ export class ScreeningService {
     return this.http.get<Screening[]>(url,{params:data});
   }
   
+  
 }

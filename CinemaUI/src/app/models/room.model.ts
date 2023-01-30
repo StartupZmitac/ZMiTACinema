@@ -5,13 +5,13 @@ import { Screening } from "./screening.model";
 
 export interface Room
 {
-    id: Guid;
+    id: string;
     column: number;
     row: number;
     taken_seats: string;
     unavailable_seats: string;
     room_number: number;
-    id_location: Guid;
+    id_location: string;
     _location: Location[];
     tickets: Ticket[];
     screenings: Screening[];
