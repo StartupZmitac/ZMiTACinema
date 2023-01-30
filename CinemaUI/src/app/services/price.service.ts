@@ -17,4 +17,9 @@ export class PriceService {
     return this.http.get<Price>(
       this.baseApiUrl+'/api/Price/type?type='+type)//xdd
   }
+  getPrices(): Observable<Price[]>{
+
+    return this.http.get<Price[]>(
+      this.baseApiUrl+'/api/Price')
+  }
 }
