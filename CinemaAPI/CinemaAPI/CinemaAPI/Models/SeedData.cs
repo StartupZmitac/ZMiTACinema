@@ -1,10 +1,12 @@
 using CinemaAPI.Controllers;
-
+using System.Globalization;
 
 namespace CinemaAPI.Models
 {
     public class SeedData
     {
+        public static CultureInfo culture = CultureInfo.InvariantCulture;
+        public static string format = "dd/MM/yyyy HH:mm:ss";
         public static void Initialize(CinemaDbContext context)
         {
             if (context.Rooms.Any() || context.Screenings.Any() || context.Locations.Any() || context.Films.Any())
@@ -44,7 +46,7 @@ namespace CinemaAPI.Models
             };
 
             //Films
-           var nieznajomy = new Film()
+            var nieznajomy = new Film()
             {
                 Id_Film = Guid.NewGuid(),
                 Is3D = false,
@@ -225,13 +227,13 @@ namespace CinemaAPI.Models
                 unavailable_seats = "0R4C,1R4C,2R4C,3R4C,4R4C,5R4C,"
             };
 
-            context.Locations.AddRange( miechow, katowice, knyszyn, wadowice, wilkowyje );
+            context.Locations.AddRange(miechow, katowice, knyszyn, wadowice, wilkowyje);
 
-            context.Rooms.AddRange( miechowPokoj1, miechowPokoj2, katowicePokoj1, katowicePokoj2, 
-                                    knyszynPokoj1, knyszynPokoj2, wilkowyjePokoj1, wilkowyjePokoj2, 
-                                    wadowicePokoj1, wadowicePokoj2 );
+            context.Rooms.AddRange(miechowPokoj1, miechowPokoj2, katowicePokoj1, katowicePokoj2,
+                                    knyszynPokoj1, knyszynPokoj2, wilkowyjePokoj1, wilkowyjePokoj2,
+                                    wadowicePokoj1, wadowicePokoj2);
 
-            context.Films.AddRange( nieznajomy, poprawka, poprawka_2, poprawka_3, poprawka_4 );
+            context.Films.AddRange(nieznajomy, poprawka, poprawka_2, poprawka_3, poprawka_4);
 
             context.Screenings.AddRange(
 
@@ -241,7 +243,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj1.room_number,
                     Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("08/01/2023 21:37:00", format, culture),
                     Location = miechow.city,
                     id_room = miechowPokoj1.id_room,
                     Id_Film = nieznajomy.Id_Film
@@ -253,7 +255,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj2.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("09/01/2023 16:30:00", format, culture),
                     Location = miechow.city,
                     id_room = miechowPokoj2.id_room,
                     Id_Film = poprawka.Id_Film
@@ -265,7 +267,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj1.room_number,
                     Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("09/01/2023 17:45:00", format, culture),
                     Location = miechow.city,
                     id_room = miechowPokoj1.id_room,
                     Id_Film = poprawka_2.Id_Film
@@ -277,7 +279,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj1.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("11/01/2023 17:45:00", format, culture),
                     Location = miechow.city,
                     id_room = miechowPokoj1.id_room,
                     Id_Film = poprawka_3.Id_Film
@@ -289,7 +291,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = miechowPokoj2.room_number,
                     Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("13/01/2023 17:00:00", format, culture),
                     Location = miechow.city,
                     id_room = miechowPokoj2.id_room,
                     Id_Film = poprawka_4.Id_Film
@@ -302,7 +304,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = katowicePokoj2.room_number,
                     Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("08/01/2023 15:00:00", format, culture),
                     Location = katowice.city,
                     id_room = katowicePokoj2.id_room,
                     Id_Film = nieznajomy.Id_Film
@@ -314,7 +316,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = katowicePokoj2.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("08/01/2023 17:45:00", format, culture),
                     Location = katowice.city,
                     id_room = katowicePokoj2.id_room,
                     Id_Film = poprawka.Id_Film
@@ -326,7 +328,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = katowicePokoj1.room_number,
                     Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("09/01/2023 15:00:00", format, culture),
                     Location = katowice.city,
                     id_room = katowicePokoj1.id_room,
                     Id_Film = poprawka_2.Id_Film
@@ -338,7 +340,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = katowicePokoj1.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("11/01/2023 17:45:00", format, culture),
                     Location = katowice.city,
                     id_room = katowicePokoj1.id_room,
                     Id_Film = poprawka_3.Id_Film
@@ -350,7 +352,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = katowicePokoj1.room_number,
                     Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("13/01/2023 19:00:00", format, culture),
                     Location = katowice.city,
                     id_room = katowicePokoj1.id_room,
                     Id_Film = poprawka_4.Id_Film
@@ -364,7 +366,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj1.room_number,
                     Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("08/01/2023 20:15:00", format, culture),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj1.id_room,
                     Id_Film = nieznajomy.Id_Film
@@ -376,7 +378,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj2.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("10/01/2023 15:45:00", format, culture),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj2.id_room,
                     Id_Film = poprawka.Id_Film
@@ -388,7 +390,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj1.room_number,
                     Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("11/01/2023 16:00:00", format, culture),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj1.id_room,
                     Id_Film = poprawka_2.Id_Film
@@ -400,7 +402,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj2.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("12/01/2023 17:00:00", format, culture),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj2.id_room,
                     Id_Film = poprawka_3.Id_Film
@@ -412,7 +414,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = knyszynPokoj1.room_number,
                     Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("14/01/2023 18:00:00", format, culture),
                     Location = knyszyn.city,
                     id_room = knyszynPokoj1.id_room,
                     Id_Film = poprawka_4.Id_Film
@@ -425,7 +427,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = wadowicePokoj2.room_number,
                     Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("09/01/2023 18:00:00", format, culture),
                     Location = wadowice.city,
                     id_room = wadowicePokoj2.id_room,
                     Id_Film = nieznajomy.Id_Film
@@ -437,7 +439,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = wadowicePokoj2.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("10/01/2023 17:00:00", format, culture),
                     Location = wadowice.city,
                     id_room = wadowicePokoj2.id_room,
                     Id_Film = poprawka.Id_Film
@@ -447,9 +449,9 @@ namespace CinemaAPI.Models
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
-                    Room =wadowicePokoj1.room_number,
+                    Room = wadowicePokoj1.room_number,
                     Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("11/01/2023 18:00:00", format, culture),
                     Location = wadowice.city,
                     id_room = wadowicePokoj1.id_room,
                     Id_Film = poprawka_2.Id_Film
@@ -461,7 +463,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = wadowicePokoj1.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("12/01/2023 19:00:00", format, culture),
                     Location = wadowice.city,
                     id_room = wadowicePokoj1.id_room,
                     Id_Film = poprawka_3.Id_Film
@@ -473,20 +475,20 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = wadowicePokoj1.room_number,
                     Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("13/01/2023 18:00:00", format, culture),
                     Location = wadowice.city,
                     id_room = wadowicePokoj1.id_room,
                     Id_Film = poprawka_4.Id_Film
 
                 },
-                
+
                 //Wilkowyje
                 new Screening()
                 {
                     Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj1.room_number,
                     Film = nieznajomy.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("10/01/2023 18:00:00", format, culture),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj1.id_room,
                     Id_Film = nieznajomy.Id_Film
@@ -498,7 +500,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj1.room_number,
                     Film = poprawka.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("11/01/2023 15:30:00", format, culture),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj1.id_room,
                     Id_Film = poprawka.Id_Film
@@ -510,7 +512,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj1.room_number,
                     Film = poprawka_2.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("11/01/2023 19:00:00", format, culture),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj1.id_room,
                     Id_Film = poprawka_2.Id_Film
@@ -522,7 +524,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj2.room_number,
                     Film = poprawka_3.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("12/01/2023 15:15:00", format, culture),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj2.id_room,
                     Id_Film = poprawka_3.Id_Film
@@ -534,7 +536,7 @@ namespace CinemaAPI.Models
                     Screening_ID = Guid.NewGuid(),
                     Room = wilkowyjePokoj2.room_number,
                     Film = poprawka_4.Name,
-                    Time = DateTime.Now,
+                    Time = DateTime.ParseExact("13/01/2023 16:00:00", format, culture),
                     Location = wilkowyje.city,
                     id_room = wilkowyjePokoj2.id_room,
                     Id_Film = poprawka_4.Id_Film
