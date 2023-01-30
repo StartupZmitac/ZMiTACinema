@@ -17,6 +17,10 @@ export class SummaryComponent implements OnInit {
   normal = 0
   reduced = 0
   price = 0
+  show = false
+  film: string = ''
+  time: string = ''
+  day: string = ''
 
   constructor(private cookieService: CookieService, private tservice: TicketService, private router:Router, private route: ActivatedRoute) { 
     //pass transaction id from buy/reserve
@@ -27,8 +31,11 @@ export class SummaryComponent implements OnInit {
     .subscribe((params)=>{
       console.log(params.get('ticketId'))
       this.getTicket(params.get('ticketId'))
-        
+
     })
+    this.film = this.cookieService.get('film')
+    this.time = this.cookieService.get('time').split("T")[1]
+    this.day = this.cookieService.get('time').split("T")[0]
   }
   private getTicket(ticketId:string|null){
     if(ticketId){
@@ -48,13 +55,37 @@ export class SummaryComponent implements OnInit {
         if(data.length==0)
           this.errorMessage = "This ticket doesn't exist"
         }
-        
         )
       }
       catch(err){
         this.errorMessage = "there was an error"
       }
     }
+  }
 
+  refreshTicket(){
+    if(this.ticketID){
+    try{
+      this.tservice.getTransaction(this.ticketID).subscribe(data=>{
+        data.forEach(element => {
+          this.seats+=element.seat+' '
+          if(element.type=="reduced"){
+            this.reduced+=1
+            this.price+=15}
+          else{
+            this.normal+=1
+            this.price+=30.5
+          }
+          this.show = true
+        });
+        if(data.length==0)
+          this.errorMessage = "This ticket doesn't exist"
+        }
+        )
+      }
+      catch(err){
+        this.errorMessage = "there was an error"
+      }
+    }
   }
 }

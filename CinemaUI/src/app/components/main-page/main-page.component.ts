@@ -44,6 +44,8 @@ export class MainPageComponent implements OnInit {
     this.cookieService.set('room', screening.room.toString())
     this.cookieService.set('location', screening.location)
     this.cookieService.set('screening', screening.screening_ID.toString())
+    this.cookieService.set('film', screening.film)
+    this.cookieService.set('time', screening.time.toString())
   }
   loadScreeningsAgain(){
     console.log(this.selectedDay);
