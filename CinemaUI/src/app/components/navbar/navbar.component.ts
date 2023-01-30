@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
 import { Location } from 'src/app/models/location.model';
 import {LocationService} from "../../services/location.service";
-import {FormBuilder} from "@angular/forms";
+
 
 @Component({
   selector: 'app-navbar',
@@ -39,7 +39,6 @@ export class NavbarComponent implements OnInit {
 
   setLocalizationName(value: string) {
     this.localizationName = value;
-    // Save the selected city to session storage
     sessionStorage.setItem('selectedCity', value);
     this.router.navigate(['/main-page', this.localizationName]);
   }

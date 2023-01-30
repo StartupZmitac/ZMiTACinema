@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Screening } from 'src/app/models/screening.model';
@@ -19,6 +19,11 @@ export class MainPageComponent implements OnInit {
   selectedDay = "2023-01-08";
 
   constructor(private cookieService: CookieService, private service: ScreeningService, private route: ActivatedRoute, private router: Router) {
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['localizationName']) {
+      window.location.reload(); //Doesnt reload
+    }
   }
   ngOnInit(): void {
     this.localizationName = this.route.snapshot.paramMap.get('localizationName');
