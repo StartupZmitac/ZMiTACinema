@@ -9,12 +9,19 @@
 </head>
 <body>
 <div class="main-page-container">
-<div class="jumbotron">
+  <div class="form-group text-center" style="width: 20%; margin: 0 auto;">
+    <label for="daySelect">Choose Day:</label>
+    <select class="form-control" id="daySelect" [(ngModel)]="selectedDay" (change)="loadScreeningsAgain()">
+      <option *ngFor="let day of days" [value]="day">{{day}}</option>
+    </select>
+  </div>
+  <br><br>
+  <div class="jumbotron">
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let screening of screenings">
       <ul class="list-group list-group-horizontal-sm">
         <li class="list-group-item" *ngIf="screening.film != currentFilm">{{ screening.film}}</li>
-        <button type="button" class="btn btn-dark" (click)="onHourClick($event, screening)" >{{screening.time}}</button>
+        <button type="button" class="btn btn-dark" (click)="onHourClick(screening)" >{{screening.time}}</button>
       </ul>
       {{ setCurrentFilm(screening.film) }}
     </li>

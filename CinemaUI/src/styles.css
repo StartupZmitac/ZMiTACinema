@@ -66,6 +66,17 @@ body{
   border-color: #6c757d;
   color: #6c757d;
 }
+form {
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #212622;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.form-control{
+  background-color: #212622 !important;
+  border-color: #6c757d !important;
+  color: #fff10b !important;
+}
 .form-control:focus{
   background-color: #212622;
   border-color: #6c757d;
@@ -90,3 +101,4 @@ body{
   margin-bottom: 10px;
   font-size: 18px;
 }
+

@@ -15,11 +15,17 @@ export class MainPageComponent implements OnInit {
   localizationName: string | null | undefined;
   screenings: Screening[] = [];
   currentFilm: string | null | undefined;
+  days = ['2023-01-08','2023-01-09','2023-01-10','2023-01-11','2023-01-12','2023-01-13','2023-01-14'];
+  selectedDay = "2023-01-08";
 
   constructor(private cookieService: CookieService, private service: ScreeningService, private route: ActivatedRoute, private router: Router) {
   }
   ngOnInit(): void {
     this.localizationName = this.route.snapshot.paramMap.get('localizationName');
+    const savedSelectedDay = sessionStorage.getItem('selectedDay');
+    if (savedSelectedDay) {
+      this.selectedDay = savedSelectedDay;
+    }
     this.getScreenings();
     this.cookieService.deleteAll();
   }
@@ -39,9 +45,14 @@ export class MainPageComponent implements OnInit {
     this.cookieService.set('location', screening.location)
     this.cookieService.set('screening', screening.screening_ID.toString())
   }
+  loadScreeningsAgain(){
+    console.log(this.selectedDay);
+    sessionStorage.setItem('selectedDay', this.selectedDay);
+    this.getScreenings();
+  }
   getScreenings(){
     if(this.localizationName!= undefined)
-    this.service.getScreenings("2023-01-08", this.localizationName)
+    this.service.getScreenings(this.selectedDay, this.localizationName)
     .subscribe({
       next: (screenings) =>{
         this.screenings = screenings;
