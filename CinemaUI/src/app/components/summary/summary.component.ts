@@ -68,6 +68,7 @@ export class SummaryComponent implements OnInit {
     try{
       this.tservice.getTransaction(this.ticketID).subscribe(data=>{
         data.forEach(element => {
+          console.log(data)
           this.seats+=element.seat+' '
           if(element.type=="reduced"){
             this.reduced+=1

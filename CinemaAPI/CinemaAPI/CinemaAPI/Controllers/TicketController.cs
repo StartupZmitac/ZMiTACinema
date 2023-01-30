@@ -21,7 +21,7 @@ namespace CinemaAPI.Controllers
             Ticket newTicket = ticket;
             newTicket.Id = Guid.NewGuid();
             bool result = changeSeatAvailability(newTicket);
-
+            
             if (result == false)
             {
                  return BadRequest();
@@ -165,7 +165,7 @@ namespace CinemaAPI.Controllers
             }
 
             Validator validator = new Validator();
-            if (validator.checkColumnRowOutOfRange(ticketSeat, connectedRoom.column, connectedRoom.row) == false || validator.checkTime(connectedScreening.Time) == false)
+            if (validator.checkColumnRowOutOfRange(ticketSeat, connectedRoom.column, connectedRoom.row) == false /*|| validator.checkTime(connectedScreening.Time) == false*/)
             {
                 return false;
             }
