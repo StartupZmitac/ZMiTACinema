@@ -3,6 +3,8 @@ import {Seat} from "../../models/seat.model";
 import {LocationService} from "../../services/location.service";
 import {Location} from "../../models/location.model";
 import {customRoom} from "../../models/customRoom";
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-page',
@@ -20,7 +22,7 @@ export class AdminPageComponent implements OnInit {
   unavailableSeats: (string | undefined)[] = [];
   createdRoom: customRoom;
   seats: Seat[][] = []
-  constructor(private lservice: LocationService) {
+  constructor(private lservice: LocationService,private cookieService: CookieService, private router: Router) {
     this.selectedLocation="";
     this.createdRoom = { column: 10, row: 10, taken_seats: "", unavailable_seats: "", room_number: 0, _locationName: this.selectedLocation  };
     this.newLocationName = "";
@@ -29,6 +31,10 @@ export class AdminPageComponent implements OnInit {
   //TODO:seans
   //TODO:film
   ngOnInit(): void {
+
+    if(!this.cookieService.check('admin'))
+      this.router.navigate(['/'])
+    
     this.getLocations();
     this.createdRoom.row = 10;
     this.createdRoom.column = 10;

@@ -1,67 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-
-import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AdminService } from 'src/app/services/admin.service';
 import {LocationService} from "../../services/location.service";
 
 
 @Component({   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css'],
-  providers: [LocationService, FormBuilder]})
+  providers: [LocationService]})
+
 export class LoginComponent implements OnInit {
-    form!: FormGroup;
-    loading = false;
-    submitted = false;
 
-    constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
-        private userService: UserService,
-    ) { }
+  username = ''
+  password = ''
 
-    ngOnInit() {
-        this.form = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
+  constructor(private aservice: AdminService, private router: Router, private cookieService: CookieService){
 
-    }
+  }
 
-    // convenience getter for easy access to form fields
-    get f() { return this.form.controls; }
-    redirectToAdminPage(){
-      this.router.navigate(['/admin-page']);
-    }
-    onSubmit() {
-        this.submitted = true;
+  ngOnInit(): void {
+    
+  }
+    
+  onSubmit(){
 
-        // reset alerts on submit
-        //this.alertService.clear();
-
-        // stop here if form is invalid
-        if (this.form.invalid) {
-            return;
+      this.aservice.authenticate(this.username, this.password).subscribe(
+        data=>{
+          console.log(data)
+          this.router.navigate(['/admin-page'])
+          this.cookieService.set('admin', "true")
         }
+      )
 
-        this.loading = true;
-        this.userService.login(this.f['username'].value, this.f['password'].value)
-            .pipe(first())
-            .subscribe({
-                next: () => {
-                    // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                    this.router.navigateByUrl(returnUrl);
-                },
-                error: error => {
-                    //this.userService.error(error);
-                    this.loading = false;
-                }
-            });
-    }
-
+  }
 
 }
